@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Plus, UploadCloud, FolderCode, Command, ChevronLeft, ArrowLeft } from 'lucide-react';
+import { Plus, UploadCloud, FolderCode, Command, ChevronLeft, ArrowLeft, Download } from 'lucide-react';
 import { CodeFile, AppSettings, CodeSpace, CodeSpaceGroup } from '../types';
 import { FileTree } from './FileTree';
 import { EditorTabs } from './EditorTabs';
@@ -10,6 +10,7 @@ import { DeleteConfirmModal } from './DeleteConfirmModal';
 import { CodeSpaceSelector } from './codespaces/CodeSpaceSelector';
 import { SessionRestoredTag } from './SessionRestoredTag';
 import { getNewFileDraft, clearNewFileDraft, NewFileDraft } from '../utils/draftStorage';
+import { downloadCodeSpaceZip } from '../utils/zipExport';
 
 interface CodebaseExplorerProps {
   files: CodeFile[];
@@ -128,6 +129,15 @@ export const CodebaseExplorer: React.FC<CodebaseExplorerProps> = ({
   const openFiles = files.filter((f) => openFileIds.includes(f.id));
   const activeFile = files.find((f) => f.id === selectedFileId) || openFiles[0] || files[0] || null;
 
+  const currentCodeSpace =
+    codeSpaces.find((c) => c.id === activeCodeSpaceId) || codeSpaces[0];
+
+  const handleExportZip = () => {
+    if (currentCodeSpace) {
+      downloadCodeSpaceZip(currentCodeSpace);
+    }
+  };
+
   return (
     <div className="flex-1 flex flex-col overflow-hidden bg-white dark:bg-neutral-900 font-sans">
       {/* Sub Header: CodeSpace Selector & Quick Switch */}
@@ -136,7 +146,8 @@ export const CodebaseExplorer: React.FC<CodebaseExplorerProps> = ({
           <button
             type="button"
             onClick={onBackToCodeSpaces}
-            className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+            style={{ height: '25px' }}
+            className="flex items-center gap-1 px-2 h-[25px] rounded-md text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
             title="Return to all CodeSpaces"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
@@ -163,6 +174,15 @@ export const CodebaseExplorer: React.FC<CodebaseExplorerProps> = ({
           <span className="text-[11px] font-mono text-neutral-400">
             {files.length} file{files.length === 1 ? '' : 's'}
           </span>
+          <button
+            type="button"
+            onClick={handleExportZip}
+            className="flex items-center gap-1 h-[25px] px-2 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer"
+            title="Download this CodeSpace as a ZIP archive"
+          >
+            <Download className="w-3.5 h-3.5 text-sky-500" />
+            <span>Export ZIP</span>
+          </button>
           <button
             type="button"
             onClick={onNavigateToVersions}
@@ -210,6 +230,7 @@ export const CodebaseExplorer: React.FC<CodebaseExplorerProps> = ({
           onOpenUploadModal={() => setIsUploadModalOpen(true)}
           onDeleteRequest={(file) => setFileToDelete(file)}
           activeCodeSpaceName={activeCodeSpaceName}
+          onExportZip={handleExportZip}
         />
 
         {/* Right Pane: Multi-Tab Editor Area */}
@@ -296,6 +317,8 @@ export const CodebaseExplorer: React.FC<CodebaseExplorerProps> = ({
         isOpen={isUploadModalOpen}
         onClose={() => setIsUploadModalOpen(false)}
         onUpload={onUploadFiles}
+        activeCodeSpace={currentCodeSpace}
+        onExportZip={handleExportZip}
       />
 
       {fileToDelete && (

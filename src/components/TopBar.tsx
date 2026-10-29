@@ -56,7 +56,7 @@ export const TopBar: React.FC<TopBarProps> = ({
           <button
             type="button"
             onClick={onBackToCodeSpaces}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+            className="h-[30px] flex items-center gap-1.5 px-2.5 rounded-md text-xs font-medium text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
             title="Return to CodeSpaces Overview"
           >
             <ChevronLeft className="w-3.5 h-3.5" />
@@ -81,7 +81,7 @@ export const TopBar: React.FC<TopBarProps> = ({
         )}
       </div>
 
-      {/* Center Area: Centered Rounded Search Bar exactly matching screenshot */}
+      {/* Center Area: Centered Rounded Search Bar */}
       <div className="flex-1 max-w-md mx-4">
         <div className="relative w-full">
           <Search className="w-4 h-4 text-neutral-400 dark:text-neutral-500 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -90,12 +90,12 @@ export const TopBar: React.FC<TopBarProps> = ({
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search CodeSpaces"
-            className="w-full h-9 pl-9 pr-3 text-xs bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 transition-all font-sans"
+            className="w-full h-[35px] pl-9 pr-3 text-xs bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 transition-all font-sans"
           />
         </div>
       </div>
 
-      {/* Right Area: + New CodeSpace button, Theme Toggle & Avatar matching screenshot */}
+      {/* Right Area: + New CodeSpace button, Theme Toggle & Avatar */}
       <div className="flex items-center gap-3 min-w-[140px] justify-end">
         {!isOnline && (
           <div
@@ -111,7 +111,7 @@ export const TopBar: React.FC<TopBarProps> = ({
         <button
           type="button"
           onClick={onOpenCreateCodeSpaceModal}
-          className="h-8.5 px-3.5 flex items-center gap-1.5 rounded-md text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer"
+          className="h-[35px] px-3.5 flex items-center gap-1.5 rounded-md text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer"
         >
           <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
           <span>New CodeSpace</span>
@@ -122,7 +122,7 @@ export const TopBar: React.FC<TopBarProps> = ({
           type="button"
           onClick={onToggleTheme}
           aria-label="Toggle dark / light mode"
-          className={`w-8.5 h-8.5 flex items-center justify-center rounded-md border transition-colors cursor-pointer ${
+          className={`w-[35px] h-[35px] flex items-center justify-center rounded-md border transition-colors cursor-pointer ${
             theme === 'dark'
               ? 'bg-neutral-900 hover:bg-neutral-800 border-neutral-700 text-amber-400'
               : 'bg-neutral-100 hover:bg-neutral-200 border-neutral-300 text-neutral-700'
@@ -136,11 +136,11 @@ export const TopBar: React.FC<TopBarProps> = ({
           )}
         </button>
 
-        {/* Demo Account Avatar with Green Accent Border matching reference screenshot */}
+        {/* Demo Account Avatar with Green Accent Border */}
         <button
           type="button"
           onClick={onOpenDemoAccountModal}
-          className="w-8.5 h-8.5 rounded-md p-0.5 border border-emerald-500/80 dark:border-emerald-400/80 bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center overflow-hidden shrink-0 shadow-2xs cursor-pointer hover:ring-2 hover:ring-emerald-400/50 transition-all"
+          className="w-[35px] h-[35px] rounded-md p-0.5 border border-emerald-500/80 dark:border-emerald-400/80 bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center overflow-hidden shrink-0 shadow-2xs cursor-pointer hover:ring-2 hover:ring-emerald-400/50 transition-all"
           title="Demo Account (Alex Reed) — Click to view profile & storage"
           aria-label="Demo Account Profile"
         >

@@ -264,7 +264,7 @@ export const NewFileModal: React.FC<NewFileModalProps> = ({
                   setError(null);
                 }}
                 placeholder="e.g. src/auth/tokenValidator.ts"
-                className="w-full h-8.5 pl-8 pr-3 text-xs font-mono bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                className="w-full h-[35px] pl-8 pr-3 text-xs font-mono bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-sky-500"
                 required
               />
               <FileCode className="w-3.5 h-3.5 text-neutral-400 dark:text-neutral-500 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -302,7 +302,7 @@ export const NewFileModal: React.FC<NewFileModalProps> = ({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="e.g. Initialized token validator routine"
-              className="w-full h-8.5 px-3 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
+              className="w-full h-[35px] px-3 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
             />
           </div>
 
@@ -312,7 +312,7 @@ export const NewFileModal: React.FC<NewFileModalProps> = ({
                 <button
                   type="button"
                   onClick={handleDiscardDraft}
-                  className="h-8.5 px-3 text-xs font-medium text-amber-700 dark:text-amber-400 hover:text-amber-900 dark:hover:text-amber-200 hover:bg-amber-500/10 rounded-md transition-colors cursor-pointer"
+                  className="h-[35px] px-3 text-xs font-medium text-amber-700 dark:text-amber-400 hover:text-amber-900 dark:hover:text-amber-200 hover:bg-amber-500/10 rounded-md transition-colors cursor-pointer"
                 >
                   Discard Restored Draft
                 </button>
@@ -323,13 +323,13 @@ export const NewFileModal: React.FC<NewFileModalProps> = ({
               <button
                 type="button"
                 onClick={onClose}
-                className="h-8.5 px-3.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
+                className="h-[35px] px-3.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
               >
                 Close (Keep Draft)
               </button>
               <button
                 type="submit"
-                className="h-8.5 px-4 flex items-center gap-1.5 text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] rounded-md transition-colors shadow-2xs cursor-pointer"
+                className="h-[35px] px-4 flex items-center gap-1.5 text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] rounded-md transition-colors shadow-2xs cursor-pointer"
               >
                 <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
                 <span>Create File</span>

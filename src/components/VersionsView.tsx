@@ -136,13 +136,13 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
           <div className="flex items-center gap-2 w-full sm:w-auto">
             {/* Quick Search */}
             <div className="relative flex-1 sm:w-64">
-              <Search className="w-3.5 h-3.5 text-neutral-400 absolute left-3 top-2.5" />
+              <Search className="w-3.5 h-3.5 text-neutral-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Filter by hash, file, note..."
-                className="w-full pl-8 pr-3 py-1.5 text-xs bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
+                className="w-full h-[30px] pl-8 pr-3 text-xs bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
               />
             </div>
 
@@ -151,7 +151,7 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
               <button
                 type="button"
                 onClick={() => setViewMode('table')}
-                className={`p-1.5 rounded-md transition-colors cursor-pointer ${
+                className={`w-[30px] h-[30px] flex items-center justify-center rounded-md transition-colors cursor-pointer ${
                   viewMode === 'table'
                     ? 'bg-neutral-100 dark:bg-neutral-800 text-sky-600 dark:text-sky-400 shadow-2xs'
                     : 'text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-200'
@@ -164,7 +164,7 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
               <button
                 type="button"
                 onClick={() => setViewMode('grid')}
-                className={`p-1.5 rounded-md transition-colors cursor-pointer ${
+                className={`w-[30px] h-[30px] flex items-center justify-center rounded-md transition-colors cursor-pointer ${
                   viewMode === 'grid'
                     ? 'bg-neutral-100 dark:bg-neutral-800 text-sky-600 dark:text-sky-400 shadow-2xs'
                     : 'text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-200'
@@ -187,7 +187,7 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
                 key={tab.key}
                 type="button"
                 onClick={() => setActiveTab(tab.key)}
-                className={`flex items-center gap-2 px-3 py-1 text-xs font-medium rounded-md transition-all whitespace-nowrap cursor-pointer ${
+                className={`h-[30px] flex items-center gap-2 px-3 text-xs font-medium rounded-md transition-all whitespace-nowrap cursor-pointer ${
                   isActive
                     ? 'bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 shadow-xs'
                     : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200'
@@ -195,7 +195,7 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
               >
                 <span>{tab.label}</span>
                 <span
-                  className={`font-mono text-[10px] tabular-nums px-1.5 py-0.5 rounded-full ${
+                  className={`font-mono text-[11px] tabular-nums px-1.5 py-0.2 rounded-full ${
                     isActive
                       ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200'
                       : 'text-neutral-400'
@@ -336,10 +336,10 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
                               e.stopPropagation();
                               setSelectedVersion(record);
                             }}
-                            className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded transition-colors"
+                            className="inline-flex items-center gap-1.5 h-[30px] px-3 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer"
                           >
                             <span>{isDeleted ? 'View Record' : 'Inspect'}</span>
-                            <ChevronRight className="w-3 h-3 text-neutral-400" />
+                            <ChevronRight className="w-3.5 h-3.5 text-neutral-400" />
                           </button>
                         </td>
                       </tr>
@@ -424,14 +424,14 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
                           </span>
                         </span>
                       ) : isDeleted ? (
-                        <span className="inline-flex items-center gap-0.5 font-mono text-[10px] text-rose-600 dark:text-rose-400 font-medium">
-                          <ShieldCheck className="w-3 h-3" /> Purged
+                        <span className="inline-flex items-center gap-0.5 font-mono text-[11px] text-rose-600 dark:text-rose-400 font-medium">
+                          <ShieldCheck className="w-3.5 h-3.5" /> Purged
                         </span>
                       ) : (
                         <span className="text-neutral-400 font-mono">—</span>
                       )}
                       <span className="text-neutral-400">·</span>
-                      <span className="text-neutral-400 font-mono text-[10px]">{dateStr}</span>
+                      <span className="text-neutral-400 font-mono text-[11px]">{dateStr}</span>
                     </div>
 
                     <button
@@ -440,7 +440,7 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
                         e.stopPropagation();
                         setSelectedVersion(record);
                       }}
-                      className="px-2.5 py-1 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded transition-colors"
+                      className="h-[30px] px-3 inline-flex items-center text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer"
                     >
                       {isDeleted ? 'View' : 'Inspect'}
                     </button>
@@ -643,7 +643,7 @@ const VersionDetailModal: React.FC<VersionDetailModalProps> = ({
               <button
                 type="button"
                 onClick={() => handleCopyCode(record.content)}
-                className="h-8.5 px-3 flex items-center gap-1.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
+                className="h-[35px] px-3 flex items-center gap-1.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
               >
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copied ? 'Copied' : 'Copy Code'}</span>
@@ -655,7 +655,7 @@ const VersionDetailModal: React.FC<VersionDetailModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="h-8.5 px-3.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
+              className="h-[35px] px-3.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
             >
               Close
             </button>
@@ -663,7 +663,7 @@ const VersionDetailModal: React.FC<VersionDetailModalProps> = ({
               <button
                 type="button"
                 onClick={onRestore}
-                className="h-8.5 px-4 flex items-center gap-1.5 text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] rounded-md transition-colors shadow-2xs cursor-pointer"
+                className="h-[35px] px-4 flex items-center gap-1.5 text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] rounded-md transition-colors shadow-2xs cursor-pointer"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Restore Revision</span>

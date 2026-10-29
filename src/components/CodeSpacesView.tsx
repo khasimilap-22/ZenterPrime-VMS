@@ -16,12 +16,9 @@ import {
   List,
   Calendar,
   Download,
-  Loader2,
-  CheckCircle2,
 } from 'lucide-react';
 import { CodeSpace, CodeSpaceGroup } from '../types';
 import { formatTimeAgo } from '../utils/storage';
-import { downloadCodeSpaceZip } from '../utils/zipExport';
 
 interface CodeSpacesViewProps {
   codeSpaces: CodeSpace[];
@@ -33,6 +30,7 @@ interface CodeSpacesViewProps {
   onOpenEditModal: (codeSpace: CodeSpace) => void;
   onOpenDeleteWarningModal: (codeSpace: CodeSpace) => void;
   onOpenMergeModal: () => void;
+  onDownloadZip?: (codeSpace: CodeSpace) => void;
 }
 
 export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
@@ -45,26 +43,10 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
   onOpenEditModal,
   onOpenDeleteWarningModal,
   onOpenMergeModal,
+  onDownloadZip,
 }) => {
   const [filterMode, setFilterMode] = useState<'all' | 'recent' | 'grouped'>('all');
   const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
-  const [downloadingId, setDownloadingId] = useState<string | null>(null);
-  const [downloadSuccessName, setDownloadSuccessName] = useState<string | null>(null);
-
-  const handleDownloadZip = async (cs: CodeSpace) => {
-    try {
-      setDownloadingId(cs.id);
-      await downloadCodeSpaceZip(cs);
-      setDownloadSuccessName(cs.name);
-      setTimeout(() => {
-        setDownloadSuccessName(null);
-      }, 3500);
-    } catch (err) {
-      console.error('Failed to download ZIP archive:', err);
-    } finally {
-      setDownloadingId(null);
-    }
-  };
 
   // Collect all pinned IDs across groups
   const allPinnedIds = new Set<string>();
@@ -120,7 +102,7 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
             <button
               type="button"
               onClick={() => setFilterMode('all')}
-              className={`px-3 py-1 rounded-md transition-colors cursor-pointer ${
+              className={`h-[30px] px-3 flex items-center rounded-md transition-colors cursor-pointer ${
                 filterMode === 'all'
                   ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 font-medium shadow-2xs'
                   : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200'
@@ -131,7 +113,7 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
             <button
               type="button"
               onClick={() => setFilterMode('recent')}
-              className={`px-3 py-1 rounded-md transition-colors cursor-pointer ${
+              className={`h-[30px] px-3 flex items-center rounded-md transition-colors cursor-pointer ${
                 filterMode === 'recent'
                   ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 font-medium shadow-2xs'
                   : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200'
@@ -142,7 +124,7 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
             <button
               type="button"
               onClick={() => setFilterMode('grouped')}
-              className={`px-3 py-1 rounded-md transition-colors cursor-pointer ${
+              className={`h-[30px] px-3 flex items-center rounded-md transition-colors cursor-pointer ${
                 filterMode === 'grouped'
                   ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 font-medium shadow-2xs'
                   : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200'
@@ -157,7 +139,7 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
             <button
               type="button"
               onClick={() => setViewMode('grid')}
-              className={`p-1.5 rounded-md transition-colors cursor-pointer ${
+              className={`w-[30px] h-[30px] flex items-center justify-center rounded-md transition-colors cursor-pointer ${
                 viewMode === 'grid'
                   ? 'bg-neutral-100 dark:bg-neutral-800 text-sky-600 dark:text-sky-400 shadow-2xs'
                   : 'text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-200'
@@ -170,7 +152,7 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
             <button
               type="button"
               onClick={() => setViewMode('table')}
-              className={`p-1.5 rounded-md transition-colors cursor-pointer ${
+              className={`w-[30px] h-[30px] flex items-center justify-center rounded-md transition-colors cursor-pointer ${
                 viewMode === 'table'
                   ? 'bg-neutral-100 dark:bg-neutral-800 text-sky-600 dark:text-sky-400 shadow-2xs'
                   : 'text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-200'
@@ -187,7 +169,7 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
             <button
               type="button"
               onClick={onOpenMergeModal}
-              className="h-8.5 px-3 flex items-center gap-1.5 rounded-md text-xs font-medium text-neutral-700 dark:text-neutral-200 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors shadow-2xs cursor-pointer"
+              className="h-[35px] px-3.5 flex items-center gap-1.5 rounded-md text-xs font-medium text-neutral-700 dark:text-neutral-200 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors shadow-2xs cursor-pointer"
             >
               <GitMerge className="w-3.5 h-3.5 text-emerald-500" />
               <span>Merge CodeSpaces</span>
@@ -198,7 +180,7 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
           <button
             type="button"
             onClick={onOpenCreateModal}
-            className="h-8.5 px-3.5 flex items-center gap-1.5 rounded-md text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer"
+            className="h-[35px] px-3.5 flex items-center gap-1.5 rounded-md text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer"
           >
             <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
             <span>New CodeSpace</span>
@@ -228,7 +210,7 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
           <button
             type="button"
             onClick={onOpenCreateModal}
-            className="mt-5 h-9 px-4 flex items-center gap-1.5 rounded-md text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer"
+            className="mt-5 h-[35px] px-4 flex items-center gap-1.5 rounded-md text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer"
           >
             <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
             <span>New CodeSpace</span>
@@ -266,12 +248,12 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
                             {cs.name}
                           </h3>
                           {cs.isDefault && (
-                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 font-mono">
+                            <span className="text-[11px] px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 font-mono">
                               Default
                             </span>
                           )}
                           {isPinned && (
-                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-900/60 flex items-center gap-0.5">
+                            <span className="text-[11px] px-1.5 py-0.5 rounded bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-900/60 flex items-center gap-0.5">
                               <Pin className="w-2.5 h-2.5" /> Pinned
                             </span>
                           )}
@@ -281,26 +263,20 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
 
                     {/* Quick Download, Edit & Delete Hover Actions */}
                     <div className="flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDownloadZip(cs);
-                        }}
-                        disabled={downloadingId === cs.id}
-                        className="p-1 rounded text-neutral-400 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-sky-50 dark:hover:bg-sky-950/40 transition-colors cursor-pointer"
-                        title="Download CodeSpace as ZIP"
-                      >
-                        {downloadingId === cs.id ? (
-                          <Loader2 className="w-3.5 h-3.5 animate-spin text-sky-600 dark:text-sky-400" />
-                        ) : (
+                      {onDownloadZip && (
+                        <button
+                          type="button"
+                          onClick={() => onDownloadZip(cs)}
+                          className="w-7 h-7 flex items-center justify-center rounded text-neutral-400 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+                          title="Download all folders and files as ZIP"
+                        >
                           <Download className="w-3.5 h-3.5" />
-                        )}
-                      </button>
+                        </button>
+                      )}
                       <button
                         type="button"
                         onClick={() => onOpenEditModal(cs)}
-                        className="p-1 rounded text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                        className="w-7 h-7 flex items-center justify-center rounded text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
                         title="Edit CodeSpace title & description"
                       >
                         <Pencil className="w-3.5 h-3.5" />
@@ -308,7 +284,7 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
                       <button
                         type="button"
                         onClick={() => onOpenDeleteWarningModal(cs)}
-                        className="p-1 rounded text-neutral-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors"
+                        className="w-7 h-7 flex items-center justify-center rounded text-neutral-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors cursor-pointer"
                         title="Delete CodeSpace"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -331,7 +307,7 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
                       {memberGroups.map((grp) => (
                         <span
                           key={grp.id}
-                          className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] rounded-md bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60"
+                          className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] rounded-md bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60"
                         >
                           <Layers className="w-2.5 h-2.5" />
                           {grp.name}
@@ -346,51 +322,32 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
                   <div className="flex items-center justify-between text-[11px] text-neutral-500 dark:text-neutral-400 mb-3 font-mono">
                     <div className="flex items-center gap-3">
                       <span className="flex items-center gap-1">
-                        <FileCode className="w-3 h-3 text-neutral-400" />
+                        <FileCode className="w-3.5 h-3.5 text-neutral-400" />
                         {fileCount} {fileCount === 1 ? 'file' : 'files'}
                       </span>
                       <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3 text-neutral-400" />
+                        <Clock className="w-3.5 h-3.5 text-neutral-400" />
                         {versionCount} {versionCount === 1 ? 'rev' : 'revs'}
                       </span>
                     </div>
-                    <span className="text-[10px] text-neutral-400 truncate">
+                    <span className="text-[11px] text-neutral-400 truncate">
                       {formatTimeAgo(cs.updatedAt || cs.createdAt)}
                     </span>
                   </div>
 
-                  {/* Open Workspace Action & Download ZIP */}
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => onSelectAndOpenCodeSpace(cs.id)}
-                      className={`flex-1 h-8.5 flex items-center justify-center gap-2 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
-                        isActive
-                          ? 'bg-sky-50 dark:bg-sky-950/40 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800/80 hover:bg-sky-100 dark:hover:bg-sky-900/40'
-                          : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'
-                      }`}
-                    >
-                      <span>{isActive ? 'Continue in Workspace' : 'Open Workspace'}</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDownloadZip(cs);
-                      }}
-                      disabled={downloadingId === cs.id}
-                      className="h-8.5 px-2.5 flex items-center justify-center gap-1 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 hover:border-sky-300 dark:hover:border-sky-700 transition-colors cursor-pointer text-xs font-medium shrink-0"
-                      title="Download all folders & files as ZIP"
-                    >
-                      {downloadingId === cs.id ? (
-                        <Loader2 className="w-3.5 h-3.5 animate-spin text-sky-600 dark:text-sky-400" />
-                      ) : (
-                        <Download className="w-3.5 h-3.5" />
-                      )}
-                      <span className="hidden sm:inline">ZIP</span>
-                    </button>
-                  </div>
+                  {/* Open Workspace Action */}
+                  <button
+                    type="button"
+                    onClick={() => onSelectAndOpenCodeSpace(cs.id)}
+                    className={`w-full h-[35px] px-3.5 flex items-center justify-center gap-2 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
+                      isActive
+                        ? 'bg-sky-50 dark:bg-sky-950/40 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800/80 hover:bg-sky-100 dark:hover:bg-sky-900/40'
+                        : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'
+                    }`}
+                  >
+                    <span>{isActive ? 'Continue in Workspace' : 'Open Workspace'}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
                 </div>
               </div>
             );
@@ -439,18 +396,18 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
                                 {cs.name}
                               </span>
                               {cs.isDefault && (
-                                <span className="text-[10px] px-1.5 py-0.2 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 font-mono">
+                                <span className="text-[11px] px-1.5 py-0.2 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 font-mono">
                                   Default
                                 </span>
                               )}
                               {isPinned && (
-                                <span className="text-[10px] px-1.5 py-0.2 rounded bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-900/60 flex items-center gap-0.5">
+                                <span className="text-[11px] px-1.5 py-0.2 rounded bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-900/60 flex items-center gap-0.5">
                                   <Pin className="w-2.5 h-2.5" /> Pinned
                                 </span>
                               )}
                             </div>
                             {isActive && (
-                              <span className="text-[10px] text-sky-600 dark:text-sky-400 font-medium">
+                              <span className="text-[11px] text-sky-600 dark:text-sky-400 font-medium">
                                 Active Workspace
                               </span>
                             )}
@@ -474,7 +431,7 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
                             {memberGroups.map((grp) => (
                               <span
                                 key={grp.id}
-                                className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] rounded-md bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60"
+                                className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] rounded-md bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60"
                               >
                                 <Layers className="w-2.5 h-2.5" />
                                 {grp.name}
@@ -504,32 +461,28 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
                       {/* Actions */}
                       <td className="py-3 px-4 text-right">
                         <div className="flex items-center justify-end gap-1.5">
+                          {onDownloadZip && (
+                            <button
+                              type="button"
+                              onClick={() => onDownloadZip(cs)}
+                              className="w-[30px] h-[30px] flex items-center justify-center rounded-md text-neutral-400 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+                              title="Download CodeSpace ZIP archive"
+                            >
+                              <Download className="w-3.5 h-3.5" />
+                            </button>
+                          )}
                           <button
                             type="button"
                             onClick={() => onSelectAndOpenCodeSpace(cs.id)}
-                            className="h-7 px-2.5 flex items-center gap-1 rounded text-xs font-medium bg-neutral-100 dark:bg-neutral-800 hover:bg-sky-50 hover:text-sky-600 dark:hover:bg-sky-950/50 dark:hover:text-sky-300 text-neutral-700 dark:text-neutral-300 transition-colors"
+                            className="h-[30px] px-3 flex items-center gap-1.5 rounded-md text-xs font-medium bg-neutral-100 dark:bg-neutral-800 hover:bg-sky-50 hover:text-sky-600 dark:hover:bg-sky-950/50 dark:hover:text-sky-300 text-neutral-700 dark:text-neutral-300 transition-colors cursor-pointer"
                           >
                             <span>Open</span>
-                            <ArrowRight className="w-3 h-3" />
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => handleDownloadZip(cs)}
-                            disabled={downloadingId === cs.id}
-                            className="h-7 px-2 flex items-center gap-1 rounded text-xs font-medium text-neutral-600 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-sky-50 dark:hover:bg-sky-950/40 border border-neutral-200 dark:border-neutral-700 hover:border-sky-300 dark:hover:border-sky-700 transition-colors cursor-pointer"
-                            title="Download CodeSpace as ZIP"
-                          >
-                            {downloadingId === cs.id ? (
-                              <Loader2 className="w-3 h-3 animate-spin text-sky-600 dark:text-sky-400" />
-                            ) : (
-                              <Download className="w-3 h-3" />
-                            )}
-                            <span className="hidden sm:inline text-[11px]">ZIP</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
                           </button>
                           <button
                             type="button"
                             onClick={() => onOpenEditModal(cs)}
-                            className="p-1.5 rounded text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                            className="w-[30px] h-[30px] flex items-center justify-center rounded-md text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
                             title="Edit"
                           >
                             <Pencil className="w-3.5 h-3.5" />
@@ -537,7 +490,7 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
                           <button
                             type="button"
                             onClick={() => onOpenDeleteWarningModal(cs)}
-                            className="p-1.5 rounded text-neutral-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors"
+                            className="w-[30px] h-[30px] flex items-center justify-center rounded-md text-neutral-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors cursor-pointer"
                             title="Delete"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -550,14 +503,6 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
               </tbody>
             </table>
           </div>
-        </div>
-      )}
-
-      {/* Download Success Floating Banner */}
-      {downloadSuccessName && (
-        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-emerald-600 text-white text-xs font-medium shadow-xl border border-emerald-500 animate-slide-up">
-          <CheckCircle2 className="w-4 h-4 text-emerald-100 shrink-0" />
-          <span>&quot;{downloadSuccessName}&quot; code files and folders downloaded as ZIP</span>
         </div>
       )}
     </div>

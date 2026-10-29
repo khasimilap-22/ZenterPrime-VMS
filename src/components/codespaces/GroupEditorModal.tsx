@@ -196,7 +196,7 @@ export const GroupEditorModal: React.FC<GroupEditorModalProps> = ({
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Group name"
                 required
-                className="w-full h-8.5 px-3 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
+                className="w-full h-[35px] px-3 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
               />
             </div>
 
@@ -231,7 +231,7 @@ export const GroupEditorModal: React.FC<GroupEditorModalProps> = ({
                   <button
                     type="button"
                     onClick={() => setIsAddPickerOpen((prev) => !prev)}
-                    className="flex items-center gap-1 h-7 px-2.5 text-xs font-medium text-sky-600 dark:text-sky-400 hover:bg-sky-50 dark:hover:bg-neutral-800 rounded-md border border-sky-300 dark:border-sky-800 transition-colors cursor-pointer"
+                    className="flex items-center gap-1.5 h-[30px] px-3 text-xs font-medium text-sky-600 dark:text-sky-400 hover:bg-sky-50 dark:hover:bg-neutral-800 rounded-md border border-sky-300 dark:border-sky-800 transition-colors cursor-pointer"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>Add CodeSpace</span>
@@ -433,13 +433,13 @@ export const GroupEditorModal: React.FC<GroupEditorModalProps> = ({
               <button
                 type="button"
                 onClick={onClose}
-                className="h-8.5 px-3.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
+                className="h-[35px] px-3.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="h-8.5 px-4 text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] rounded-md transition-colors shadow-2xs cursor-pointer"
+                className="h-[35px] px-4 text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] rounded-md transition-colors shadow-2xs cursor-pointer"
               >
                 Save Group Changes
               </button>

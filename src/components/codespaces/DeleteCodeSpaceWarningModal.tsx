@@ -96,7 +96,7 @@ export const DeleteCodeSpaceWarningModal: React.FC<DeleteCodeSpaceWarningModalPr
             <button
               type="button"
               onClick={onClose}
-              className="h-8.5 px-3.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
+              className="h-[35px] px-3.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
             >
               Cancel
             </button>
@@ -106,7 +106,7 @@ export const DeleteCodeSpaceWarningModal: React.FC<DeleteCodeSpaceWarningModalPr
                 onConfirm(codeSpace.id);
                 onClose();
               }}
-              className="h-8.5 px-4 flex items-center gap-1.5 text-xs font-medium text-white bg-rose-600 hover:bg-rose-700 active:bg-rose-800 rounded-md transition-colors shadow-2xs cursor-pointer"
+              className="h-[35px] px-4 flex items-center gap-1.5 text-xs font-medium text-white bg-rose-600 hover:bg-rose-700 active:bg-rose-800 rounded-md transition-colors shadow-2xs cursor-pointer"
             >
               <Trash2 className="w-3.5 h-3.5" />
               <span>Permanently Delete CodeSpace</span>

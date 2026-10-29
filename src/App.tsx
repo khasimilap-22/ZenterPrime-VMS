@@ -40,6 +40,7 @@ import { CreateEditCodeSpaceModal } from './components/codespaces/CreateEditCode
 import { MergeCodeSpacesModal } from './components/codespaces/MergeCodeSpacesModal';
 import { GroupEditorModal } from './components/codespaces/GroupEditorModal';
 import { DeleteCodeSpaceWarningModal } from './components/codespaces/DeleteCodeSpaceWarningModal';
+import { downloadCodeSpaceZip } from './utils/zipExport';
 
 export default function App() {
   const [settings, setSettings] = useState<AppSettings>(() => getStoredSettings());
@@ -576,6 +577,7 @@ export default function App() {
               onOpenEditModal={(cs) => setEditingCodeSpace(cs)}
               onOpenDeleteWarningModal={(cs) => setCodeSpaceToDelete(cs)}
               onOpenMergeModal={() => setIsMergeModalOpen(true)}
+              onDownloadZip={(cs) => downloadCodeSpaceZip(cs)}
             />
           )}
 

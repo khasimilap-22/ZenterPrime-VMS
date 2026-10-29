@@ -347,7 +347,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
             </React.Fragment>
           ))}
           {isDirty && (
-            <span className="ml-2 text-[10px] font-sans font-semibold px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+            <span className="ml-2 text-[11px] font-sans font-semibold px-2 py-0.5 rounded bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/20">
               Modified
             </span>
           )}
@@ -366,7 +366,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
           <button
             type="button"
             onClick={handleCopy}
-            className="h-[30px] w-[61.4844px] flex items-center justify-center gap-1.5 px-2.5 text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors"
+            className="h-[30px] flex items-center justify-center gap-1.5 px-3 text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
             title="Copy code to clipboard"
           >
             {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
@@ -376,7 +376,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
           <button
             type="button"
             onClick={handleDownload}
-            className="h-[30px] flex items-center gap-1.5 px-2.5 text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors"
+            className="h-[30px] flex items-center gap-1.5 px-3 text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
             title="Download this file"
           >
             <Download className="w-3.5 h-3.5" />
@@ -387,7 +387,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
             <button
               type="button"
               onClick={handleRevert}
-              className="h-[30px] flex items-center gap-1.5 px-2.5 text-xs text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors"
+              className="h-[30px] flex items-center gap-1.5 px-3 text-xs text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
               title="Discard unsaved edits"
             >
               <RotateCcw className="w-3.5 h-3.5" />
@@ -399,7 +399,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
             type="button"
             onClick={() => setShowCommitInput((v) => !v)}
             disabled={!isDirty}
-            className={`h-[30px] flex items-center gap-1.5 px-3 text-xs font-medium rounded-md transition-all shadow-xs ${
+            className={`h-[30px] flex items-center gap-1.5 px-3.5 text-xs font-medium rounded-md transition-all shadow-xs ${
               isDirty
                 ? 'bg-sky-600 hover:bg-sky-500 text-white cursor-pointer active:scale-98'
                 : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-600 cursor-not-allowed'
@@ -413,7 +413,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
 
       {/* Commit message input bar */}
       {showCommitInput && isDirty && (
-        <div className="flex items-center gap-2 px-4 py-2 bg-sky-50 dark:bg-neutral-950 border-b border-sky-200 dark:border-neutral-800 animate-in slide-in-from-top duration-150">
+        <div className="flex items-center gap-2.5 px-4 py-2 bg-sky-50 dark:bg-neutral-950 border-b border-sky-200 dark:border-neutral-800 animate-in slide-in-from-top duration-150">
           <GitCommit className="w-4 h-4 text-sky-600 dark:text-sky-400 shrink-0" />
           <input
             type="text"
@@ -426,20 +426,20 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
               }
             }}
             placeholder={`Commit note for ${file.name}...`}
-            className="flex-1 w-[931.664px] h-[35px] px-3 text-xs bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
+            className="flex-1 min-w-0 h-[35px] px-3 text-xs bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
             autoFocus
           />
           <button
             type="button"
             onClick={executeSave}
-            className="h-[35px] px-3 text-xs font-medium text-white bg-sky-600 hover:bg-sky-500 rounded transition-colors whitespace-nowrap cursor-pointer"
+            className="h-[35px] px-3.5 text-xs font-medium text-white bg-sky-600 hover:bg-sky-500 rounded-md transition-colors whitespace-nowrap cursor-pointer"
           >
             Commit
           </button>
           <button
             type="button"
             onClick={() => setShowCommitInput(false)}
-            className="h-[35px] px-3 flex items-center justify-center text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded transition-colors cursor-pointer"
+            className="h-[35px] px-3 flex items-center justify-center text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
           >
             Cancel
           </button>

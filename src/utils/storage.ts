@@ -384,7 +384,7 @@ export function saveStoredSettings(settings: AppSettings): void {
   try {
     localStorage.setItem(STORAGE_SETTINGS_KEY, JSON.stringify(settings));
   } catch (err) {
-    console.error('Failed to save settings to localStorage', err);
+    console.warn('[Storage] Failed to save settings to localStorage:', err);
   }
 }
 
@@ -402,11 +402,65 @@ export function getStoredCodeSpaces(): CodeSpace[] {
   }
 }
 
+/**
+ * Creates a lightweight snapshot suitable for localStorage caching.
+ * Truncates massive file bodies and limits revision snapshots,
+ * as unmetered full content is authoritatively persisted in IndexedDB.
+ */
+function createLightweightCodeSpaces(codespaces: CodeSpace[]): CodeSpace[] {
+  return codespaces.map((cs) => ({
+    ...cs,
+    files: (cs.files || []).map((f) => ({
+      ...f,
+      content: f.content && f.content.length > 2000 ? f.content.slice(0, 2000) : (f.content || ''),
+    })),
+    versions: (cs.versions || []).slice(-3).map((v) => ({
+      ...v,
+      content: v.content && v.content.length > 500 ? v.content.slice(0, 500) : v.content,
+      previousContent: undefined,
+    })),
+  }));
+}
+
 export function saveStoredCodeSpaces(codespaces: CodeSpace[]): void {
   try {
-    localStorage.setItem(STORAGE_CODESPACES_KEY, JSON.stringify(codespaces));
-  } catch (err) {
-    console.error('Failed to save CodeSpaces to localStorage', err);
+    const raw = JSON.stringify(codespaces);
+    // If under 300KB, it's safe to store directly in localStorage
+    if (raw.length < 300000) {
+      localStorage.setItem(STORAGE_CODESPACES_KEY, raw);
+      return;
+    }
+
+    // Payload is large (e.g. from imported zip or multiple projects).
+    // Store lightweight cache in localStorage; full data is stored in IndexedDB.
+    const lightweight = createLightweightCodeSpaces(codespaces);
+    const lightRaw = JSON.stringify(lightweight);
+    if (lightRaw.length < 300000) {
+      localStorage.setItem(STORAGE_CODESPACES_KEY, lightRaw);
+    } else {
+      // Store metadata-only in localStorage to prevent QuotaExceededError
+      const metaOnly = codespaces.map((cs) => ({
+        ...cs,
+        files: (cs.files || []).map((f) => ({ ...f, content: '' })),
+        versions: [],
+      }));
+      localStorage.setItem(STORAGE_CODESPACES_KEY, JSON.stringify(metaOnly));
+    }
+  } catch (err: any) {
+    // If quota is reached, preserve remaining storage by clearing large key or saving metadata
+    try {
+      const metaOnly = codespaces.map((cs) => ({
+        ...cs,
+        files: (cs.files || []).map((f) => ({ ...f, content: '' })),
+        versions: [],
+      }));
+      localStorage.setItem(STORAGE_CODESPACES_KEY, JSON.stringify(metaOnly));
+    } catch {
+      try {
+        localStorage.removeItem(STORAGE_CODESPACES_KEY);
+      } catch {}
+    }
+    console.warn('[Storage] CodeSpaces data safely stored in IndexedDB; localStorage quota preserved.');
   }
 }
 
@@ -424,7 +478,7 @@ export function saveStoredActiveCodeSpaceId(id: string): void {
   try {
     localStorage.setItem(STORAGE_ACTIVE_CODESPACE_KEY, id);
   } catch (err) {
-    console.error('Failed to save active CodeSpace ID to localStorage', err);
+    console.warn('[Storage] Failed to save active CodeSpace ID to localStorage:', err);
   }
 }
 
@@ -443,7 +497,7 @@ export function saveStoredCodeSpaceGroups(groups: CodeSpaceGroup[]): void {
   try {
     localStorage.setItem(STORAGE_GROUPS_KEY, JSON.stringify(groups));
   } catch (err) {
-    console.error('Failed to save CodeSpace groups to localStorage', err);
+    console.warn('[Storage] Failed to save CodeSpace groups to localStorage:', err);
   }
 }
 

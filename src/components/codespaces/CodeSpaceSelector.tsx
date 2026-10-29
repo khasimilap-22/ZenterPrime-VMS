@@ -67,19 +67,15 @@ export const CodeSpaceSelector: React.FC<CodeSpaceSelectorProps> = ({
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        style={{ height: '35px' }}
-        className="flex items-center justify-between gap-2 px-3 h-[35px] min-w-[150px] max-w-[210px] rounded-lg border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200 transition-colors shadow-2xs group cursor-pointer"
+        style={{ height: '25px' }}
+        className="flex items-center justify-between gap-1.5 px-2.5 h-[25px] min-w-[130px] max-w-[210px] rounded-md border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-800 dark:text-neutral-200 transition-colors shadow-2xs group cursor-pointer"
         title={`Active CodeSpace: ${activeCodeSpace?.name || 'Default CodeSpace'}`}
       >
-        <div className="flex items-center gap-1.5 min-w-0">
-          <div className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
-          <Box className="w-3.5 h-3.5 text-sky-500 shrink-0" />
-          <span className="text-xs font-medium truncate font-sans">
-            {activeCodeSpace?.name || 'Default CodeSpace'}
-          </span>
-        </div>
+        <span className="text-xs font-medium truncate font-sans">
+          {activeCodeSpace?.name || 'Default CodeSpace'}
+        </span>
         <ChevronDown
-          className={`w-3.5 h-3.5 text-neutral-400 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-transform shrink-0 ${
+          className={`w-3 h-3 text-neutral-400 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-transform shrink-0 ${
             isOpen ? 'rotate-180' : ''
           }`}
         />
@@ -98,7 +94,7 @@ export const CodeSpaceSelector: React.FC<CodeSpaceSelectorProps> = ({
                 onChange={(e) => setFilterQuery(e.target.value)}
                 placeholder="Filter CodeSpaces..."
                 autoFocus
-                className="w-full h-8 pl-8 pr-2.5 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
+                className="w-full h-[30px] pl-8 pr-2.5 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
               />
             </div>
           </div>
@@ -317,7 +313,7 @@ export const CodeSpaceSelector: React.FC<CodeSpaceSelectorProps> = ({
                 setIsOpen(false);
                 onOpenCreateModal();
               }}
-              className="w-full h-8.5 flex items-center justify-center gap-1.5 px-3 text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] rounded-md transition-colors shadow-2xs cursor-pointer"
+              className="w-full h-[35px] flex items-center justify-center gap-1.5 px-3 text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] rounded-md transition-colors shadow-2xs cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
               <span>Create new CodeSpace</span>
@@ -330,7 +326,7 @@ export const CodeSpaceSelector: React.FC<CodeSpaceSelectorProps> = ({
                 setIsOpen(false);
                 onOpenMergeModal();
               }}
-              className="w-full h-8.5 flex items-center justify-center gap-1.5 px-3 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 bg-white dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700/60 rounded-md transition-colors border border-neutral-300 dark:border-neutral-700 shadow-2xs cursor-pointer"
+              className="w-full h-[35px] flex items-center justify-center gap-1.5 px-3 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 bg-white dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700/60 rounded-md transition-colors border border-neutral-300 dark:border-neutral-700 shadow-2xs cursor-pointer"
             >
               <GitMerge className="w-3.5 h-3.5 text-emerald-500" />
               <span>Merge CodeSpaces</span>

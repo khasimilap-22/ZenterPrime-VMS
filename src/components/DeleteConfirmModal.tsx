@@ -82,7 +82,7 @@ export const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({
               value={reason}
               onChange={(e) => setReason(e.target.value)}
               placeholder="e.g. Deprecated module, replaced with new storage core"
-              className="w-full h-8.5 px-3 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-rose-500 font-sans"
+              className="w-full h-[35px] px-3 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-rose-500 font-sans"
             />
           </div>
 
@@ -90,13 +90,13 @@ export const DeleteConfirmModal: React.FC<DeleteConfirmModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="h-8.5 px-3.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
+              className="h-[35px] px-3.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="h-8.5 px-4 text-xs font-medium text-white bg-rose-600 hover:bg-rose-700 active:bg-rose-800 rounded-md transition-colors shadow-2xs flex items-center gap-1.5 cursor-pointer"
+              className="h-[35px] px-4 text-xs font-medium text-white bg-rose-600 hover:bg-rose-700 active:bg-rose-800 rounded-md transition-colors shadow-2xs flex items-center gap-1.5 cursor-pointer"
             >
               <Trash2 className="w-3.5 h-3.5" />
               <span>Confirm Deletion</span>

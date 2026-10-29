@@ -237,7 +237,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 <select
                   value={settings.tabSize}
                   onChange={(e) => onUpdateSettings({ tabSize: Number(e.target.value) })}
-                  className="h-8.5 px-3 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-1 focus:ring-sky-500 cursor-pointer"
+                  className="h-[35px] px-3 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-1 focus:ring-sky-500 cursor-pointer font-sans"
                 >
                   <option value={2}>2 Spaces</option>
                   <option value={4}>4 Spaces</option>
@@ -257,7 +257,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 <select
                   value={settings.fontSize || '13px'}
                   onChange={(e) => onUpdateSettings({ fontSize: e.target.value as '12px' | '13px' | '14px' })}
-                  className="h-8.5 px-3 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-1 focus:ring-sky-500 cursor-pointer"
+                  className="h-[35px] px-3 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-800 dark:text-neutral-200 focus:outline-none focus:ring-1 focus:ring-sky-500 cursor-pointer font-sans"
                 >
                   <option value="12px">Compact (12px)</option>
                   <option value="13px">Default (13px)</option>
@@ -354,14 +354,14 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                       onResetWorkspace();
                       setResetConfirm(false);
                     }}
-                    className="h-8.5 px-3.5 text-xs font-medium text-white bg-rose-600 hover:bg-rose-700 rounded-md transition-colors whitespace-nowrap cursor-pointer"
+                    className="h-[35px] px-3.5 text-xs font-medium text-white bg-rose-600 hover:bg-rose-700 rounded-md transition-colors whitespace-nowrap cursor-pointer"
                   >
                     Confirm Full Reset
                   </button>
                   <button
                     type="button"
                     onClick={() => setResetConfirm(false)}
-                    className="h-8.5 px-3 text-xs text-neutral-600 dark:text-neutral-400 hover:underline cursor-pointer"
+                    className="h-[35px] px-3 text-xs text-neutral-600 dark:text-neutral-400 hover:underline cursor-pointer"
                   >
                     Cancel
                   </button>
@@ -370,7 +370,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 <button
                   type="button"
                   onClick={() => setResetConfirm(true)}
-                  className="h-8.5 flex items-center gap-1.5 px-3.5 text-xs font-medium text-rose-700 dark:text-rose-300 bg-rose-100 dark:bg-rose-900/40 hover:bg-rose-200 dark:hover:bg-rose-900/60 rounded-md transition-colors whitespace-nowrap cursor-pointer"
+                  className="h-[35px] flex items-center gap-1.5 px-3.5 text-xs font-medium text-rose-700 dark:text-rose-300 bg-rose-100 dark:bg-rose-900/40 hover:bg-rose-200 dark:hover:bg-rose-900/60 rounded-md transition-colors whitespace-nowrap cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>Reset Workspace Data</span>

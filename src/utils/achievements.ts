@@ -25,11 +25,11 @@ export function getStoredStreakDays(): number {
       const parsed = parseInt(raw, 10);
       if (!isNaN(parsed) && parsed >= 0) return parsed;
     }
-    // Default demo account has 7-day streak established across workspace history
-    localStorage.setItem(STREAK_STORAGE_KEY, '7');
-    return 7;
+    // Starts at 1 day active streak until maintained for 7 / 14 days
+    localStorage.setItem(STREAK_STORAGE_KEY, '1');
+    return 1;
   } catch {
-    return 7;
+    return 1;
   }
 }
 
@@ -54,7 +54,7 @@ export function evaluateAchievements(
   const bronzeUnlocked = codespaces.length >= 1 && (totalFiles >= 1 || totalRevs >= 1);
 
   // 2. Silver: When they create codespaces more than 10 (11th codespace created)
-  const silverUnlocked = codespaces.length >= 11;
+  const silverUnlocked = codespaces.length > 10;
 
   // 3. Clean Commit: 7-day version management streak
   const cleanCommitUnlocked = streakDays >= 7;

@@ -51,7 +51,7 @@ export const GroupsView: React.FC<GroupsViewProps> = ({
             <button
               type="button"
               onClick={() => setViewMode('grid')}
-              className={`p-1.5 rounded-md transition-colors cursor-pointer ${
+              className={`w-[30px] h-[30px] flex items-center justify-center rounded-md transition-colors cursor-pointer ${
                 viewMode === 'grid'
                   ? 'bg-neutral-100 dark:bg-neutral-800 text-sky-600 dark:text-sky-400 shadow-2xs'
                   : 'text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-200'
@@ -64,7 +64,7 @@ export const GroupsView: React.FC<GroupsViewProps> = ({
             <button
               type="button"
               onClick={() => setViewMode('table')}
-              className={`p-1.5 rounded-md transition-colors cursor-pointer ${
+              className={`w-[30px] h-[30px] flex items-center justify-center rounded-md transition-colors cursor-pointer ${
                 viewMode === 'table'
                   ? 'bg-neutral-100 dark:bg-neutral-800 text-sky-600 dark:text-sky-400 shadow-2xs'
                   : 'text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-200'
@@ -79,7 +79,7 @@ export const GroupsView: React.FC<GroupsViewProps> = ({
           <button
             type="button"
             onClick={onOpenMergeModal}
-            className="h-8.5 px-3.5 flex items-center gap-1.5 rounded-md text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer"
+            className="h-[35px] px-3.5 flex items-center gap-1.5 rounded-md text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer"
           >
             <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
             <span>New Group</span>
@@ -103,7 +103,7 @@ export const GroupsView: React.FC<GroupsViewProps> = ({
           <button
             type="button"
             onClick={onOpenMergeModal}
-            className="mt-5 h-9 px-4 flex items-center gap-1.5 rounded-md text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer"
+            className="mt-5 h-[35px] px-4 flex items-center gap-1.5 rounded-md text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer"
           >
             <GitMerge className="w-3.5 h-3.5 stroke-[2]" />
             <span>Merge CodeSpaces into Group</span>
@@ -145,9 +145,9 @@ export const GroupsView: React.FC<GroupsViewProps> = ({
                     <button
                       type="button"
                       onClick={() => onOpenGroupEditorModal(group)}
-                      className="flex items-center gap-1 px-2.5 py-1 text-xs font-medium text-neutral-600 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer"
+                      className="h-[30px] px-3 flex items-center gap-1 text-xs font-medium text-neutral-600 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer"
                     >
-                      <Pencil className="w-3 h-3" />
+                      <Pencil className="w-3.5 h-3.5" />
                       <span>Manage Group</span>
                     </button>
                   </div>
@@ -161,7 +161,7 @@ export const GroupsView: React.FC<GroupsViewProps> = ({
 
                   {/* Member CodeSpaces List */}
                   <div className="mt-3 space-y-1.5">
-                    <div className="text-[10px] font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-1">
+                    <div className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-1">
                       Grouped Workspaces
                     </div>
                     {memberCodeSpaces.length === 0 ? (
@@ -182,20 +182,20 @@ export const GroupsView: React.FC<GroupsViewProps> = ({
                                 {cs.name}
                               </span>
                               {isPinned && (
-                                <span className="text-[10px] px-1.5 py-0.2 rounded bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-900/60 flex items-center gap-0.5">
+                                <span className="text-[11px] px-1.5 py-0.2 rounded bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-900/60 flex items-center gap-0.5">
                                   <Pin className="w-2.5 h-2.5" /> Pinned
                                 </span>
                               )}
                             </div>
 
                             <div className="flex items-center gap-2 shrink-0">
-                              <span className="text-[10px] font-mono text-neutral-400">
+                              <span className="text-[11px] font-mono text-neutral-400">
                                 {cs.files ? cs.files.length : 0} files
                               </span>
                               <button
                                 type="button"
                                 onClick={() => onSelectAndOpenCodeSpace(cs.id)}
-                                className="p-1 rounded text-neutral-400 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+                                className="w-7 h-7 flex items-center justify-center rounded text-neutral-400 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
                                 title="Launch workspace"
                               >
                                 <ArrowRight className="w-3.5 h-3.5" />
@@ -269,7 +269,7 @@ export const GroupsView: React.FC<GroupsViewProps> = ({
                                   key={cs.id}
                                   type="button"
                                   onClick={() => onSelectAndOpenCodeSpace(cs.id)}
-                                  className="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] rounded bg-neutral-100 dark:bg-neutral-800 hover:bg-sky-50 dark:hover:bg-sky-950/40 text-neutral-700 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-300 border border-neutral-200 dark:border-neutral-700 transition-colors cursor-pointer"
+                                  className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] rounded bg-neutral-100 dark:bg-neutral-800 hover:bg-sky-50 dark:hover:bg-sky-950/40 text-neutral-700 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-300 border border-neutral-200 dark:border-neutral-700 transition-colors cursor-pointer"
                                   title={`Open "${cs.name}"`}
                                 >
                                   <Box className="w-2.5 h-2.5 text-sky-500" />
@@ -299,9 +299,9 @@ export const GroupsView: React.FC<GroupsViewProps> = ({
                         <button
                           type="button"
                           onClick={() => onOpenGroupEditorModal(group)}
-                          className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded transition-colors cursor-pointer"
+                          className="h-[30px] px-3 inline-flex items-center gap-1.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer"
                         >
-                          <Pencil className="w-3 h-3" />
+                          <Pencil className="w-3.5 h-3.5" />
                           <span>Manage Group</span>
                         </button>
                       </td>

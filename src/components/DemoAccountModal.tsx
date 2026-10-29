@@ -14,6 +14,7 @@ import {
   Trophy,
   ChevronRight,
   CheckCircle2,
+  Check,
   Lock,
   ArrowLeft,
   Flame,
@@ -153,7 +154,7 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
                       <span className="text-xl font-bold font-mono text-neutral-900 dark:text-neutral-100">
                         {codespaces.length}
                       </span>
-                      <p className="text-[10px] text-neutral-400 mt-0.5">configured</p>
+                      <p className="text-[11px] text-neutral-400 mt-0.5">configured</p>
                     </div>
                   </div>
 
@@ -167,7 +168,7 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
                       <span className="text-xl font-bold font-mono text-neutral-900 dark:text-neutral-100">
                         {totalFiles}
                       </span>
-                      <p className="text-[10px] text-neutral-400 mt-0.5">source files</p>
+                      <p className="text-[11px] text-neutral-400 mt-0.5">source files</p>
                     </div>
                   </div>
 
@@ -181,7 +182,7 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
                       <span className="text-xl font-bold font-mono text-neutral-900 dark:text-neutral-100">
                         {totalRevs}
                       </span>
-                      <p className="text-[10px] text-neutral-400 mt-0.5">commit logs</p>
+                      <p className="text-[11px] text-neutral-400 mt-0.5">commit logs</p>
                     </div>
                   </div>
 
@@ -208,7 +209,7 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
                           / {achievements.length}
                         </span>
                       </div>
-                      <p className="text-[10px] text-amber-700 dark:text-amber-400 font-medium mt-0.5">
+                      <p className="text-[11px] text-amber-700 dark:text-amber-400 font-medium mt-0.5">
                         Click to view &rarr;
                       </p>
                     </div>
@@ -271,31 +272,31 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
                   return (
                     <div
                       key={item.id}
-                      className={`p-3.5 rounded-xl border transition-all ${
+                      className={`p-3.5 rounded-xl border transition-all duration-200 ${
                         item.unlocked
-                          ? 'bg-neutral-50 dark:bg-neutral-950/70 border-neutral-200 dark:border-neutral-800'
-                          : 'bg-white/40 dark:bg-neutral-900/40 border-dashed border-neutral-200 dark:border-neutral-800 opacity-80'
+                          ? item.tier === 'bronze'
+                            ? 'bg-amber-50/90 dark:bg-amber-950/35 border-amber-300 dark:border-amber-600/80 shadow-xs ring-1 ring-amber-400/25 dark:ring-amber-500/30'
+                            : item.tier === 'silver'
+                            ? 'bg-slate-50/90 dark:bg-slate-900/60 border-slate-300 dark:border-slate-500/80 shadow-xs ring-1 ring-slate-400/25 dark:ring-slate-500/30'
+                            : item.tier === 'clean'
+                            ? 'bg-emerald-50/90 dark:bg-emerald-950/35 border-emerald-300 dark:border-emerald-600/80 shadow-xs ring-1 ring-emerald-400/25 dark:ring-emerald-500/30'
+                            : 'bg-yellow-50/90 dark:bg-yellow-950/35 border-yellow-300 dark:border-yellow-600/80 shadow-xs ring-1 ring-yellow-400/25 dark:ring-yellow-500/30'
+                          : 'bg-neutral-100/50 dark:bg-neutral-900/30 border border-dashed border-neutral-300/80 dark:border-neutral-800/80 opacity-55 filter blur-[0.35px] hover:blur-none hover:opacity-90 select-none'
                       }`}
                     >
                       <div className="flex items-start gap-3">
-                        {/* Badge Icon */}
+                        {/* Badge / Pending Icon Box */}
                         <div
-                          className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 border ${
-                            item.tier === 'bronze'
-                              ? item.unlocked
-                                ? 'bg-amber-700/15 text-amber-700 dark:text-amber-400 border-amber-700/30'
-                                : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-400 border-neutral-200 dark:border-neutral-700'
-                              : item.tier === 'silver'
-                              ? item.unlocked
-                                ? 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700'
-                                : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-400 border-neutral-200 dark:border-neutral-700'
-                              : item.tier === 'clean'
-                              ? item.unlocked
-                                ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30'
-                                : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-400 border-neutral-200 dark:border-neutral-700'
-                              : item.unlocked
-                              ? 'bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-500/40'
-                              : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-400 border-neutral-200 dark:border-neutral-700'
+                          className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 border transition-colors ${
+                            item.unlocked
+                              ? item.tier === 'bronze'
+                                ? 'bg-amber-600/15 text-amber-700 dark:text-amber-300 border-amber-600/30'
+                                : item.tier === 'silver'
+                                ? 'bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 border-slate-300 dark:border-slate-600'
+                                : item.tier === 'clean'
+                                ? 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border-emerald-500/40'
+                                : 'bg-yellow-500/20 text-yellow-700 dark:text-yellow-300 border-yellow-500/40'
+                              : 'bg-neutral-200/60 dark:bg-neutral-800/60 text-neutral-400 dark:text-neutral-500 border-neutral-300/70 dark:border-neutral-700/60'
                           }`}
                         >
                           {item.unlocked ? (
@@ -305,24 +306,32 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
                               <Trophy className="w-5 h-5" />
                             )
                           ) : (
-                            <Lock className="w-4 h-4 text-neutral-400" />
+                            <Clock className="w-4 h-4 text-neutral-400 dark:text-neutral-500 animate-pulse" />
                           )}
                         </div>
 
                         {/* Achievement Info */}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between gap-2">
-                            <h4 className="text-xs font-bold text-neutral-900 dark:text-neutral-100 flex items-center gap-1.5">
+                            <h4
+                              className={`text-xs flex items-center gap-1.5 ${
+                                item.unlocked
+                                  ? 'font-bold text-neutral-900 dark:text-neutral-50'
+                                  : 'font-semibold text-neutral-600 dark:text-neutral-400'
+                              }`}
+                            >
                               <span>{item.name}</span>
                               <span
                                 className={`text-[10px] px-1.5 py-0.2 rounded font-medium border ${
-                                  item.tier === 'bronze'
-                                    ? 'bg-amber-100/70 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border-amber-300 dark:border-amber-800'
-                                    : item.tier === 'silver'
-                                    ? 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700'
-                                    : item.tier === 'clean'
-                                    ? 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border-emerald-300 dark:border-emerald-800'
-                                    : 'bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border-amber-300 dark:border-amber-800'
+                                  item.unlocked
+                                    ? item.tier === 'bronze'
+                                      ? 'bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-200 border-amber-300 dark:border-amber-700'
+                                      : item.tier === 'silver'
+                                      ? 'bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-600'
+                                      : item.tier === 'clean'
+                                      ? 'bg-emerald-100 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-200 border-emerald-300 dark:border-emerald-700'
+                                      : 'bg-yellow-100 dark:bg-yellow-950/70 text-yellow-800 dark:text-yellow-200 border-yellow-300 dark:border-yellow-700'
+                                    : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 border-neutral-200 dark:border-neutral-700'
                                 }`}
                               >
                                 {item.badgeLabel}
@@ -330,30 +339,45 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
                             </h4>
 
                             {item.unlocked ? (
-                              <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 shrink-0">
-                                <CheckCircle2 className="w-3.5 h-3.5" />
-                                Unlocked
+                              /* Ticked Checkmark Badge */
+                              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 dark:bg-emerald-950/90 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 shadow-2xs shrink-0">
+                                <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 stroke-[3]" />
+                                <span>Unlocked</span>
                               </span>
                             ) : (
-                              <span className="text-[11px] font-mono text-neutral-400 shrink-0">
-                                {item.progress} / {item.target}
+                              /* Inactive / Pending Badge with Icon */
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 border border-neutral-300 dark:border-neutral-700/80 shrink-0 font-mono">
+                                <Clock className="w-3 h-3 text-neutral-400 dark:text-neutral-500" />
+                                <span>Pending ({item.progress} / {item.target})</span>
                               </span>
                             )}
                           </div>
 
-                          <p className="text-xs text-neutral-700 dark:text-neutral-300 font-medium mt-1">
+                          <p
+                            className={`text-xs mt-1 leading-relaxed ${
+                              item.unlocked
+                                ? 'font-semibold text-neutral-800 dark:text-neutral-200'
+                                : 'font-medium text-neutral-500 dark:text-neutral-400'
+                            }`}
+                          >
                             &quot;{item.description}&quot;
                           </p>
 
-                          <p className="text-[11px] text-neutral-500 dark:text-neutral-400 mt-0.5">
+                          <p
+                            className={`text-[11px] mt-0.5 ${
+                              item.unlocked
+                                ? 'text-neutral-600 dark:text-neutral-400'
+                                : 'text-neutral-400 dark:text-neutral-500'
+                            }`}
+                          >
                             {item.requirement}
                           </p>
 
-                          {/* Progress Bar */}
+                          {/* Progress Bar for Inactive / Pending Achievements */}
                           {!item.unlocked && (
-                            <div className="w-full bg-neutral-200 dark:bg-neutral-800 h-1.5 rounded-full mt-2.5 overflow-hidden">
+                            <div className="w-full bg-neutral-200/80 dark:bg-neutral-800 h-1.5 rounded-full mt-2.5 overflow-hidden">
                               <div
-                                className="bg-sky-500 h-full rounded-full transition-all duration-300"
+                                className="bg-neutral-400 dark:bg-neutral-600 h-full rounded-full transition-all duration-300"
                                 style={{
                                   width: `${Math.min(100, Math.round((item.progress / item.target) * 100))}%`,
                                 }}
@@ -383,7 +407,7 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
                 onResetWorkspace();
               }
             }}
-            className="h-8.5 px-3 flex items-center gap-1.5 rounded-md text-xs font-medium text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer"
+            className="h-[35px] px-3 flex items-center gap-1.5 rounded-md text-xs font-medium text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Reset Demo DB</span>
@@ -392,7 +416,7 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="h-8.5 px-4 flex items-center justify-center rounded-md text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] transition-colors cursor-pointer shadow-2xs"
+            className="h-[35px] px-4 flex items-center justify-center rounded-md text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] transition-colors cursor-pointer shadow-2xs"
           >
             Done
           </button>

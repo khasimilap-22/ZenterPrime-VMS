@@ -24,6 +24,7 @@ interface FileTreeProps {
   onOpenUploadModal: () => void;
   onDeleteRequest: (file: CodeFile) => void;
   activeCodeSpaceName?: string;
+  onExportZip?: () => void;
 }
 
 interface TreeNode {
@@ -42,6 +43,7 @@ export const FileTree: React.FC<FileTreeProps> = ({
   onOpenUploadModal,
   onDeleteRequest,
   activeCodeSpaceName,
+  onExportZip,
 }) => {
   const [search, setSearch] = useState('');
   const [collapsedFolders, setCollapsedFolders] = useState<{ [key: string]: boolean }>({});
@@ -135,7 +137,7 @@ export const FileTree: React.FC<FileTreeProps> = ({
               <span className="truncate font-medium text-neutral-800 dark:text-neutral-200">
                 {node.name}
               </span>
-              <span className="text-[10px] text-neutral-400 ml-auto opacity-0 group-hover:opacity-100 font-mono">
+              <span className="text-[11px] text-neutral-400 ml-auto opacity-0 group-hover:opacity-100 font-mono">
                 {childCount}
               </span>
             </button>
@@ -176,17 +178,17 @@ export const FileTree: React.FC<FileTreeProps> = ({
           <div className="flex items-center gap-1 shrink-0">
             {/* Status letter flag */}
             {file.lastAction === 'edited' && (
-              <span className="text-[10px] font-mono font-bold text-amber-500 px-1" title="Modified revision">
+              <span className="text-[11px] font-mono font-bold text-amber-500 px-1" title="Modified revision">
                 M
               </span>
             )}
             {file.lastAction === 'uploaded' && (
-              <span className="text-[10px] font-mono font-bold text-emerald-500 px-1" title="Uploaded asset">
+              <span className="text-[11px] font-mono font-bold text-emerald-500 px-1" title="Uploaded asset">
                 U
               </span>
             )}
             {file.lastAction === 'created' && (
-              <span className="text-[10px] font-mono font-bold text-sky-500 px-1" title="Created asset">
+              <span className="text-[11px] font-mono font-bold text-sky-500 px-1" title="Created asset">
                 C
               </span>
             )}
@@ -201,7 +203,7 @@ export const FileTree: React.FC<FileTreeProps> = ({
               className="opacity-0 group-hover:opacity-100 p-0.5 text-neutral-400 hover:text-rose-500 rounded transition-opacity"
               title={`Delete ${file.name}`}
             >
-              <Trash2 className="w-3 h-3" />
+              <Trash2 className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
@@ -222,7 +224,7 @@ export const FileTree: React.FC<FileTreeProps> = ({
             <button
               type="button"
               onClick={onOpenNewModal}
-              className="p-1 text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded transition-colors"
+              className="w-7 h-7 flex items-center justify-center text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
               title="New File (N)"
             >
               <FilePlus className="w-3.5 h-3.5" />
@@ -231,11 +233,22 @@ export const FileTree: React.FC<FileTreeProps> = ({
             <button
               type="button"
               onClick={onOpenUploadModal}
-              className="p-1 text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded transition-colors"
-              title="Upload Code Files"
+              className="w-7 h-7 flex items-center justify-center text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
+              title="Upload Code Files or ZIP"
             >
               <UploadCloud className="w-3.5 h-3.5 text-emerald-500" />
             </button>
+
+            {onExportZip && (
+              <button
+                type="button"
+                onClick={onExportZip}
+                className="w-7 h-7 flex items-center justify-center text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
+                title="Export CodeSpace as ZIP archive"
+              >
+                <Download className="w-3.5 h-3.5 text-sky-500" />
+              </button>
+            )}
           </div>
         </div>
 
@@ -267,7 +280,19 @@ export const FileTree: React.FC<FileTreeProps> = ({
       {/* Explorer Footer Status */}
       <div className="px-3 border-t border-neutral-200 dark:border-neutral-800 bg-neutral-100/40 dark:bg-neutral-950/40 text-[11px] text-neutral-400 flex items-center justify-between h-[40px]">
         <span className="font-mono tabular-nums">{files.length} active files</span>
-        <span>codespace: <span className="font-mono text-neutral-600 dark:text-neutral-300">{activeCodeSpaceName || 'Default'}</span></span>
+        {onExportZip ? (
+          <button
+            type="button"
+            onClick={onExportZip}
+            className="flex items-center gap-1 text-sky-600 dark:text-sky-400 hover:underline cursor-pointer"
+            title="Download all folders and files as ZIP"
+          >
+            <Download className="w-3 h-3" />
+            <span>Export ZIP</span>
+          </button>
+        ) : (
+          <span>codespace: <span className="font-mono text-neutral-600 dark:text-neutral-300">{activeCodeSpaceName || 'Default'}</span></span>
+        )}
       </div>
     </div>
   );
