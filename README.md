@@ -1,25 +1,47 @@
-**ZenterPrime VMS**
-- A Complete Version Management System for SaaS or Scalable Software
+# ZenterPrime VMS
 
-A proper tool for beginners or juniors to push and commit the codebase to manage every track of version.
+**A Complete Version Management System for SaaS and Scalable Software**
 
-**Core Features**
-- Compatible for all devices
-- Run directly without any setup in your browser
-- No need to create an account, use demo account to manage your codebase
-- Create codespaces to manage every codebase of your apps
-- Create groups and merge codespaces into them to manage group-wise codespaces
-- Import files from your computer in new / existing codespace
-- Export to .zip to your codespaces
-- No limits, no usage tokens
+**ZenterPrime VMS** is a lightweight, browser-based Version Management System designed specifically to help beginner and junior developers easily push, commit, and track changes across their codebase.
 
-**Currently Supports**
-- .ts
-- .tsx
-- .json
-- .md
-- .py
-- .css
-- .html
-- .sql
-- .img ( Currently in Beta and can occur errors while loading )
+## 🚀 Key Features
+
+* **Cross-Device Compatibility:** Works seamlessly on desktop, tablet, and mobile devices.
+
+* **Zero-Setup & Browser Native:** Run directly in your browser without complex installation or environment configuration.
+
+* **Instant Demo Access:** Start managing your code immediately using built-in demo credentials—no account creation required.
+
+* **Codespaces Management:** Organize, manage, and version-control individual application codebases effortlessly.
+
+* **Group & Merge Operations:** Combine multiple codespaces into structured groups for centralized management.
+
+* **Import & Export:** Easily import local files into new or existing codespaces, and export entire projects as `.zip` archives.
+
+* **Unrestricted Usage:** No usage limits or API token constraints.
+
+## 🛠️ Supported File Types
+
+ZenterPrime VMS supports version tracking and management for a variety of project files:
+
+| Category | Supported Extensions | Status | 
+| ----- | ----- | ----- | 
+| **JavaScript / TypeScript** | `.ts`, `.tsx` | Stable | 
+| **Web Development** | `.html`, `.css` | Stable | 
+| **Backend & Scripts** | `.py`, `.sql` | Stable | 
+| **Data & Documentation** | `.json`, `.md` | Stable | 
+| **Assets** | `.img` | ⚠️ *Beta (May cause loading issues)* | 
+
+## ⚡ Quick Start Guide
+
+1. Open **ZenterPrime VMS** in your web browser.
+
+2. Sign in using the **Demo Account** option or create your own project space.
+
+3. Create a **Codespace** or import your existing files directly from your computer.
+
+4. Make changes, commit updates, and export your project to `.zip` at any time.
+
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
