@@ -1,0 +1,6 @@
+{
+  "name": "Version Management System",
+  "description": "Manage application and codebase version history with file creation, upload, editing, deletion tracking, and customizable themes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
