@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import {
   Save,
   RotateCcw,
@@ -19,6 +19,7 @@ import {
   clearFileEditDraft,
 } from '../utils/draftStorage';
 import { SessionRestoredTag } from './SessionRestoredTag';
+import { renderHighlightedCode } from '../utils/syntaxHighlight';
 
 interface CodeEditorProps {
   file: CodeFile;
@@ -59,6 +60,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
   const toastTimeoutRef = useRef<number | null>(null);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const highlightLayerRef = useRef<HTMLPreElement>(null);
   const gutterRef = useRef<HTMLDivElement>(null);
   const editorViewportRef = useRef<HTMLDivElement>(null);
   const touchStateRef = useRef<{ startDist: number; startZoom: number } | null>(null);
@@ -82,6 +84,17 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
     }
     setCommitNote('');
     setShowCommitInput(false);
+    if (textareaRef.current) {
+      textareaRef.current.scrollTop = 0;
+      textareaRef.current.scrollLeft = 0;
+    }
+    if (highlightLayerRef.current) {
+      highlightLayerRef.current.scrollTop = 0;
+      highlightLayerRef.current.scrollLeft = 0;
+    }
+    if (gutterRef.current) {
+      gutterRef.current.scrollTop = 0;
+    }
   }, [file.id, file.content]);
 
   // Auto-save draft changes to localStorage immediately
@@ -215,10 +228,21 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
   };
 
   const handleEditorScroll = () => {
-    if (textareaRef.current && gutterRef.current) {
-      gutterRef.current.scrollTop = textareaRef.current.scrollTop;
+    const ta = textareaRef.current;
+    if (!ta) return;
+    if (gutterRef.current) {
+      gutterRef.current.scrollTop = ta.scrollTop;
+    }
+    if (highlightLayerRef.current) {
+      highlightLayerRef.current.scrollTop = ta.scrollTop;
+      highlightLayerRef.current.scrollLeft = ta.scrollLeft;
     }
   };
+
+  const highlightedCode = useMemo(
+    () => renderHighlightedCode(content, file.name, file.language),
+    [content, file.name, file.language]
+  );
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     // Zoom keyboard shortcuts
@@ -494,33 +518,73 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
           </div>
         )}
 
-        {/* Code Textarea with Smooth Scaled Font and Line Height Animation */}
-        <textarea
-          ref={textareaRef}
-          value={content}
-          onChange={(e) => {
-            const nextVal = e.target.value;
-            setContent(nextVal);
-            updateCursorPosition();
-            onDirtyChangeRef.current?.(file.id, nextVal !== file.content);
-          }}
-          onScroll={handleEditorScroll}
-          onKeyUp={updateCursorPosition}
-          onClick={updateCursorPosition}
-          onKeyDown={handleKeyDown}
-          spellCheck={false}
-          className={`flex-1 bg-transparent text-neutral-800 dark:text-neutral-200 focus:outline-none resize-none font-mono ${
-            settings.codeWrap ? 'whitespace-pre-wrap break-words' : 'whitespace-pre overflow-x-auto'
-          }`}
-          style={{
-            fontSize: `${effectiveFontSize}px`,
-            lineHeight: `${effectiveLineHeight}px`,
-            padding: `${Math.max(10, Math.round(12 * zoomRatio))}px`,
-            transition:
-              'font-size 180ms cubic-bezier(0.16, 1, 0.3, 1), line-height 180ms cubic-bezier(0.16, 1, 0.3, 1), padding 180ms cubic-bezier(0.16, 1, 0.3, 1)',
-          }}
-          placeholder="File content..."
-        />
+        {/* Synchronized VS Code Syntax-Highlighted Code Area */}
+        <div className="relative flex-1 min-w-0 h-full overflow-hidden">
+          {/* Syntax Highlighted Backdrop */}
+          <pre
+            ref={highlightLayerRef}
+            aria-hidden="true"
+            className={`vscode-code absolute inset-0 m-0 w-full h-full overflow-hidden pointer-events-none select-none font-mono ${
+              settings.codeWrap ? 'whitespace-pre-wrap break-words' : 'whitespace-pre'
+            }`}
+            style={{
+              fontSize: `${effectiveFontSize}px`,
+              lineHeight: `${effectiveLineHeight}px`,
+              padding: `${Math.max(10, Math.round(12 * zoomRatio))}px`,
+              letterSpacing: '0px',
+              tabSize: settings.tabSize || 2,
+              scrollbarGutter: 'stable',
+              transition:
+                'font-size 180ms cubic-bezier(0.16, 1, 0.3, 1), line-height 180ms cubic-bezier(0.16, 1, 0.3, 1), padding 180ms cubic-bezier(0.16, 1, 0.3, 1)',
+            }}
+          >
+            {content ? (
+              <>
+                {highlightedCode}
+                {content.endsWith('\n') ? ' ' : ''}
+              </>
+            ) : (
+              <span className="text-neutral-400 dark:text-neutral-600">File content...</span>
+            )}
+          </pre>
+
+          {/* Transparent Editable Textarea Overlay */}
+          <textarea
+            ref={textareaRef}
+            value={content}
+            onChange={(e) => {
+              const nextVal = e.target.value;
+              setContent(nextVal);
+              updateCursorPosition();
+              onDirtyChangeRef.current?.(file.id, nextVal !== file.content);
+            }}
+            onScroll={handleEditorScroll}
+            onKeyUp={updateCursorPosition}
+            onClick={updateCursorPosition}
+            onKeyDown={handleKeyDown}
+            spellCheck={false}
+            autoCapitalize="off"
+            autoComplete="off"
+            autoCorrect="off"
+            aria-label={`Code editor for ${file.name}`}
+            className={`absolute inset-0 w-full h-full m-0 border-0 bg-transparent text-transparent caret-neutral-900 dark:caret-sky-400 selection:bg-sky-500/25 focus:outline-none resize-none font-mono ${
+              settings.codeWrap
+                ? 'whitespace-pre-wrap break-words overflow-y-auto overflow-x-hidden'
+                : 'whitespace-pre overflow-auto'
+            }`}
+            style={{
+              fontSize: `${effectiveFontSize}px`,
+              lineHeight: `${effectiveLineHeight}px`,
+              padding: `${Math.max(10, Math.round(12 * zoomRatio))}px`,
+              letterSpacing: '0px',
+              tabSize: settings.tabSize || 2,
+              scrollbarGutter: 'stable',
+              WebkitTextFillColor: 'transparent',
+              transition:
+                'font-size 180ms cubic-bezier(0.16, 1, 0.3, 1), line-height 180ms cubic-bezier(0.16, 1, 0.3, 1), padding 180ms cubic-bezier(0.16, 1, 0.3, 1)',
+            }}
+          />
+        </div>
       </div>
 
       {/* Professional Developer Status Bar with Integrated Zoom Controls */}

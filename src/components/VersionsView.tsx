@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { VersionFilterTab, VersionRecord, VersionActionType } from '../types';
 import { computeLineDiff } from '../utils/diff';
+import { renderHighlightedCode } from '../utils/syntaxHighlight';
 
 interface VersionsViewProps {
   versions: VersionRecord[];
@@ -629,8 +630,12 @@ const VersionDetailModal: React.FC<VersionDetailModalProps> = ({
                 </span>
               </div>
 
-              <pre className="p-4 bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-lg text-[13px] font-mono text-neutral-800 dark:text-neutral-200 overflow-x-auto max-h-96 whitespace-pre leading-6">
-                {record.content || '// Empty content'}
+              <pre className="vscode-code p-4 bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-lg text-[13px] font-mono overflow-x-auto max-h-96 whitespace-pre leading-6">
+                {renderHighlightedCode(
+                  record.content || '// Empty content',
+                  record.fileName,
+                  record.language
+                )}
               </pre>
             </div>
           )}
