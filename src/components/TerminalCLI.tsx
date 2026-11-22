@@ -841,11 +841,7 @@ export const TerminalCLI: React.FC<TerminalCLIProps> = ({
 
             <button
               type="submit"
-              className={`h-[26px] px-2.5 inline-flex items-center gap-1 rounded-md font-sans text-xs font-medium transition-colors cursor-pointer shrink-0 ${
-                isLight
-                  ? 'bg-neutral-900 text-white hover:bg-neutral-800'
-                  : 'bg-neutral-100 text-neutral-950 hover:bg-white'
-              }`}
+              className="h-[26px] px-2.5 inline-flex items-center gap-1 rounded-md font-sans text-xs font-medium transition-colors cursor-pointer shrink-0 bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] text-white"
             >
               <span>Run</span>
               <CornerDownLeft className="w-3 h-3" />

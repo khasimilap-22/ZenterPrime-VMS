@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
-  <rect width="512" height="512" rx="96" fill="#0F172A" />
-  <rect x="44" y="44" width="424" height="424" rx="68" stroke="#1E293B" stroke-width="12" />
-  <path d="M160 156V312C160 347.346 188.654 376 224 376H304" stroke="#38BDF8" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" />
-  <path d="M352 196V332" stroke="#94A3B8" stroke-width="28" stroke-linecap="round" />
-  <circle cx="160" cy="152" r="34" fill="#38BDF8" />
-  <circle cx="352" cy="152" r="34" fill="#0EA5E9" />
-  <circle cx="352" cy="376" r="34" fill="#38BDF8" />
+  <rect width="512" height="512" rx="96" fill="#0284C7" />
+  <rect x="44" y="44" width="424" height="424" rx="68" stroke="#38BDF8" stroke-opacity="0.45" stroke-width="10" />
+  <path d="M160 156V312C160 347.346 188.654 376 224 376H304" stroke="#FFFFFF" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M352 196V332" stroke="#E0F2FE" stroke-width="28" stroke-linecap="round" />
+  <circle cx="160" cy="152" r="34" fill="#FFFFFF" />
+  <circle cx="352" cy="152" r="34" fill="#E0F2FE" />
+  <circle cx="352" cy="376" r="34" fill="#FFFFFF" />
 </svg>

@@ -7,12 +7,20 @@
     color-scheme: light;
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --color-primary: #0284c7;
+    --color-primary-hover: #0369a1;
+    --color-primary-active: #075985;
+    accent-color: #0284c7;
     font-size: 16px;
     letter-spacing: -0.01em;
   }
   
   :root.dark {
     color-scheme: dark;
+  }
+
+  ::selection {
+    background-color: rgba(2, 132, 199, 0.24);
   }
 
   body {
