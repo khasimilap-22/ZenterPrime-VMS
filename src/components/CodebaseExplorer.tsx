@@ -1,15 +1,21 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Plus, UploadCloud, FolderCode, Command, ChevronLeft, ArrowLeft, Download } from 'lucide-react';
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { Plus, UploadCloud, FolderCode, Command, ArrowLeft, Download } from 'lucide-react';
 import { CodeFile, AppSettings, CodeSpace, CodeSpaceGroup } from '../types';
 import { FileTree } from './FileTree';
 import { EditorTabs } from './EditorTabs';
 import { CodeEditor } from './CodeEditor';
+import { LivePreviewPanel } from './LivePreviewPanel';
 import { NewFileModal } from './NewFileModal';
 import { UploadModal } from './UploadModal';
 import { DeleteConfirmModal } from './DeleteConfirmModal';
 import { CodeSpaceSelector } from './codespaces/CodeSpaceSelector';
 import { SessionRestoredTag } from './SessionRestoredTag';
-import { getNewFileDraft, clearNewFileDraft, NewFileDraft } from '../utils/draftStorage';
+import {
+  getNewFileDraft,
+  clearNewFileDraft,
+  getFileEditDraft,
+  NewFileDraft,
+} from '../utils/draftStorage';
 import { downloadCodeSpaceZip } from '../utils/zipExport';
 
 interface CodebaseExplorerProps {
@@ -66,6 +72,12 @@ export const CodebaseExplorer: React.FC<CodebaseExplorerProps> = ({
     return files.slice(0, 3).map((f) => f.id);
   });
   const [unsavedMap, setUnsavedMap] = useState<{ [key: string]: boolean }>({});
+  const [liveContentMap, setLiveContentMap] = useState<Record<string, string>>({});
+  const [isLivePreviewOpen, setIsLivePreviewOpen] = useState(false);
+  const [previewWidth, setPreviewWidth] = useState(460);
+  const [isResizingPreview, setIsResizingPreview] = useState(false);
+  const resizeStartXRef = useRef(0);
+  const resizeStartWidthRef = useRef(460);
   const [isNewModalOpen, setIsNewModalOpen] = useState(false);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [fileToDelete, setFileToDelete] = useState<CodeFile | null>(null);
@@ -78,6 +90,44 @@ export const CodebaseExplorer: React.FC<CodebaseExplorerProps> = ({
   useEffect(() => {
     setRestoredDraft(getNewFileDraft(activeCodeSpaceId));
   }, [activeCodeSpaceId, isNewModalOpen]);
+
+  // Clear stale live-content map entries when switching CodeSpaces
+  useEffect(() => {
+    setLiveContentMap({});
+  }, [activeCodeSpaceId]);
+
+  // Drag-to-resize Live Preview side-panel horizontally
+  useEffect(() => {
+    if (!isResizingPreview) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const delta = resizeStartXRef.current - e.clientX;
+      const maxW = Math.max(360, Math.floor(window.innerWidth * 0.6));
+      const next = Math.max(280, Math.min(maxW, resizeStartWidthRef.current + delta));
+      setPreviewWidth(next);
+    };
+
+    const handleMouseUp = () => {
+      setIsResizingPreview(false);
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isResizingPreview]);
+
+  const handleStartPreviewResize = (e: React.MouseEvent) => {
+    setIsResizingPreview(true);
+    resizeStartXRef.current = e.clientX;
+    resizeStartWidthRef.current = previewWidth;
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+  };
 
   // Filter openFileIds when files change (e.g. switching codespaces)
   useEffect(() => {
@@ -126,8 +176,34 @@ export const CodebaseExplorer: React.FC<CodebaseExplorerProps> = ({
     });
   }, []);
 
+  const handleLiveContentChange = useCallback((fileId: string, liveContent: string) => {
+    setLiveContentMap((prev) => {
+      if (prev[fileId] === liveContent) return prev;
+      return { ...prev, [fileId]: liveContent };
+    });
+  }, []);
+
   const openFiles = files.filter((f) => openFileIds.includes(f.id));
   const activeFile = files.find((f) => f.id === selectedFileId) || openFiles[0] || files[0] || null;
+
+  // Merge live unsaved edits/drafts into files passed to Live Preview
+  const liveFiles = useMemo(() => {
+    return files.map((f) => {
+      if (f.id in liveContentMap) {
+        return { ...f, content: liveContentMap[f.id] };
+      }
+      const draft = getFileEditDraft(f.id);
+      if (draft !== null) {
+        return { ...f, content: draft };
+      }
+      return f;
+    });
+  }, [files, liveContentMap]);
+
+  const liveActiveFile = useMemo(() => {
+    if (!activeFile) return null;
+    return liveFiles.find((f) => f.id === activeFile.id) || activeFile;
+  }, [liveFiles, activeFile]);
 
   const currentCodeSpace =
     codeSpaces.find((c) => c.id === activeCodeSpaceId) || codeSpaces[0];
@@ -235,8 +311,8 @@ export const CodebaseExplorer: React.FC<CodebaseExplorerProps> = ({
           onExportZip={handleExportZip}
         />
 
-        {/* Right Pane: Multi-Tab Editor Area */}
-        <div className="flex-1 flex flex-col overflow-hidden bg-white dark:bg-neutral-900">
+        {/* Center Pane: Multi-Tab Editor Area */}
+        <div className="flex-1 min-w-0 flex flex-col overflow-hidden bg-white dark:bg-neutral-900">
           {openFiles.length > 0 && (
             <EditorTabs
               openFiles={openFiles}
@@ -255,6 +331,9 @@ export const CodebaseExplorer: React.FC<CodebaseExplorerProps> = ({
               onSave={onSaveFileContent}
               onDeleteRequest={(file) => setFileToDelete(file)}
               onDirtyChange={handleDirtyChange}
+              isLivePreviewOpen={isLivePreviewOpen}
+              onToggleLivePreview={() => setIsLivePreviewOpen((prev) => !prev)}
+              onLiveContentChange={handleLiveContentChange}
             />
           ) : (
             <div className="flex-1 flex flex-col items-center justify-center p-8 text-center text-neutral-500 dark:text-neutral-400 bg-white dark:bg-neutral-900 select-none">
@@ -299,6 +378,19 @@ export const CodebaseExplorer: React.FC<CodebaseExplorerProps> = ({
             </div>
           )}
         </div>
+
+        {/* Right Side-Panel: Live Preview (Toggled via Go Live in bottom status bar) */}
+        {isLivePreviewOpen && (
+          <LivePreviewPanel
+            files={liveFiles}
+            activeFile={liveActiveFile}
+            theme={settings.theme}
+            width={previewWidth}
+            isResizing={isResizingPreview}
+            onStartResize={handleStartPreviewResize}
+            onClose={() => setIsLivePreviewOpen(false)}
+          />
+        )}
       </div>
 
       {/* Creation, Upload, and Deletion Modals */}

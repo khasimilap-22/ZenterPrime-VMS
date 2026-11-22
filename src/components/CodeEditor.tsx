@@ -9,6 +9,7 @@ import {
   ChevronRight,
   ZoomIn,
   ZoomOut,
+  Radio,
 } from 'lucide-react';
 import { CodeFile, AppSettings } from '../types';
 import { formatBytes } from '../utils/storage';
@@ -27,6 +28,9 @@ interface CodeEditorProps {
   onSave: (fileId: string, updatedContent: string, commitNote: string) => void;
   onDeleteRequest: (file: CodeFile) => void;
   onDirtyChange?: (fileId: string, isDirty: boolean) => void;
+  isLivePreviewOpen?: boolean;
+  onToggleLivePreview?: () => void;
+  onLiveContentChange?: (fileId: string, liveContent: string) => void;
 }
 
 export const CodeEditor: React.FC<CodeEditorProps> = ({
@@ -35,6 +39,9 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
   onSave,
   onDeleteRequest,
   onDirtyChange,
+  isLivePreviewOpen = false,
+  onToggleLivePreview,
+  onLiveContentChange,
 }) => {
   const [content, setContent] = useState(file.content);
   const [commitNote, setCommitNote] = useState('');
@@ -70,6 +77,11 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
     onDirtyChangeRef.current = onDirtyChange;
   }, [onDirtyChange]);
 
+  const onLiveContentChangeRef = useRef(onLiveContentChange);
+  useEffect(() => {
+    onLiveContentChangeRef.current = onLiveContentChange;
+  }, [onLiveContentChange]);
+
   // Sync content when file changes or restore saved draft from previous session
   useEffect(() => {
     const savedDraft = getFileEditDraft(file.id);
@@ -97,8 +109,9 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
     }
   }, [file.id, file.content]);
 
-  // Auto-save draft changes to localStorage immediately
+  // Auto-save draft changes to localStorage and sync live preview content immediately
   useEffect(() => {
+    onLiveContentChangeRef.current?.(file.id, content);
     if (content !== file.content) {
       saveFileEditDraft(file.id, content);
     } else {
@@ -656,6 +669,24 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
           <span className="capitalize font-mono text-neutral-700 dark:text-neutral-300">
             {file.language}
           </span>
+          {onToggleLivePreview && (
+            <>
+              <span className="text-neutral-300 dark:text-neutral-700">·</span>
+              <button
+                type="button"
+                onClick={onToggleLivePreview}
+                className={`h-[24px] px-2.5 inline-flex items-center gap-1.5 rounded text-xs font-medium transition-colors cursor-pointer whitespace-nowrap ${
+                  isLivePreviewOpen
+                    ? 'bg-[#0284c7] hover:bg-[#0369a1] text-white'
+                    : 'text-neutral-700 dark:text-neutral-200 hover:bg-[#0284c7]/12 hover:text-[#0284c7] dark:hover:text-sky-400'
+                }`}
+                title={isLivePreviewOpen ? 'Close Live Preview' : 'Open Live Preview side-panel'}
+              >
+                <Radio className="w-3.5 h-3.5 shrink-0" />
+                <span>{isLivePreviewOpen ? 'Live' : 'Go Live'}</span>
+              </button>
+            </>
+          )}
           <span className="text-neutral-300 dark:text-neutral-700">·</span>
           <button
             type="button"

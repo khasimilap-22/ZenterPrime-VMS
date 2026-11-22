@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Plus, X, FileCode, WifiOff } from 'lucide-react';
+import { Plus, X, FileCode } from 'lucide-react';
 import { detectLanguage } from '../utils/storage';
 import {
   saveNewFileDraft,
@@ -83,30 +83,24 @@ export const NewFileModal: React.FC<NewFileModalProps> = ({
   const [description, setDescription] = useState(DEFAULT_DESCRIPTION);
   const [error, setError] = useState<string | null>(null);
   const [wasRestored, setWasRestored] = useState(false);
-  const [isOnline, setIsOnline] = useState<boolean>(() =>
-    typeof navigator !== 'undefined' ? navigator.onLine : true
-  );
 
   const activeId = codeSpaceId || 'default';
   const latestValuesRef = useRef({ filePath, content, description });
   latestValuesRef.current = { filePath, content, description };
 
-  // Online / Offline tracking
+  // Silently flush current draft to IndexedDB if network disconnects
   useEffect(() => {
-    const handleOnline = () => setIsOnline(true);
     const handleOffline = () => {
-      setIsOnline(false);
-      // Immediately flush current draft on disconnect
-      saveNewFileDraft(activeId, latestValuesRef.current);
+      if (isOpen) {
+        saveNewFileDraft(activeId, latestValuesRef.current);
+      }
     };
 
-    window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
     return () => {
-      window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
     };
-  }, [activeId]);
+  }, [activeId, isOpen]);
 
   // Load existing draft on open / mount
   useEffect(() => {
@@ -195,12 +189,6 @@ export const NewFileModal: React.FC<NewFileModalProps> = ({
                 <h3 id="new-file-title" className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
                   Create New Code File
                 </h3>
-                {!isOnline && (
-                  <span className="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30">
-                    <WifiOff className="w-3.5 h-3.5" />
-                    Offline Draft Mode
-                  </span>
-                )}
               </div>
               <p className="text-[13px] text-neutral-600 dark:text-neutral-400">
                 Define path, template, and initial contents. Draft is auto-saved locally.

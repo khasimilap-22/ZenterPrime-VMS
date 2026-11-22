@@ -46,6 +46,10 @@ import {
   clearAllCodeSpaceFolderStates,
   hydrateFolderStatesFromIDB,
 } from './utils/folderStateStorage';
+import {
+  hydrateDraftsFromIDB,
+  clearAllDrafts,
+} from './utils/draftStorage';
 import { TerminalCLI } from './components/TerminalCLI';
 import {
   buildCodeSpaceFromTemplate,
@@ -106,6 +110,7 @@ export default function App() {
           idbGetKeyVal<string>('activeCodeSpaceId'),
           idbGetKeyVal<AppSettings>('settings'),
           hydrateFolderStatesFromIDB(),
+          hydrateDraftsFromIDB(),
         ]);
 
         if (!isMounted) return;
@@ -566,6 +571,7 @@ export default function App() {
     localStorage.removeItem('vms_version_records_v1');
     localStorage.removeItem('vms_settings_v1');
     clearAllCodeSpaceFolderStates();
+    clearAllDrafts();
     window.location.reload();
   };
 

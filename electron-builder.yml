@@ -20,7 +20,6 @@ win:
     - target: portable
       arch:
         - x64
-  artifactName: "${productName}-${version}-${arch}-${target}.${ext}"
 
 nsis:
   oneClick: false
@@ -28,6 +27,7 @@ nsis:
   createDesktopShortcut: true
   createStartMenuShortcut: true
   shortcutName: Version Management System
+  artifactName: "${productName}-Setup-${version}-${arch}.${ext}"
 
 portable:
-  artifactName: "${productName}-${version}-portable.${ext}"
+  artifactName: "${productName}-Portable-${version}-${arch}.${ext}"

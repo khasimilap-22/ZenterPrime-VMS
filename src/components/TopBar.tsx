@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   Search,
   Plus,
   Moon,
   Sun,
   ChevronLeft,
-  WifiOff,
 } from 'lucide-react';
 import { ThemeMode } from '../types';
 import { MainNavTab } from './Sidebar';
@@ -34,20 +33,6 @@ export const TopBar: React.FC<TopBarProps> = ({
   onBackToCodeSpaces,
   onOpenDemoAccountModal,
 }) => {
-  const [isOnline, setIsOnline] = useState<boolean>(() =>
-    typeof navigator !== 'undefined' ? navigator.onLine : true
-  );
-
-  useEffect(() => {
-    const handleOnline = () => setIsOnline(true);
-    const handleOffline = () => setIsOnline(false);
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-    };
-  }, []);
   return (
     <header className="h-14 shrink-0 flex items-center justify-between px-5 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 transition-colors select-none">
       {/* Left Area: Context / Navigation Indicator */}
@@ -97,16 +82,6 @@ export const TopBar: React.FC<TopBarProps> = ({
 
       {/* Right Area: + New CodeSpace button, Theme Toggle & Avatar */}
       <div className="flex items-center gap-3 min-w-[140px] justify-end">
-        {!isOnline && (
-          <div
-            className="h-[30px] flex items-center gap-1.5 px-2.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 text-xs font-medium whitespace-nowrap"
-            title="Internet disconnected - Local drafts are auto-saving safely"
-          >
-            <WifiOff className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Offline (Drafts Preserved)</span>
-          </div>
-        )}
-
         {/* Blue Primary Button */}
         <button
           type="button"
