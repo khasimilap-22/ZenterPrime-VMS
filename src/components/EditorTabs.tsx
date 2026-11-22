@@ -30,14 +30,14 @@ export const EditorTabs: React.FC<EditorTabsProps> = ({
           <div
             key={file.id}
             onClick={() => onSelectTab(file.id)}
-            className={`group flex items-center gap-2 px-3 text-xs border-r border-neutral-200 dark:border-neutral-800 cursor-pointer transition-colors shrink-0 h-[30px] ${
+            className={`group flex items-center gap-2 px-3.5 text-[13px] border-r border-neutral-200 dark:border-neutral-800 cursor-pointer transition-colors shrink-0 h-[34px] ${
               isActive
                 ? 'bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 font-medium border-t-2 border-t-sky-500'
-                : 'text-neutral-500 dark:text-neutral-400 hover:bg-neutral-200/50 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-200'
+                : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200/50 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-200'
             }`}
           >
-            <FileIcon fileName={file.name} className="w-3.5 h-3.5 shrink-0" />
-            <span className="font-mono text-xs">{file.name}</span>
+            <FileIcon fileName={file.name} className="w-4 h-4 shrink-0" />
+            <span className="font-mono text-[13px]">{file.name}</span>
 
             {/* Dirty indicator or close button */}
             <div className="flex items-center ml-1">

@@ -94,7 +94,7 @@ export const CodeSpaceSelector: React.FC<CodeSpaceSelectorProps> = ({
                 onChange={(e) => setFilterQuery(e.target.value)}
                 placeholder="Filter CodeSpaces..."
                 autoFocus
-                className="w-full h-[30px] pl-8 pr-2.5 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
+                className="w-full h-[30px] pl-8 pr-2.5 text-[13px] bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
               />
             </div>
           </div>
@@ -103,12 +103,12 @@ export const CodeSpaceSelector: React.FC<CodeSpaceSelectorProps> = ({
           <div className="max-h-72 overflow-y-auto divide-y divide-neutral-100 dark:divide-neutral-800">
             {/* 1. Standalone CodeSpaces List */}
             <div className="p-1.5">
-              <div className="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase text-neutral-400 dark:text-neutral-500">
+              <div className="px-2.5 py-1 text-xs font-semibold tracking-wider uppercase text-neutral-500 dark:text-neutral-400">
                 CodeSpaces
               </div>
 
               {filteredCodeSpaces.length === 0 ? (
-                <div className="px-3 py-3 text-center text-xs text-neutral-400 dark:text-neutral-500">
+                <div className="px-3 py-3 text-center text-[13px] text-neutral-500 dark:text-neutral-400">
                   No matching CodeSpaces found
                 </div>
               ) : (
@@ -118,7 +118,7 @@ export const CodeSpaceSelector: React.FC<CodeSpaceSelectorProps> = ({
                     return (
                       <div
                         key={cs.id}
-                        className={`group/row flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs transition-colors cursor-pointer ${
+                        className={`group/row flex items-center justify-between px-2.5 py-1.5 rounded-lg text-[13px] transition-colors cursor-pointer ${
                           isActive
                             ? 'bg-sky-50 dark:bg-sky-950/40 text-sky-900 dark:text-sky-200 font-medium'
                             : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/70'
@@ -138,7 +138,7 @@ export const CodeSpaceSelector: React.FC<CodeSpaceSelectorProps> = ({
                           </div>
                           <span className="truncate">{cs.name}</span>
                           {cs.isDefault && (
-                            <span className="text-[10px] px-1.5 py-0.2 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 font-mono">
+                            <span className="text-xs px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 font-mono">
                               Default
                             </span>
                           )}
@@ -146,7 +146,7 @@ export const CodeSpaceSelector: React.FC<CodeSpaceSelectorProps> = ({
 
                         {/* Hover Actions: Edit and Delete icons appear on hover */}
                         <div className="flex items-center gap-1 shrink-0">
-                          <span className="text-[10px] font-mono text-neutral-400 dark:text-neutral-500 group-hover/row:hidden">
+                          <span className="text-xs font-mono tabular-nums text-neutral-500 dark:text-neutral-400 group-hover/row:hidden">
                             {cs.files ? cs.files.length : 0}f
                           </span>
 
@@ -188,7 +188,7 @@ export const CodeSpaceSelector: React.FC<CodeSpaceSelectorProps> = ({
             {/* 2. Groups Section */}
             {groups.length > 0 && (
               <div className="p-1.5">
-                <div className="px-2.5 py-1 text-[10px] font-semibold tracking-wider uppercase text-neutral-400 dark:text-neutral-500">
+                <div className="px-2.5 py-1 text-xs font-semibold tracking-wider uppercase text-neutral-500 dark:text-neutral-400">
                   Groups
                 </div>
 
@@ -214,16 +214,16 @@ export const CodeSpaceSelector: React.FC<CodeSpaceSelectorProps> = ({
                         >
                           <div className="flex items-center gap-1.5 min-w-0">
                             <Layers className="w-3.5 h-3.5 text-sky-500 shrink-0" />
-                            <span className="text-xs font-semibold text-neutral-900 dark:text-neutral-100 truncate group-hover/grpHdr:text-sky-600 dark:group-hover/grpHdr:text-sky-400">
+                            <span className="text-[13px] font-semibold text-neutral-900 dark:text-neutral-100 truncate group-hover/grpHdr:text-sky-600 dark:group-hover/grpHdr:text-sky-400">
                               {grp.name}
                             </span>
-                            <span className="text-[10px] font-mono text-neutral-400">
+                            <span className="text-xs font-mono tabular-nums text-neutral-500 dark:text-neutral-400">
                               ({memberCodeSpaces.length})
                             </span>
                           </div>
 
-                          <div className="flex items-center gap-1 text-[10px] text-neutral-400 group-hover/grpHdr:text-neutral-600 dark:group-hover/grpHdr:text-neutral-200">
-                            <Settings2 className="w-3 h-3" />
+                          <div className="flex items-center gap-1 text-xs text-neutral-500 dark:text-neutral-400 group-hover/grpHdr:text-neutral-700 dark:group-hover/grpHdr:text-neutral-200">
+                            <Settings2 className="w-3.5 h-3.5" />
                             <span className="hidden sm:inline">Edit</span>
                           </div>
                         </div>
@@ -231,7 +231,7 @@ export const CodeSpaceSelector: React.FC<CodeSpaceSelectorProps> = ({
                         {/* Member CodeSpaces inside Group */}
                         <div className="pl-2 mt-1 space-y-0.5 border-l-2 border-neutral-200 dark:border-neutral-800 ml-2">
                           {memberCodeSpaces.length === 0 ? (
-                            <div className="px-2 py-1 text-[11px] text-neutral-400 dark:text-neutral-500 italic">
+                            <div className="px-2 py-1 text-xs text-neutral-500 dark:text-neutral-400 italic">
                               No CodeSpaces in group
                             </div>
                           ) : (
@@ -241,7 +241,7 @@ export const CodeSpaceSelector: React.FC<CodeSpaceSelectorProps> = ({
                               return (
                                 <div
                                   key={cs.id}
-                                  className={`group/mem flex items-center justify-between px-2 py-1 rounded text-xs transition-colors cursor-pointer ${
+                                  className={`group/mem flex items-center justify-between px-2 py-1 rounded text-[13px] transition-colors cursor-pointer ${
                                     isActive
                                       ? 'bg-sky-50 dark:bg-sky-950/40 text-sky-900 dark:text-sky-200 font-medium'
                                       : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/70'
@@ -261,7 +261,7 @@ export const CodeSpaceSelector: React.FC<CodeSpaceSelectorProps> = ({
                                   </div>
 
                                   <div className="flex items-center gap-1">
-                                    <span className="text-[10px] font-mono text-neutral-400 group-hover/mem:hidden">
+                                    <span className="text-xs font-mono tabular-nums text-neutral-500 dark:text-neutral-400 group-hover/mem:hidden">
                                       {cs.files ? cs.files.length : 0}f
                                     </span>
                                     <div className="hidden group-hover/mem:flex items-center gap-0.5">
@@ -313,9 +313,9 @@ export const CodeSpaceSelector: React.FC<CodeSpaceSelectorProps> = ({
                 setIsOpen(false);
                 onOpenCreateModal();
               }}
-              className="w-full h-[35px] flex items-center justify-center gap-1.5 px-3 text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] rounded-md transition-colors shadow-2xs cursor-pointer"
+              className="w-full h-[35px] flex items-center justify-center gap-1.5 px-3 text-sm font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] rounded-md transition-colors shadow-2xs cursor-pointer"
             >
-              <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
+              <Plus className="w-4 h-4 stroke-[2.5]" />
               <span>Create new CodeSpace</span>
             </button>
 
@@ -326,9 +326,9 @@ export const CodeSpaceSelector: React.FC<CodeSpaceSelectorProps> = ({
                 setIsOpen(false);
                 onOpenMergeModal();
               }}
-              className="w-full h-[35px] flex items-center justify-center gap-1.5 px-3 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 bg-white dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700/60 rounded-md transition-colors border border-neutral-300 dark:border-neutral-700 shadow-2xs cursor-pointer"
+              className="w-full h-[35px] flex items-center justify-center gap-1.5 px-3 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-neutral-900 dark:hover:text-neutral-100 bg-white dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-700/60 rounded-md transition-colors border border-neutral-300 dark:border-neutral-700 shadow-2xs cursor-pointer"
             >
-              <GitMerge className="w-3.5 h-3.5 text-emerald-500" />
+              <GitMerge className="w-4 h-4 text-emerald-500" />
               <span>Merge CodeSpaces</span>
             </button>
           </div>

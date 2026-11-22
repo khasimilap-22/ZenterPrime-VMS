@@ -56,19 +56,19 @@ export const TopBar: React.FC<TopBarProps> = ({
           <button
             type="button"
             onClick={onBackToCodeSpaces}
-            className="h-[30px] flex items-center gap-1.5 px-2.5 rounded-md text-xs font-medium text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+            className="h-[30px] flex items-center gap-1.5 px-2.5 rounded-md text-[13px] font-medium text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
             title="Return to CodeSpaces Overview"
           >
-            <ChevronLeft className="w-3.5 h-3.5" />
+            <ChevronLeft className="w-4 h-4" />
             <span>CodeSpaces</span>
             <span className="text-neutral-400 dark:text-neutral-600">/</span>
-            <span className="text-neutral-900 dark:text-neutral-100 font-semibold truncate max-w-[130px]">
+            <span className="text-neutral-900 dark:text-neutral-100 font-semibold truncate max-w-[180px]">
               {activeCodeSpaceName || 'Workspace'}
             </span>
           </button>
         ) : (
           <div className="hidden sm:flex items-center gap-2">
-            <span className="text-xs font-semibold text-neutral-900 dark:text-neutral-100 uppercase tracking-wider">
+            <span className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 tracking-tight">
               {currentTab === 'codespaces'
                 ? 'CodeSpaces'
                 : currentTab === 'versions'
@@ -90,7 +90,7 @@ export const TopBar: React.FC<TopBarProps> = ({
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search CodeSpaces"
-            className="w-full h-[35px] pl-9 pr-3 text-xs bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 transition-all font-sans"
+            className="w-full h-[35px] pl-9 pr-3 text-sm bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 transition-all font-sans"
           />
         </div>
       </div>
@@ -99,7 +99,7 @@ export const TopBar: React.FC<TopBarProps> = ({
       <div className="flex items-center gap-3 min-w-[140px] justify-end">
         {!isOnline && (
           <div
-            className="h-[30px] flex items-center gap-1.5 px-2.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 text-[11px] font-medium"
+            className="h-[30px] flex items-center gap-1.5 px-2.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 text-xs font-medium whitespace-nowrap"
             title="Internet disconnected - Local drafts are auto-saving safely"
           >
             <WifiOff className="w-3.5 h-3.5" />
@@ -111,9 +111,9 @@ export const TopBar: React.FC<TopBarProps> = ({
         <button
           type="button"
           onClick={onOpenCreateCodeSpaceModal}
-          className="h-[35px] px-3.5 flex items-center gap-1.5 rounded-md text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer"
+          className="h-[35px] px-3.5 flex items-center gap-1.5 rounded-md text-sm font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer whitespace-nowrap"
         >
-          <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
+          <Plus className="w-4 h-4 stroke-[2.5]" />
           <span>New CodeSpace</span>
         </button>
 

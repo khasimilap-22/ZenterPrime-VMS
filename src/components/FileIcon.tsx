@@ -23,6 +23,15 @@ export const FileIcon: React.FC<FileIconProps> = ({ fileName, className = 'w-4 h
     case 'css':
     case 'html':
       return <FileCode className={`${className} text-purple-500`} />;
+    case 'dart':
+      return <FileCode className={`${className} text-cyan-500`} />;
+    case 'kt':
+    case 'kts':
+      return <FileCode className={`${className} text-violet-500`} />;
+    case 'yaml':
+    case 'yml':
+    case 'properties':
+      return <FileText className={`${className} text-teal-500`} />;
     case 'sql':
       return <FileSpreadsheet className={`${className} text-orange-500`} />;
     default:

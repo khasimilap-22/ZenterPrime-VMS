@@ -318,11 +318,11 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
   const pathParts = file.path.split('/');
 
   // Font and Line Height Scaling for Zoom Animation
-  const baseFontSize = parseInt(settings.fontSize || '13px', 10) || 13;
+  const baseFontSize = parseInt(settings.fontSize || '14px', 10) || 14;
   const zoomRatio = zoomPercent / 100;
   const effectiveFontSize = Math.round(baseFontSize * zoomRatio * 10) / 10;
-  const effectiveLineHeight = Math.round(effectiveFontSize * 1.58 * 10) / 10;
-  const gutterWidth = Math.max(38, Math.round(36 * Math.sqrt(zoomRatio)));
+  const effectiveLineHeight = Math.round(effectiveFontSize * 1.6 * 10) / 10;
+  const gutterWidth = Math.max(42, Math.round(40 * Math.sqrt(zoomRatio)));
   const gutterPadTop = Math.round(12 * zoomRatio);
 
   return (
@@ -330,16 +330,16 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
       {/* Real Product Sub-Header: Breadcrumbs & Primary Actions */}
       <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2 border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/60">
         {/* Breadcrumb path */}
-        <div className="flex items-center gap-1.5 text-xs text-neutral-500 font-mono overflow-hidden">
-          <FileIcon fileName={file.name} className="w-3.5 h-3.5 shrink-0" />
+        <div className="flex items-center gap-1.5 text-[13px] text-neutral-600 dark:text-neutral-400 font-mono overflow-hidden">
+          <FileIcon fileName={file.name} className="w-4 h-4 shrink-0" />
           {pathParts.map((part, idx) => (
             <React.Fragment key={idx}>
-              {idx > 0 && <ChevronRight className="w-3 h-3 text-neutral-400 shrink-0" />}
+              {idx > 0 && <ChevronRight className="w-3.5 h-3.5 text-neutral-400 shrink-0" />}
               <span
                 className={`${
                   idx === pathParts.length - 1
                     ? 'text-neutral-900 dark:text-neutral-100 font-medium'
-                    : 'text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300'
+                    : 'text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300'
                 }`}
               >
                 {part}
@@ -347,7 +347,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
             </React.Fragment>
           ))}
           {isDirty && (
-            <span className="ml-2 text-[11px] font-sans font-semibold px-2 py-0.5 rounded bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+            <span className="ml-2 text-xs font-sans font-semibold px-2 py-0.5 rounded bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/20">
               Modified
             </span>
           )}
@@ -366,7 +366,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
           <button
             type="button"
             onClick={handleCopy}
-            className="h-[30px] flex items-center justify-center gap-1.5 px-3 text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
+            className="h-[30px] flex items-center justify-center gap-1.5 px-3 text-[13px] text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
             title="Copy code to clipboard"
           >
             {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
@@ -376,7 +376,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
           <button
             type="button"
             onClick={handleDownload}
-            className="h-[30px] flex items-center gap-1.5 px-3 text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
+            className="h-[30px] flex items-center gap-1.5 px-3 text-[13px] text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
             title="Download this file"
           >
             <Download className="w-3.5 h-3.5" />
@@ -387,7 +387,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
             <button
               type="button"
               onClick={handleRevert}
-              className="h-[30px] flex items-center gap-1.5 px-3 text-xs text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
+              className="h-[30px] flex items-center gap-1.5 px-3 text-[13px] text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
               title="Discard unsaved edits"
             >
               <RotateCcw className="w-3.5 h-3.5" />
@@ -399,7 +399,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
             type="button"
             onClick={() => setShowCommitInput((v) => !v)}
             disabled={!isDirty}
-            className={`h-[30px] flex items-center gap-1.5 px-3.5 text-xs font-medium rounded-md transition-all shadow-xs ${
+            className={`h-[30px] flex items-center gap-1.5 px-3.5 text-[13px] font-medium rounded-md transition-all shadow-xs ${
               isDirty
                 ? 'bg-sky-600 hover:bg-sky-500 text-white cursor-pointer active:scale-98'
                 : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-600 cursor-not-allowed'
@@ -426,20 +426,20 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
               }
             }}
             placeholder={`Commit note for ${file.name}...`}
-            className="flex-1 min-w-0 h-[35px] px-3 text-xs bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
+            className="flex-1 min-w-0 h-[35px] px-3 text-sm bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
             autoFocus
           />
           <button
             type="button"
             onClick={executeSave}
-            className="h-[35px] px-3.5 text-xs font-medium text-white bg-sky-600 hover:bg-sky-500 rounded-md transition-colors whitespace-nowrap cursor-pointer"
+            className="h-[35px] px-3.5 text-sm font-medium text-white bg-sky-600 hover:bg-sky-500 rounded-md transition-colors whitespace-nowrap cursor-pointer"
           >
             Commit
           </button>
           <button
             type="button"
             onClick={() => setShowCommitInput(false)}
-            className="h-[35px] px-3 flex items-center justify-center text-xs text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
+            className="h-[35px] px-3 flex items-center justify-center text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
           >
             Cancel
           </button>
@@ -460,7 +460,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
         >
           <ZoomIn className="w-3.5 h-3.5" />
           <span>Zoom: {zoomPercent}%</span>
-          <span className="text-[10px] opacity-75 font-sans">(Ctrl + Scroll / Pinch)</span>
+          <span className="text-xs opacity-75 font-sans">(Ctrl + Scroll / Pinch)</span>
         </div>
 
         {/* Line Numbers Gutter */}
@@ -524,7 +524,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
       </div>
 
       {/* Professional Developer Status Bar with Integrated Zoom Controls */}
-      <div className="h-[40px] flex items-center justify-between px-4 text-[11px] text-neutral-500 dark:text-neutral-400 border-t border-neutral-200 dark:border-neutral-800 bg-neutral-100/60 dark:bg-neutral-950 select-none font-sans">
+      <div className="h-[40px] flex items-center justify-between px-4 text-xs text-neutral-600 dark:text-neutral-400 border-t border-neutral-200 dark:border-neutral-800 bg-neutral-100/60 dark:bg-neutral-950 select-none font-sans">
         {/* Left: Position & Metrics */}
         <div className="flex items-center gap-3">
           <span className="font-mono tabular-nums">
@@ -540,23 +540,23 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
         <div className="flex items-center gap-3">
           {/* Zoom Level Control Pill */}
           <div
-            className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-neutral-200/60 dark:bg-neutral-800/80 border border-neutral-200 dark:border-neutral-700/60 text-neutral-600 dark:text-neutral-300"
+            className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-neutral-200/60 dark:bg-neutral-800/80 border border-neutral-200 dark:border-neutral-700/60 text-neutral-700 dark:text-neutral-300"
             title="Ctrl + Scroll or Pinch to zoom in/out"
           >
             <button
               type="button"
               onClick={() => setZoom((z) => z - 10)}
               disabled={zoomPercent <= 60}
-              className="p-0.5 hover:text-neutral-900 dark:hover:text-neutral-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="p-0.5 hover:text-neutral-900 dark:hover:text-neutral-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
               title="Zoom out (Ctrl + -)"
             >
-              <ZoomOut className="w-3 h-3" />
+              <ZoomOut className="w-3.5 h-3.5" />
             </button>
 
             <button
               type="button"
               onClick={() => setZoom(100)}
-              className="font-mono tabular-nums text-[11px] px-1 hover:text-sky-600 dark:hover:text-sky-400 transition-colors font-medium cursor-pointer"
+              className="font-mono tabular-nums text-xs px-1 hover:text-sky-600 dark:hover:text-sky-400 transition-colors font-medium cursor-pointer"
               title="Reset Zoom to 100% (Ctrl + 0)"
             >
               {zoomPercent}%
@@ -566,17 +566,17 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
               type="button"
               onClick={() => setZoom((z) => z + 10)}
               disabled={zoomPercent >= 250}
-              className="p-0.5 hover:text-neutral-900 dark:hover:text-neutral-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="p-0.5 hover:text-neutral-900 dark:hover:text-neutral-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
               title="Zoom in (Ctrl + +)"
             >
-              <ZoomIn className="w-3 h-3" />
+              <ZoomIn className="w-3.5 h-3.5" />
             </button>
 
             {zoomPercent !== 100 && (
               <button
                 type="button"
                 onClick={() => setZoom(100)}
-                className="text-[10px] text-sky-600 dark:text-sky-400 hover:underline ml-0.5 cursor-pointer"
+                className="text-xs text-sky-600 dark:text-sky-400 hover:underline ml-0.5 cursor-pointer"
                 title="Reset to 100%"
               >
                 Reset
@@ -596,7 +596,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({
           <button
             type="button"
             onClick={() => onDeleteRequest(file)}
-            className="text-neutral-400 hover:text-rose-500 transition-colors cursor-pointer"
+            className="text-neutral-500 dark:text-neutral-400 hover:text-rose-500 transition-colors cursor-pointer"
           >
             Delete
           </button>

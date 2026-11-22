@@ -37,10 +37,10 @@ export const GroupsView: React.FC<GroupsViewProps> = ({
       {/* Header — ALWAYS retained */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 tracking-tight">
+          <h1 className="text-xl font-bold text-neutral-900 dark:text-neutral-100 tracking-tight">
             CodeSpace Groups
           </h1>
-          <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+          <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-0.5">
             {groups.length} group{groups.length === 1 ? '' : 's'} defined
           </p>
         </div>
@@ -79,9 +79,9 @@ export const GroupsView: React.FC<GroupsViewProps> = ({
           <button
             type="button"
             onClick={onOpenMergeModal}
-            className="h-[35px] px-3.5 flex items-center gap-1.5 rounded-md text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer"
+            className="h-[35px] px-3.5 flex items-center gap-1.5 rounded-md text-sm font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer whitespace-nowrap"
           >
-            <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
+            <Plus className="w-4 h-4 stroke-[2.5]" />
             <span>New Group</span>
           </button>
         </div>
@@ -97,15 +97,15 @@ export const GroupsView: React.FC<GroupsViewProps> = ({
           <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mt-4 tracking-tight">
             No CodeSpace Groups
           </h2>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1.5 max-w-md font-normal leading-relaxed">
+          <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1.5 max-w-md font-normal leading-relaxed">
             Organize related CodeSpaces together into manageable workspaces and feature sets.
           </p>
           <button
             type="button"
             onClick={onOpenMergeModal}
-            className="mt-5 h-[35px] px-4 flex items-center gap-1.5 rounded-md text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer"
+            className="mt-5 h-[35px] px-4 flex items-center gap-1.5 rounded-md text-sm font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer whitespace-nowrap"
           >
-            <GitMerge className="w-3.5 h-3.5 stroke-[2]" />
+            <GitMerge className="w-4 h-4 stroke-[2]" />
             <span>Merge CodeSpaces into Group</span>
           </button>
         </div>
@@ -132,10 +132,10 @@ export const GroupsView: React.FC<GroupsViewProps> = ({
                         <Layers className="w-4 h-4" />
                       </div>
                       <div>
-                        <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 truncate">
+                        <h3 className="text-base font-semibold text-neutral-900 dark:text-neutral-100 truncate">
                           {group.name}
                         </h3>
-                        <p className="text-[11px] text-neutral-500 dark:text-neutral-400">
+                        <p className="text-xs text-neutral-600 dark:text-neutral-400">
                           {memberCodeSpaces.length} member codespace{memberCodeSpaces.length === 1 ? '' : 's'}
                         </p>
                       </div>
@@ -145,7 +145,7 @@ export const GroupsView: React.FC<GroupsViewProps> = ({
                     <button
                       type="button"
                       onClick={() => onOpenGroupEditorModal(group)}
-                      className="h-[30px] px-3 flex items-center gap-1 text-xs font-medium text-neutral-600 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer"
+                      className="h-[30px] px-3 flex items-center gap-1.5 text-[13px] font-medium text-neutral-700 dark:text-neutral-200 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer whitespace-nowrap"
                     >
                       <Pencil className="w-3.5 h-3.5" />
                       <span>Manage Group</span>
@@ -154,18 +154,18 @@ export const GroupsView: React.FC<GroupsViewProps> = ({
 
                   {/* Group Description */}
                   {group.description && (
-                    <p className="text-xs text-neutral-600 dark:text-neutral-300 mb-3 leading-relaxed">
+                    <p className="text-sm text-neutral-600 dark:text-neutral-300 mb-3 leading-relaxed">
                       {group.description}
                     </p>
                   )}
 
                   {/* Member CodeSpaces List */}
                   <div className="mt-3 space-y-1.5">
-                    <div className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 mb-1">
+                    <div className="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-1.5">
                       Grouped Workspaces
                     </div>
                     {memberCodeSpaces.length === 0 ? (
-                      <div className="text-xs text-neutral-400 italic py-2">
+                      <div className="text-sm text-neutral-500 dark:text-neutral-400 italic py-2">
                         No codespaces currently in this group.
                       </div>
                     ) : (
@@ -174,31 +174,31 @@ export const GroupsView: React.FC<GroupsViewProps> = ({
                         return (
                           <div
                             key={cs.id}
-                            className="flex items-center justify-between p-2 rounded-lg bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-150 dark:border-neutral-800 text-xs"
+                            className="flex items-center justify-between p-2.5 rounded-lg bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-200/80 dark:border-neutral-800 text-sm"
                           >
                             <div className="flex items-center gap-2 min-w-0">
-                              <Box className="w-3.5 h-3.5 text-sky-500 shrink-0" />
+                              <Box className="w-4 h-4 text-sky-500 shrink-0" />
                               <span className="font-medium text-neutral-800 dark:text-neutral-200 truncate">
                                 {cs.name}
                               </span>
                               {isPinned && (
-                                <span className="text-[11px] px-1.5 py-0.2 rounded bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-900/60 flex items-center gap-0.5">
-                                  <Pin className="w-2.5 h-2.5" /> Pinned
+                                <span className="text-xs px-1.5 py-0.5 rounded bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-900/60 flex items-center gap-1">
+                                  <Pin className="w-3 h-3" /> Pinned
                                 </span>
                               )}
                             </div>
 
                             <div className="flex items-center gap-2 shrink-0">
-                              <span className="text-[11px] font-mono text-neutral-400">
+                              <span className="text-xs font-mono tabular-nums text-neutral-500 dark:text-neutral-400">
                                 {cs.files ? cs.files.length : 0} files
                               </span>
                               <button
                                 type="button"
                                 onClick={() => onSelectAndOpenCodeSpace(cs.id)}
-                                className="w-7 h-7 flex items-center justify-center rounded text-neutral-400 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
+                                className="w-7 h-7 flex items-center justify-center rounded text-neutral-500 dark:text-neutral-400 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors cursor-pointer"
                                 title="Launch workspace"
                               >
-                                <ArrowRight className="w-3.5 h-3.5" />
+                                <ArrowRight className="w-4 h-4" />
                               </button>
                             </div>
                           </div>
@@ -215,8 +215,8 @@ export const GroupsView: React.FC<GroupsViewProps> = ({
         /* Groups Table View */
         <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden bg-white dark:bg-neutral-900 shadow-xs">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-neutral-50 dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 text-neutral-500 dark:text-neutral-400 font-medium select-none">
+            <table className="w-full text-left text-sm">
+              <thead className="bg-neutral-50 dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 text-[13px] text-neutral-600 dark:text-neutral-400 font-medium select-none">
                 <tr>
                   <th className="py-3 px-4">Group Name</th>
                   <th className="py-3 px-4">Description</th>
@@ -269,28 +269,28 @@ export const GroupsView: React.FC<GroupsViewProps> = ({
                                   key={cs.id}
                                   type="button"
                                   onClick={() => onSelectAndOpenCodeSpace(cs.id)}
-                                  className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] rounded bg-neutral-100 dark:bg-neutral-800 hover:bg-sky-50 dark:hover:bg-sky-950/40 text-neutral-700 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-300 border border-neutral-200 dark:border-neutral-700 transition-colors cursor-pointer"
+                                  className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded bg-neutral-100 dark:bg-neutral-800 hover:bg-sky-50 dark:hover:bg-sky-950/40 text-neutral-700 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-300 border border-neutral-200 dark:border-neutral-700 transition-colors cursor-pointer"
                                   title={`Open "${cs.name}"`}
                                 >
-                                  <Box className="w-2.5 h-2.5 text-sky-500" />
+                                  <Box className="w-3 h-3 text-sky-500" />
                                   <span>{cs.name}</span>
-                                  {isPinned && <Pin className="w-2.5 h-2.5 text-amber-500" />}
+                                  {isPinned && <Pin className="w-3 h-3 text-amber-500" />}
                                 </button>
                               );
                             })}
                           </div>
                         ) : (
-                          <span className="text-neutral-400 italic">No workspaces</span>
+                          <span className="text-neutral-500 dark:text-neutral-400 italic">No workspaces</span>
                         )}
                       </td>
 
                       {/* Count */}
-                      <td className="py-3 px-4 text-center font-mono text-neutral-700 dark:text-neutral-300">
+                      <td className="py-3 px-4 text-center font-mono tabular-nums text-neutral-700 dark:text-neutral-300">
                         {memberCodeSpaces.length}
                       </td>
 
                       {/* Last Activity */}
-                      <td className="py-3 px-4 text-neutral-500 dark:text-neutral-400 font-mono text-[11px] whitespace-nowrap">
+                      <td className="py-3 px-4 text-neutral-600 dark:text-neutral-400 font-mono text-xs whitespace-nowrap">
                         {formatTimeAgo(group.updatedAt || group.createdAt)}
                       </td>
 
@@ -299,7 +299,7 @@ export const GroupsView: React.FC<GroupsViewProps> = ({
                         <button
                           type="button"
                           onClick={() => onOpenGroupEditorModal(group)}
-                          className="h-[30px] px-3 inline-flex items-center gap-1.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer"
+                          className="h-[30px] px-3 inline-flex items-center gap-1.5 text-[13px] font-medium text-neutral-700 dark:text-neutral-200 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer"
                         >
                           <Pencil className="w-3.5 h-3.5" />
                           <span>Manage Group</span>

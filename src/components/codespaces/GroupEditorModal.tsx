@@ -164,10 +164,10 @@ export const GroupEditorModal: React.FC<GroupEditorModalProps> = ({
               <Layers className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+              <h3 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
                 Group Editor
               </h3>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400">
+              <p className="text-[13px] text-neutral-600 dark:text-neutral-400">
                 Manage group details, reorder workspaces, and pin priority items
               </p>
             </div>
@@ -175,7 +175,7 @@ export const GroupEditorModal: React.FC<GroupEditorModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-md text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+            className="p-1.5 rounded-md text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
             aria-label="Close"
           >
             <X className="w-4 h-4" />
@@ -187,7 +187,7 @@ export const GroupEditorModal: React.FC<GroupEditorModalProps> = ({
           {/* Group Title & Description */}
           <div className="space-y-3">
             <div>
-              <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1.5">
+              <label className="block text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-1.5">
                 Group Title <span className="text-red-500">*</span>
               </label>
               <input
@@ -196,50 +196,50 @@ export const GroupEditorModal: React.FC<GroupEditorModalProps> = ({
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Group name"
                 required
-                className="w-full h-[35px] px-3 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
+                className="w-full h-[35px] px-3 text-sm bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1.5">
-                Group Description <span className="text-neutral-400 dark:text-neutral-500 font-normal">(Optional)</span>
+              <label className="block text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-1.5">
+                Group Description <span className="text-neutral-500 dark:text-neutral-400 font-normal">(Optional)</span>
               </label>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Overview of this grouped collection..."
                 rows={2}
-                className="w-full px-3 py-2 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans resize-none"
+                className="w-full px-3 py-2 text-sm bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans resize-none"
               />
             </div>
           </div>
 
           {/* CodeSpaces Section */}
           <div className="space-y-2 pt-2 border-t border-neutral-200 dark:border-neutral-800">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-2">
               <div>
-                <label className="text-xs font-semibold text-neutral-800 dark:text-neutral-200">
+                <label className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
                   CodeSpaces ({orderedIds.length})
                 </label>
-                <p className="text-[11px] text-neutral-500 dark:text-neutral-400">
+                <p className="text-xs text-neutral-600 dark:text-neutral-400">
                   Drag to re-order. Pin up to 2 items. Removing unlinks from group; Deleting erases code files.
                 </p>
               </div>
 
               {availableToAdd.length > 0 && (
-                <div className="relative">
+                <div className="relative shrink-0">
                   <button
                     type="button"
                     onClick={() => setIsAddPickerOpen((prev) => !prev)}
-                    className="flex items-center gap-1.5 h-[30px] px-3 text-xs font-medium text-sky-600 dark:text-sky-400 hover:bg-sky-50 dark:hover:bg-neutral-800 rounded-md border border-sky-300 dark:border-sky-800 transition-colors cursor-pointer"
+                    className="flex items-center gap-1.5 h-[30px] px-3 text-[13px] font-medium text-sky-600 dark:text-sky-400 hover:bg-sky-50 dark:hover:bg-neutral-800 rounded-md border border-sky-300 dark:border-sky-800 transition-colors cursor-pointer whitespace-nowrap"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>Add CodeSpace</span>
                   </button>
 
                   {isAddPickerOpen && (
-                    <div className="absolute right-0 top-full mt-1 w-56 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg shadow-xl py-1 z-30">
-                      <div className="px-3 py-1.5 text-[11px] font-semibold text-neutral-400 dark:text-neutral-500 border-b border-neutral-100 dark:border-neutral-800">
+                    <div className="absolute right-0 top-full mt-1 w-60 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg shadow-xl py-1 z-30">
+                      <div className="px-3 py-1.5 text-xs font-semibold text-neutral-500 dark:text-neutral-400 border-b border-neutral-100 dark:border-neutral-800">
                         Select to add to group
                       </div>
                       <div className="max-h-40 overflow-y-auto divide-y divide-neutral-100 dark:divide-neutral-800">
@@ -248,10 +248,10 @@ export const GroupEditorModal: React.FC<GroupEditorModalProps> = ({
                             key={cs.id}
                             type="button"
                             onClick={() => handleAddCodeSpaceToGroup(cs.id)}
-                            className="w-full px-3 py-1.5 text-left text-xs text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 flex items-center justify-between cursor-pointer"
+                            className="w-full px-3 py-2 text-left text-[13px] text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 flex items-center justify-between cursor-pointer"
                           >
                             <span className="truncate">{cs.name}</span>
-                            <span className="text-[10px] text-neutral-400 font-mono">
+                            <span className="text-xs text-neutral-500 dark:text-neutral-400 font-mono tabular-nums">
                               {cs.files ? cs.files.length : 0} files
                             </span>
                           </button>
@@ -265,15 +265,15 @@ export const GroupEditorModal: React.FC<GroupEditorModalProps> = ({
 
             {/* Pin notification */}
             {pinNotice && (
-              <div className="p-2 text-xs text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/60 rounded-md flex items-center gap-1.5">
-                <Info className="w-3.5 h-3.5 shrink-0" />
+              <div className="p-2.5 text-sm text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/60 rounded-md flex items-center gap-1.5">
+                <Info className="w-4 h-4 shrink-0" />
                 <span>{pinNotice}</span>
               </div>
             )}
 
             {/* CodeSpaces List */}
             {orderedIds.length === 0 ? (
-              <div className="p-6 text-center text-xs text-neutral-400 dark:text-neutral-500 border border-dashed border-neutral-200 dark:border-neutral-800 rounded-lg">
+              <div className="p-6 text-center text-sm text-neutral-500 dark:text-neutral-400 border border-dashed border-neutral-200 dark:border-neutral-800 rounded-lg">
                 No CodeSpaces currently in this group. Use &quot;Add CodeSpace&quot; above.
               </div>
             ) : (
@@ -311,28 +311,28 @@ export const GroupEditorModal: React.FC<GroupEditorModalProps> = ({
                         </div>
 
                         {/* Order index badge */}
-                        <span className="w-4 text-[10px] font-mono text-neutral-400 dark:text-neutral-500 text-center">
+                        <span className="w-5 text-xs font-mono tabular-nums text-neutral-500 dark:text-neutral-400 text-center">
                           {index + 1}
                         </span>
 
                         <div className="min-w-0">
                           <div className="flex items-center gap-1.5 flex-wrap">
-                            <span className="text-xs font-semibold text-neutral-900 dark:text-neutral-100 truncate">
+                            <span className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 truncate">
                               {cs.name}
                             </span>
                             {isPinned && (
-                              <span className="inline-flex items-center gap-0.5 px-1.5 py-0.2 rounded text-[10px] font-medium bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-900/60">
-                                <Pin className="w-2.5 h-2.5 fill-current" />
+                              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-xs font-medium bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-900/60">
+                                <Pin className="w-3 h-3 fill-current" />
                                 <span>Pinned</span>
                               </span>
                             )}
                             {cs.isDefault && (
-                              <span className="text-[10px] px-1 py-0.2 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 font-mono">
+                              <span className="text-xs px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 font-mono">
                                 Default
                               </span>
                             )}
                           </div>
-                          <div className="text-[11px] text-neutral-500 dark:text-neutral-400 truncate">
+                          <div className="text-xs text-neutral-600 dark:text-neutral-400 truncate mt-0.5">
                             {cs.files ? cs.files.length : 0} files &bull; {cs.versions ? cs.versions.length : 0} versions
                           </div>
                         </div>
@@ -423,9 +423,9 @@ export const GroupEditorModal: React.FC<GroupEditorModalProps> = ({
                   onClose();
                 }
               }}
-              className="text-xs text-red-600 dark:text-red-400 hover:underline flex items-center gap-1 cursor-pointer"
+              className="text-sm font-medium text-red-600 dark:text-red-400 hover:underline flex items-center gap-1.5 cursor-pointer"
             >
-              <Trash2 className="w-3.5 h-3.5" />
+              <Trash2 className="w-4 h-4" />
               <span>Delete Group</span>
             </button>
 
@@ -433,13 +433,13 @@ export const GroupEditorModal: React.FC<GroupEditorModalProps> = ({
               <button
                 type="button"
                 onClick={onClose}
-                className="h-[35px] px-3.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
+                className="h-[35px] px-3.5 text-sm font-medium text-neutral-700 dark:text-neutral-200 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="h-[35px] px-4 text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] rounded-md transition-colors shadow-2xs cursor-pointer"
+                className="h-[35px] px-4 text-sm font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] rounded-md transition-colors shadow-2xs cursor-pointer"
               >
                 Save Group Changes
               </button>

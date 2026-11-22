@@ -1,0 +1,33 @@
+appId: com.zenterprime.vms
+productName: Version Management System
+copyright: Copyright © 2026 ZenterPrime
+asar: true
+
+directories:
+  output: release
+
+files:
+  - dist/**/*
+  - electron/main.cjs
+  - electron/preload.cjs
+  - package.json
+
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+    - target: portable
+      arch:
+        - x64
+  artifactName: "${productName}-${version}-${arch}-${target}.${ext}"
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Version Management System
+
+portable:
+  artifactName: "${productName}-${version}-portable.${ext}"

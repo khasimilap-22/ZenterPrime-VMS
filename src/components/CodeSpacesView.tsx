@@ -87,10 +87,10 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
       {/* Top Filter & Actions Header — ALWAYS retained */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 tracking-tight">
+          <h1 className="text-xl font-bold text-neutral-900 dark:text-neutral-100 tracking-tight">
             Active CodeSpaces
           </h1>
-          <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+          <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-0.5">
             {codeSpaces.length} workspace environment{codeSpaces.length === 1 ? '' : 's'} configured
             {searchQuery && ` · matching "${searchQuery}"`}
           </p>
@@ -98,11 +98,11 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
 
         <div className="flex items-center gap-2.5 flex-wrap sm:flex-nowrap">
           {/* Three Filter Buttons: All, Recent, Grouped */}
-          <div className="flex items-center bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg p-1 text-xs shadow-2xs">
+          <div className="flex items-center bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg p-1 text-[13px] shadow-2xs">
             <button
               type="button"
               onClick={() => setFilterMode('all')}
-              className={`h-[30px] px-3 flex items-center rounded-md transition-colors cursor-pointer ${
+              className={`h-[30px] px-3 flex items-center rounded-md transition-colors cursor-pointer whitespace-nowrap ${
                 filterMode === 'all'
                   ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 font-medium shadow-2xs'
                   : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200'
@@ -113,7 +113,7 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
             <button
               type="button"
               onClick={() => setFilterMode('recent')}
-              className={`h-[30px] px-3 flex items-center rounded-md transition-colors cursor-pointer ${
+              className={`h-[30px] px-3 flex items-center rounded-md transition-colors cursor-pointer whitespace-nowrap ${
                 filterMode === 'recent'
                   ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 font-medium shadow-2xs'
                   : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200'
@@ -124,7 +124,7 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
             <button
               type="button"
               onClick={() => setFilterMode('grouped')}
-              className={`h-[30px] px-3 flex items-center rounded-md transition-colors cursor-pointer ${
+              className={`h-[30px] px-3 flex items-center rounded-md transition-colors cursor-pointer whitespace-nowrap ${
                 filterMode === 'grouped'
                   ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 font-medium shadow-2xs'
                   : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200'
@@ -169,9 +169,9 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
             <button
               type="button"
               onClick={onOpenMergeModal}
-              className="h-[35px] px-3.5 flex items-center gap-1.5 rounded-md text-xs font-medium text-neutral-700 dark:text-neutral-200 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors shadow-2xs cursor-pointer"
+              className="h-[35px] px-3.5 flex items-center gap-1.5 rounded-md text-sm font-medium text-neutral-700 dark:text-neutral-200 bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors shadow-2xs cursor-pointer whitespace-nowrap"
             >
-              <GitMerge className="w-3.5 h-3.5 text-emerald-500" />
+              <GitMerge className="w-4 h-4 text-emerald-500" />
               <span>Merge CodeSpaces</span>
             </button>
           )}
@@ -180,9 +180,9 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
           <button
             type="button"
             onClick={onOpenCreateModal}
-            className="h-[35px] px-3.5 flex items-center gap-1.5 rounded-md text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer"
+            className="h-[35px] px-3.5 flex items-center gap-1.5 rounded-md text-sm font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer whitespace-nowrap"
           >
-            <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
+            <Plus className="w-4 h-4 stroke-[2.5]" />
             <span>New CodeSpace</span>
           </button>
         </div>
@@ -198,7 +198,7 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
           <h2 className="text-xl font-semibold text-neutral-900 dark:text-neutral-100 mt-4 tracking-tight">
             No CodeSpaces Found
           </h2>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1.5 max-w-md font-normal leading-relaxed">
+          <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1.5 max-w-md font-normal leading-relaxed">
             {searchQuery
               ? `No workspaces matched "${searchQuery}". Try searching with a different term.`
               : filterMode === 'recent'
@@ -210,9 +210,9 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
           <button
             type="button"
             onClick={onOpenCreateModal}
-            className="mt-5 h-[35px] px-4 flex items-center gap-1.5 rounded-md text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer"
+            className="mt-5 h-[35px] px-4 flex items-center gap-1.5 rounded-md text-sm font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] transition-colors shadow-2xs cursor-pointer whitespace-nowrap"
           >
-            <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
+            <Plus className="w-4 h-4 stroke-[2.5]" />
             <span>New CodeSpace</span>
           </button>
         </div>
@@ -244,17 +244,17 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
                       </div>
                       <div className="min-w-0">
                         <div className="flex items-center gap-1.5 flex-wrap">
-                          <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 truncate">
+                          <h3 className="text-base font-semibold text-neutral-900 dark:text-neutral-100 truncate">
                             {cs.name}
                           </h3>
                           {cs.isDefault && (
-                            <span className="text-[11px] px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 font-mono">
+                            <span className="text-xs px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 font-mono">
                               Default
                             </span>
                           )}
                           {isPinned && (
-                            <span className="text-[11px] px-1.5 py-0.5 rounded bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-900/60 flex items-center gap-0.5">
-                              <Pin className="w-2.5 h-2.5" /> Pinned
+                            <span className="text-xs px-1.5 py-0.5 rounded bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-900/60 flex items-center gap-1">
+                              <Pin className="w-3 h-3" /> Pinned
                             </span>
                           )}
                         </div>
@@ -293,9 +293,9 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
                   </div>
 
                   {/* Description */}
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400 line-clamp-2 min-h-[32px] leading-relaxed mb-3">
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2 min-h-[42px] leading-relaxed mb-3">
                     {cs.description || (
-                      <span className="italic text-neutral-400 dark:text-neutral-500">
+                      <span className="italic text-neutral-500 dark:text-neutral-500">
                         Blank workspace environment. No files created yet.
                       </span>
                     )}
@@ -307,9 +307,9 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
                       {memberGroups.map((grp) => (
                         <span
                           key={grp.id}
-                          className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] rounded-md bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60"
+                          className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-md bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60"
                         >
-                          <Layers className="w-2.5 h-2.5" />
+                          <Layers className="w-3 h-3" />
                           {grp.name}
                         </span>
                       ))}
@@ -319,18 +319,18 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
 
                 {/* Card Bottom: Metadata and Launch Button */}
                 <div className="pt-3 border-t border-neutral-100 dark:border-neutral-800">
-                  <div className="flex items-center justify-between text-[11px] text-neutral-500 dark:text-neutral-400 mb-3 font-mono">
+                  <div className="flex items-center justify-between text-xs text-neutral-600 dark:text-neutral-400 mb-3 font-mono tabular-nums">
                     <div className="flex items-center gap-3">
                       <span className="flex items-center gap-1">
-                        <FileCode className="w-3.5 h-3.5 text-neutral-400" />
+                        <FileCode className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400" />
                         {fileCount} {fileCount === 1 ? 'file' : 'files'}
                       </span>
                       <span className="flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5 text-neutral-400" />
+                        <Clock className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400" />
                         {versionCount} {versionCount === 1 ? 'rev' : 'revs'}
                       </span>
                     </div>
-                    <span className="text-[11px] text-neutral-400 truncate">
+                    <span className="text-xs text-neutral-500 dark:text-neutral-400 truncate">
                       {formatTimeAgo(cs.updatedAt || cs.createdAt)}
                     </span>
                   </div>
@@ -339,14 +339,14 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
                   <button
                     type="button"
                     onClick={() => onSelectAndOpenCodeSpace(cs.id)}
-                    className={`w-full h-[35px] px-3.5 flex items-center justify-center gap-2 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
+                    className={`w-full h-[35px] px-3.5 flex items-center justify-center gap-2 rounded-lg text-sm font-medium transition-colors cursor-pointer ${
                       isActive
                         ? 'bg-sky-50 dark:bg-sky-950/40 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800/80 hover:bg-sky-100 dark:hover:bg-sky-900/40'
-                        : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'
+                        : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-700'
                     }`}
                   >
                     <span>{isActive ? 'Continue in Workspace' : 'Open Workspace'}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
               </div>
@@ -357,8 +357,8 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
         /* CodeSpaces Table View */
         <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden bg-white dark:bg-neutral-900 shadow-xs">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-neutral-50 dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 text-neutral-500 dark:text-neutral-400 font-medium select-none">
+            <table className="w-full text-left text-sm">
+              <thead className="bg-neutral-50 dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 text-[13px] text-neutral-600 dark:text-neutral-400 font-medium select-none">
                 <tr>
                   <th className="py-3 px-4">Name &amp; Status</th>
                   <th className="py-3 px-4">Description</th>
@@ -386,7 +386,7 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
                     >
                       {/* Name & Status */}
                       <td className="py-3 px-4">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2.5">
                           <div className="w-7 h-7 rounded-md bg-sky-500/10 dark:bg-sky-500/15 text-sky-600 dark:text-sky-400 flex items-center justify-center shrink-0">
                             <Box className="w-3.5 h-3.5" />
                           </div>
@@ -396,18 +396,18 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
                                 {cs.name}
                               </span>
                               {cs.isDefault && (
-                                <span className="text-[11px] px-1.5 py-0.2 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 font-mono">
+                                <span className="text-xs px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 font-mono">
                                   Default
                                 </span>
                               )}
                               {isPinned && (
-                                <span className="text-[11px] px-1.5 py-0.2 rounded bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-900/60 flex items-center gap-0.5">
-                                  <Pin className="w-2.5 h-2.5" /> Pinned
+                                <span className="text-xs px-1.5 py-0.5 rounded bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-900/60 flex items-center gap-0.5">
+                                  <Pin className="w-3 h-3" /> Pinned
                                 </span>
                               )}
                             </div>
                             {isActive && (
-                              <span className="text-[11px] text-sky-600 dark:text-sky-400 font-medium">
+                              <span className="text-xs text-sky-600 dark:text-sky-400 font-medium">
                                 Active Workspace
                               </span>
                             )}
@@ -418,7 +418,7 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
                       {/* Description */}
                       <td className="py-3 px-4 max-w-xs text-neutral-600 dark:text-neutral-400 truncate">
                         {cs.description || (
-                          <span className="italic text-neutral-400 dark:text-neutral-500">
+                          <span className="italic text-neutral-500 dark:text-neutral-500">
                             Blank workspace
                           </span>
                         )}
@@ -431,9 +431,9 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
                             {memberGroups.map((grp) => (
                               <span
                                 key={grp.id}
-                                className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] rounded-md bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60"
+                                className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-md bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60"
                               >
-                                <Layers className="w-2.5 h-2.5" />
+                                <Layers className="w-3 h-3" />
                                 {grp.name}
                               </span>
                             ))}
@@ -444,17 +444,17 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
                       </td>
 
                       {/* Files */}
-                      <td className="py-3 px-4 text-center font-mono text-neutral-700 dark:text-neutral-300">
+                      <td className="py-3 px-4 text-center font-mono tabular-nums text-neutral-700 dark:text-neutral-300">
                         {fileCount}
                       </td>
 
                       {/* Revisions */}
-                      <td className="py-3 px-4 text-center font-mono text-neutral-700 dark:text-neutral-300">
+                      <td className="py-3 px-4 text-center font-mono tabular-nums text-neutral-700 dark:text-neutral-300">
                         {versionCount}
                       </td>
 
                       {/* Last Updated */}
-                      <td className="py-3 px-4 text-neutral-500 dark:text-neutral-400 font-mono text-[11px]">
+                      <td className="py-3 px-4 text-neutral-600 dark:text-neutral-400 font-mono text-xs whitespace-nowrap">
                         {formatTimeAgo(cs.updatedAt || cs.createdAt)}
                       </td>
 
@@ -465,7 +465,7 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
                             <button
                               type="button"
                               onClick={() => onDownloadZip(cs)}
-                              className="w-[30px] h-[30px] flex items-center justify-center rounded-md text-neutral-400 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+                              className="w-[30px] h-[30px] flex items-center justify-center rounded-md text-neutral-500 dark:text-neutral-400 hover:text-sky-600 dark:hover:text-sky-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
                               title="Download CodeSpace ZIP archive"
                             >
                               <Download className="w-3.5 h-3.5" />
@@ -474,7 +474,7 @@ export const CodeSpacesView: React.FC<CodeSpacesViewProps> = ({
                           <button
                             type="button"
                             onClick={() => onSelectAndOpenCodeSpace(cs.id)}
-                            className="h-[30px] px-3 flex items-center gap-1.5 rounded-md text-xs font-medium bg-neutral-100 dark:bg-neutral-800 hover:bg-sky-50 hover:text-sky-600 dark:hover:bg-sky-950/50 dark:hover:text-sky-300 text-neutral-700 dark:text-neutral-300 transition-colors cursor-pointer"
+                            className="h-[30px] px-3 flex items-center gap-1.5 rounded-md text-[13px] font-medium bg-neutral-100 dark:bg-neutral-800 hover:bg-sky-50 hover:text-sky-600 dark:hover:bg-sky-950/50 dark:hover:text-sky-300 text-neutral-700 dark:text-neutral-200 transition-colors cursor-pointer"
                           >
                             <span>Open</span>
                             <ArrowRight className="w-3.5 h-3.5" />

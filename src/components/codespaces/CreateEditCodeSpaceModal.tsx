@@ -64,10 +64,10 @@ export const CreateEditCodeSpaceModal: React.FC<CreateEditCodeSpaceModalProps> =
               <Box className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+              <h3 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
                 {isEditing ? 'Edit CodeSpace' : 'Create New CodeSpace'}
               </h3>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400">
+              <p className="text-[13px] text-neutral-600 dark:text-neutral-400">
                 {isEditing
                   ? 'Update title and description'
                   : 'Scaffold an isolated environment for your code'}
@@ -77,7 +77,7 @@ export const CreateEditCodeSpaceModal: React.FC<CreateEditCodeSpaceModalProps> =
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-md text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+            className="p-1.5 rounded-md text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
             aria-label="Close"
           >
             <X className="w-4 h-4" />
@@ -87,13 +87,13 @@ export const CreateEditCodeSpaceModal: React.FC<CreateEditCodeSpaceModalProps> =
         {/* Form Body */}
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
           {error && (
-            <div className="p-2.5 text-xs text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 rounded-lg">
+            <div className="p-3 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 rounded-lg">
               {error}
             </div>
           )}
 
           <div>
-            <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1.5">
+            <label className="block text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-1.5">
               CodeSpace Name <span className="text-red-500">*</span>
             </label>
             <input
@@ -105,26 +105,26 @@ export const CreateEditCodeSpaceModal: React.FC<CreateEditCodeSpaceModalProps> =
               }}
               placeholder="e.g. feature/auth-service or experimentation"
               autoFocus
-              className="w-full h-[35px] px-3 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
+              className="w-full h-[35px] px-3 text-sm bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1.5">
-              Description <span className="text-neutral-400 dark:text-neutral-500 font-normal">(Optional)</span>
+            <label className="block text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-1.5">
+              Description <span className="text-neutral-500 dark:text-neutral-400 font-normal">(Optional)</span>
             </label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Purpose of this workspace environment..."
               rows={3}
-              className="w-full px-3 py-2 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans resize-none"
+              className="w-full px-3 py-2 text-sm bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans resize-none"
             />
           </div>
 
           {!isEditing && (
             <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800">
-              <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-2">
+              <label className="block text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
                 Initial Contents
               </label>
               <div className="grid grid-cols-2 gap-2.5">
@@ -137,11 +137,11 @@ export const CreateEditCodeSpaceModal: React.FC<CreateEditCodeSpaceModalProps> =
                       : 'border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-950/40 hover:border-neutral-300 dark:hover:border-neutral-700'
                   }`}
                 >
-                  <div className="flex items-center gap-1.5 text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1">
-                    <Plus className="w-3.5 h-3.5 text-sky-500" />
+                  <div className="flex items-center gap-1.5 text-sm font-medium text-neutral-900 dark:text-neutral-100 mb-1">
+                    <Plus className="w-4 h-4 text-sky-500" />
                     <span>Blank Space</span>
                   </div>
-                  <p className="text-[11px] text-neutral-500 dark:text-neutral-400">
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
                     Fresh workspace with no files or folders.
                   </p>
                 </button>
@@ -155,11 +155,11 @@ export const CreateEditCodeSpaceModal: React.FC<CreateEditCodeSpaceModalProps> =
                       : 'border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-950/40 hover:border-neutral-300 dark:hover:border-neutral-700'
                   }`}
                 >
-                  <div className="flex items-center gap-1.5 text-xs font-medium text-neutral-900 dark:text-neutral-100 mb-1">
-                    <Copy className="w-3.5 h-3.5 text-emerald-500" />
+                  <div className="flex items-center gap-1.5 text-sm font-medium text-neutral-900 dark:text-neutral-100 mb-1">
+                    <Copy className="w-4 h-4 text-emerald-500" />
                     <span>Branch Active</span>
                   </div>
-                  <p className="text-[11px] text-neutral-500 dark:text-neutral-400 truncate">
+                  <p className="text-xs text-neutral-600 dark:text-neutral-400 truncate">
                     Copy from {activeCodeSpaceName || 'current'}.
                   </p>
                 </button>
@@ -172,13 +172,13 @@ export const CreateEditCodeSpaceModal: React.FC<CreateEditCodeSpaceModalProps> =
             <button
               type="button"
               onClick={onClose}
-              className="h-[35px] px-3.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
+              className="h-[35px] px-3.5 text-sm font-medium text-neutral-700 dark:text-neutral-200 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="h-[35px] px-4 text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] rounded-md transition-colors shadow-2xs cursor-pointer"
+              className="h-[35px] px-4 text-sm font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] rounded-md transition-colors shadow-2xs cursor-pointer"
             >
               {isEditing ? 'Save Changes' : 'Create CodeSpace'}
             </button>

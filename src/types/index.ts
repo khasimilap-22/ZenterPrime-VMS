@@ -65,7 +65,7 @@ export interface AppSettings {
   tabSize: number;
   showLineNumbers: boolean;
   codeWrap: boolean;
-  fontSize: '12px' | '13px' | '14px';
+  fontSize: '12px' | '13px' | '14px' | '15px' | '16px';
   defaultBranch: string;
 }
 

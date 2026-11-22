@@ -41,6 +41,16 @@ import { MergeCodeSpacesModal } from './components/codespaces/MergeCodeSpacesMod
 import { GroupEditorModal } from './components/codespaces/GroupEditorModal';
 import { DeleteCodeSpaceWarningModal } from './components/codespaces/DeleteCodeSpaceWarningModal';
 import { downloadCodeSpaceZip } from './utils/zipExport';
+import {
+  clearCodeSpaceFolderState,
+  clearAllCodeSpaceFolderStates,
+  hydrateFolderStatesFromIDB,
+} from './utils/folderStateStorage';
+import { TerminalCLI } from './components/TerminalCLI';
+import {
+  buildCodeSpaceFromTemplate,
+  ProjectTemplateDefinition,
+} from './utils/projectTemplates';
 
 export default function App() {
   const [settings, setSettings] = useState<AppSettings>(() => getStoredSettings());
@@ -95,6 +105,7 @@ export default function App() {
           idbGetGroups(),
           idbGetKeyVal<string>('activeCodeSpaceId'),
           idbGetKeyVal<AppSettings>('settings'),
+          hydrateFolderStatesFromIDB(),
         ]);
 
         if (!isMounted) return;
@@ -447,6 +458,27 @@ export default function App() {
     setCurrentTab('codebase');
   };
 
+  // Scaffold Project CodeSpace via Bottom CLI
+  const handleScaffoldProject = (template: ProjectTemplateDefinition): CodeSpace => {
+    const newCodeSpace = buildCodeSpaceFromTemplate(
+      template,
+      codespaces.map((cs) => cs.name)
+    );
+    setCodespaces((prev) => [newCodeSpace, ...prev]);
+    setActiveCodeSpaceId(newCodeSpace.id);
+    setSelectedFileId(newCodeSpace.files.length > 0 ? newCodeSpace.files[0].id : null);
+    return newCodeSpace;
+  };
+
+  const handleOpenCodeSpaceFromCLI = (id: string) => {
+    const target = codespaces.find((c) => c.id === id);
+    setActiveCodeSpaceId(id);
+    if (target) {
+      setSelectedFileId(target.files && target.files.length > 0 ? target.files[0].id : null);
+    }
+    setCurrentTab('codebase');
+  };
+
   // Edit CodeSpace
   const handleSaveEditCodeSpace = (name: string, description: string) => {
     if (!editingCodeSpace) return;
@@ -468,7 +500,10 @@ export default function App() {
       }))
     );
 
-    // 2. Remove from codespaces list
+    // 2. Remove persisted folder open/closed state for deleted CodeSpace
+    clearCodeSpaceFolderState(id);
+
+    // 3. Remove from codespaces list
     const remaining = codespaces.filter((c) => c.id !== id);
     if (remaining.length === 0) {
       setCodespaces([]);
@@ -530,39 +565,42 @@ export default function App() {
     localStorage.removeItem('vms_code_files_v1');
     localStorage.removeItem('vms_version_records_v1');
     localStorage.removeItem('vms_settings_v1');
+    clearAllCodeSpaceFolderStates();
     window.location.reload();
   };
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 antialiased font-sans transition-colors">
-      {/* Collapsible Left Navigation Sidebar */}
-      <Sidebar
-        isExpanded={isSidebarExpanded}
-        onToggleExpand={() => setIsSidebarExpanded((prev) => !prev)}
-        activeTab={currentTab}
-        onSelectTab={setCurrentTab}
-        codespaceCount={codespaces.length}
-        versionCount={versions.length}
-        groupCount={groups.length}
-      />
-
-      {/* Main Column */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Top Header Bar matching reference screenshot */}
-        <TopBar
-          currentTab={currentTab}
-          searchQuery={searchQuery}
-          onSearchChange={setSearchQuery}
-          theme={settings.theme}
-          onToggleTheme={handleToggleTheme}
-          onOpenCreateCodeSpaceModal={() => setIsCreateCodeSpaceModalOpen(true)}
-          activeCodeSpaceName={activeCodeSpace.name}
-          onBackToCodeSpaces={() => setCurrentTab('codespaces')}
-          onOpenDemoAccountModal={() => setIsDemoAccountModalOpen(true)}
+    <div className="flex flex-col h-screen w-screen overflow-hidden bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 antialiased font-sans transition-colors">
+      {/* Upper Workspace Shell */}
+      <div className="flex-1 flex min-h-0 overflow-hidden">
+        {/* Collapsible Left Navigation Sidebar */}
+        <Sidebar
+          isExpanded={isSidebarExpanded}
+          onToggleExpand={() => setIsSidebarExpanded((prev) => !prev)}
+          activeTab={currentTab}
+          onSelectTab={setCurrentTab}
+          codespaceCount={codespaces.length}
+          versionCount={versions.length}
+          groupCount={groups.length}
         />
 
-        {/* Main Content Area */}
-        <main className="flex-1 flex overflow-hidden">
+        {/* Main Column */}
+        <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+          {/* Top Header Bar matching reference screenshot */}
+          <TopBar
+            currentTab={currentTab}
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            theme={settings.theme}
+            onToggleTheme={handleToggleTheme}
+            onOpenCreateCodeSpaceModal={() => setIsCreateCodeSpaceModalOpen(true)}
+            activeCodeSpaceName={activeCodeSpace.name}
+            onBackToCodeSpaces={() => setCurrentTab('codespaces')}
+            onOpenDemoAccountModal={() => setIsDemoAccountModalOpen(true)}
+          />
+
+          {/* Main Content Area */}
+          <main className="flex-1 flex min-h-0 overflow-hidden">
           {currentTab === 'codespaces' && (
             <CodeSpacesView
               codeSpaces={codespaces}
@@ -636,8 +674,17 @@ export default function App() {
               versionCount={versions.length}
             />
           )}
-        </main>
+          </main>
+        </div>
       </div>
+
+      {/* Bottom Docked Command Line Interface */}
+      <TerminalCLI
+        theme={settings.theme}
+        codeSpaces={codespaces}
+        onScaffoldProject={handleScaffoldProject}
+        onOpenCodeSpace={handleOpenCodeSpaceFromCLI}
+      />
 
       {/* Global Quick Command Palette (Cmd+K) */}
       <CommandPalette

@@ -1,14 +1,21 @@
 {
-  "name": "react-example",
+  "name": "version-management-system",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Offline-ready Version Management System for CodeSpaces, files, versions, and local CLI scaffolding.",
+  "author": "ZenterPrime",
   "type": "module",
+  "main": "electron/main.cjs",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",
     "preview": "vite preview",
-    "clean": "rm -rf dist server.js",
-    "lint": "tsc --noEmit"
+    "clean": "rm -rf dist release server.js",
+    "lint": "tsc --noEmit",
+    "electron:dev": "node electron/dev.mjs",
+    "electron:start": "vite build && electron .",
+    "electron:build": "vite build && electron-builder --win",
+    "electron:build:dir": "vite build && electron-builder --win --dir"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
@@ -24,12 +31,16 @@
     "vite": "^8.3.0"
   },
   "devDependencies": {
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
     "@types/express": "^4.17.21",
     "@types/jszip": "^3.4.0",
     "@types/node": "^22.14.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "autoprefixer": "^10.4.21",
+    "electron": "^45.4.1",
+    "electron-builder": "^26.18.0",
     "esbuild": "^0.25.0",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.21.0",

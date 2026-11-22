@@ -81,19 +81,19 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           />
           <button
             onClick={onClose}
-            className="p-1 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 rounded"
+            className="p-1 text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 rounded cursor-pointer"
           >
-            <span className="text-[11px] font-mono px-1.5 py-0.5 rounded border border-neutral-200 dark:border-neutral-700">
+            <span className="text-xs font-mono px-1.5 py-0.5 rounded border border-neutral-200 dark:border-neutral-700">
               ESC
             </span>
           </button>
         </div>
 
         {/* Results List */}
-        <div className="max-h-96 overflow-y-auto p-2 space-y-3 text-xs">
+        <div className="max-h-96 overflow-y-auto p-2 space-y-3 text-sm">
           {/* Quick Actions */}
           <div>
-            <div className="px-3 py-1.5 text-[11px] font-medium text-neutral-400 uppercase tracking-wider">
+            <div className="px-3 py-1.5 text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
               Actions
             </div>
             <div className="space-y-0.5">
@@ -103,13 +103,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   onClose();
                   onOpenNewFileModal();
                 }}
-                className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-left"
+                className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-left cursor-pointer"
               >
                 <div className="flex items-center gap-2.5">
                   <Plus className="w-4 h-4 text-sky-500" />
                   <span>Create New File</span>
                 </div>
-                <span className="text-[10px] text-neutral-400 font-mono">Workspace</span>
+                <span className="text-xs text-neutral-500 dark:text-neutral-400 font-mono">Workspace</span>
               </button>
 
               <button
@@ -118,13 +118,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   onClose();
                   onOpenUploadModal();
                 }}
-                className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-left"
+                className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-left cursor-pointer"
               >
                 <div className="flex items-center gap-2.5">
                   <UploadCloud className="w-4 h-4 text-emerald-500" />
                   <span>Upload Code Files</span>
                 </div>
-                <span className="text-[10px] text-neutral-400 font-mono">Ingest</span>
+                <span className="text-xs text-neutral-500 dark:text-neutral-400 font-mono">Ingest</span>
               </button>
 
               <button
@@ -133,13 +133,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   onClose();
                   onNavigateTab('versions');
                 }}
-                className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-left"
+                className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-left cursor-pointer"
               >
                 <div className="flex items-center gap-2.5">
                   <Layers className="w-4 h-4 text-amber-500" />
                   <span>Open Versions History</span>
                 </div>
-                <span className="text-[10px] text-neutral-400 font-mono">Audit Log</span>
+                <span className="text-xs text-neutral-500 dark:text-neutral-400 font-mono">Audit Log</span>
               </button>
 
               <button
@@ -148,7 +148,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   onToggleTheme();
                   onClose();
                 }}
-                className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-left"
+                className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-left cursor-pointer"
               >
                 <div className="flex items-center gap-2.5">
                   {currentTheme === 'dark' ? (
@@ -158,14 +158,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   )}
                   <span>Switch to {currentTheme === 'dark' ? 'Light' : 'Dark'} Theme</span>
                 </div>
-                <span className="text-[10px] text-neutral-400 font-mono">Appearance</span>
+                <span className="text-xs text-neutral-500 dark:text-neutral-400 font-mono">Appearance</span>
               </button>
             </div>
           </div>
 
           {/* Files */}
           <div>
-            <div className="px-3 py-1.5 text-[11px] font-medium text-neutral-400 uppercase tracking-wider">
+            <div className="px-3 py-1.5 text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
               Code Files ({filteredFiles.length})
             </div>
             <div className="space-y-0.5">
@@ -178,13 +178,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                     onNavigateTab('codebase');
                     onClose();
                   }}
-                  className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-neutral-800 dark:text-neutral-200 hover:bg-sky-50 dark:hover:bg-neutral-800 transition-colors text-left"
+                  className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-neutral-800 dark:text-neutral-200 hover:bg-sky-50 dark:hover:bg-neutral-800 transition-colors text-left cursor-pointer"
                 >
                   <div className="flex items-center gap-2 truncate pr-2">
                     <FileIcon fileName={file.name} className="shrink-0" />
-                    <span className="font-mono text-xs truncate">{file.path}</span>
+                    <span className="font-mono text-[13px] truncate">{file.path}</span>
                   </div>
-                  <span className="text-[11px] text-neutral-400 font-mono tabular-nums shrink-0">
+                  <span className="text-xs text-neutral-500 dark:text-neutral-400 font-mono tabular-nums shrink-0">
                     {file.lineCount} lines
                   </span>
                 </button>
@@ -195,7 +195,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           {/* Recent Versions */}
           {filteredVersions.length > 0 && (
             <div>
-              <div className="px-3 py-1.5 text-[11px] font-medium text-neutral-400 uppercase tracking-wider">
+              <div className="px-3 py-1.5 text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
                 Recent Version Revisions
               </div>
               <div className="space-y-0.5">
@@ -207,15 +207,15 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                       onNavigateTab('versions');
                       onClose();
                     }}
-                    className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-left"
+                    className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors text-left cursor-pointer"
                   >
                     <div className="flex items-center gap-2 truncate pr-2">
-                      <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300">
+                      <span className="font-mono text-xs px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300">
                         {v.hash || v.id}
                       </span>
                       <span className="truncate">{v.description}</span>
                     </div>
-                    <span className="capitalize text-[10px] text-neutral-400 shrink-0">
+                    <span className="capitalize text-xs text-neutral-500 dark:text-neutral-400 shrink-0">
                       {v.action}
                     </span>
                   </button>
@@ -226,7 +226,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between px-4 py-2 border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 text-[11px] text-neutral-400">
+        <div className="flex items-center justify-between px-4 py-2.5 border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 text-xs text-neutral-500 dark:text-neutral-400">
           <span>Navigate with <kbd className="font-mono">↑</kbd> <kbd className="font-mono">↓</kbd></span>
           <span>Open with <kbd className="font-mono">Enter</kbd></span>
         </div>

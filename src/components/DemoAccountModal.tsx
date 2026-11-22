@@ -61,15 +61,15 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
               <button
                 type="button"
                 onClick={() => setActiveTab('overview')}
-                className="flex items-center gap-1.5 text-xs font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors cursor-pointer mr-1"
+                className="flex items-center gap-1.5 text-[13px] font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors cursor-pointer mr-1"
               >
-                <ArrowLeft className="w-3.5 h-3.5" />
+                <ArrowLeft className="w-4 h-4" />
                 <span>Back</span>
               </button>
             ) : (
               <UserCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             )}
-            <h2 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+            <h2 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
               {activeTab === 'overview' ? 'Enterprise Demo Account' : 'VMS Achievements'}
             </h2>
           </div>
@@ -80,7 +80,7 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
               <button
                 type="button"
                 onClick={() => setActiveTab('overview')}
-                className={`px-2.5 py-1 rounded-md text-[11px] font-medium transition-colors cursor-pointer ${
+                className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors cursor-pointer ${
                   activeTab === 'overview'
                     ? 'bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 shadow-2xs'
                     : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200'
@@ -91,13 +91,13 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
               <button
                 type="button"
                 onClick={() => setActiveTab('achievements')}
-                className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-medium transition-colors cursor-pointer ${
+                className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-medium transition-colors cursor-pointer whitespace-nowrap ${
                   activeTab === 'achievements'
                     ? 'bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 shadow-2xs'
                     : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200'
                 }`}
               >
-                <Trophy className="w-3 h-3 text-amber-500" />
+                <Trophy className="w-3.5 h-3.5 text-amber-500" />
                 <span>Achievements ({unlockedCount}/{achievements.length})</span>
               </button>
             </div>
@@ -105,7 +105,7 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="p-1 rounded-md text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors ml-1 cursor-pointer"
+              className="p-1 rounded-md text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors ml-1 cursor-pointer"
               aria-label="Close modal"
             >
               <X className="w-4 h-4" />
@@ -124,18 +124,18 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <h3 className="text-base font-bold text-neutral-900 dark:text-neutral-100 truncate">
+                    <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 truncate">
                       Alex Reed
                     </h3>
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800">
-                      <ShieldCheck className="w-3 h-3" />
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800">
+                      <ShieldCheck className="w-3.5 h-3.5" />
                       Demo Mode Active
                     </span>
                   </div>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-0.5">
                     Lead Software Architect · Enterprise Core Team
                   </p>
-                  <p className="text-xs font-mono text-neutral-600 dark:text-neutral-300 mt-1">
+                  <p className="text-sm font-mono text-neutral-700 dark:text-neutral-300 mt-1">
                     alex.reed@demo.zentervms.io
                   </p>
                 </div>
@@ -146,43 +146,43 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {/* Card 1: CodeSpaces */}
                   <div className="p-3.5 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-2xs flex flex-col justify-between">
-                    <div className="flex items-center justify-between text-neutral-400 dark:text-neutral-500">
-                      <span className="text-[11px] font-medium">CodeSpaces</span>
+                    <div className="flex items-center justify-between text-neutral-600 dark:text-neutral-400">
+                      <span className="text-xs font-medium">CodeSpaces</span>
                       <Box className="w-3.5 h-3.5 text-neutral-400" />
                     </div>
                     <div className="mt-2">
-                      <span className="text-xl font-bold font-mono text-neutral-900 dark:text-neutral-100">
+                      <span className="text-2xl font-bold font-mono tabular-nums text-neutral-900 dark:text-neutral-100">
                         {codespaces.length}
                       </span>
-                      <p className="text-[11px] text-neutral-400 mt-0.5">configured</p>
+                      <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">configured</p>
                     </div>
                   </div>
 
                   {/* Card 2: Total Files */}
                   <div className="p-3.5 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-2xs flex flex-col justify-between">
-                    <div className="flex items-center justify-between text-neutral-400 dark:text-neutral-500">
-                      <span className="text-[11px] font-medium">Total Files</span>
+                    <div className="flex items-center justify-between text-neutral-600 dark:text-neutral-400">
+                      <span className="text-xs font-medium">Total Files</span>
                       <FileCode className="w-3.5 h-3.5 text-neutral-400" />
                     </div>
                     <div className="mt-2">
-                      <span className="text-xl font-bold font-mono text-neutral-900 dark:text-neutral-100">
+                      <span className="text-2xl font-bold font-mono tabular-nums text-neutral-900 dark:text-neutral-100">
                         {totalFiles}
                       </span>
-                      <p className="text-[11px] text-neutral-400 mt-0.5">source files</p>
+                      <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">source files</p>
                     </div>
                   </div>
 
                   {/* Card 3: Revisions */}
                   <div className="p-3.5 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-2xs flex flex-col justify-between">
-                    <div className="flex items-center justify-between text-neutral-400 dark:text-neutral-500">
-                      <span className="text-[11px] font-medium">Revisions</span>
+                    <div className="flex items-center justify-between text-neutral-600 dark:text-neutral-400">
+                      <span className="text-xs font-medium">Revisions</span>
                       <Clock className="w-3.5 h-3.5 text-neutral-400" />
                     </div>
                     <div className="mt-2">
-                      <span className="text-xl font-bold font-mono text-neutral-900 dark:text-neutral-100">
+                      <span className="text-2xl font-bold font-mono tabular-nums text-neutral-900 dark:text-neutral-100">
                         {totalRevs}
                       </span>
-                      <p className="text-[11px] text-neutral-400 mt-0.5">commit logs</p>
+                      <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">commit logs</p>
                     </div>
                   </div>
 
@@ -194,22 +194,22 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
                     title="Click to view all unlocked and in-progress achievements"
                   >
                     <div className="flex items-center justify-between text-amber-700 dark:text-amber-400">
-                      <span className="text-[11px] font-semibold flex items-center gap-1">
-                        <Trophy className="w-3 h-3 text-amber-500" />
-                        Achievements
+                      <span className="text-xs font-semibold flex items-center gap-1">
+                        <Trophy className="w-3.5 h-3.5 text-amber-500" />
+                        Awards
                       </span>
                       <ChevronRight className="w-3.5 h-3.5 text-amber-500 group-hover:translate-x-0.5 transition-transform" />
                     </div>
                     <div className="mt-2">
                       <div className="flex items-baseline gap-1">
-                        <span className="text-xl font-bold font-mono text-amber-900 dark:text-amber-300">
+                        <span className="text-2xl font-bold font-mono tabular-nums text-amber-900 dark:text-amber-300">
                           {unlockedCount}
                         </span>
                         <span className="text-xs text-amber-700/80 dark:text-amber-400/80 font-mono">
                           / {achievements.length}
                         </span>
                       </div>
-                      <p className="text-[11px] text-amber-700 dark:text-amber-400 font-medium mt-0.5">
+                      <p className="text-xs text-amber-700 dark:text-amber-400 font-medium mt-0.5">
                         Click to view &rarr;
                       </p>
                     </div>
@@ -218,10 +218,10 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
               </div>
 
               {/* Three Indicators */}
-              <div className="space-y-2 text-xs">
+              <div className="space-y-2 text-sm">
                 <div className="flex items-center justify-between py-2 border-b border-neutral-100 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400">
                   <span className="flex items-center gap-2">
-                    <HardDrive className="w-3.5 h-3.5 text-neutral-400" />
+                    <HardDrive className="w-4 h-4 text-neutral-400" />
                     Active Environment
                   </span>
                   <span className="font-medium text-neutral-900 dark:text-neutral-100 font-mono">
@@ -230,16 +230,16 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
                 </div>
                 <div className="flex items-center justify-between py-2 border-b border-neutral-100 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400">
                   <span className="flex items-center gap-2">
-                    <Layers className="w-3.5 h-3.5 text-neutral-400" />
+                    <Layers className="w-4 h-4 text-neutral-400" />
                     Configured Groups
                   </span>
-                  <span className="font-medium text-neutral-900 dark:text-neutral-100 font-mono">
+                  <span className="font-medium text-neutral-900 dark:text-neutral-100 font-mono tabular-nums">
                     {groups.length} active
                   </span>
                 </div>
                 <div className="flex items-center justify-between py-2 text-neutral-600 dark:text-neutral-400">
                   <span className="flex items-center gap-2">
-                    <FolderGit2 className="w-3.5 h-3.5 text-neutral-400" />
+                    <FolderGit2 className="w-4 h-4 text-neutral-400" />
                     Auth Model
                   </span>
                   <span className="font-medium text-emerald-600 dark:text-emerald-400">
@@ -251,12 +251,12 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
           ) : (
             /* Achievements View */
             <div className="space-y-4">
-              <div className="flex items-center justify-between pb-1">
+              <div className="flex items-center justify-between gap-3 pb-1">
                 <div>
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                  <h3 className="text-sm font-semibold uppercase tracking-wider text-neutral-600 dark:text-neutral-400">
                     VMS Milestones &amp; Progression
                   </h3>
-                  <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5">
+                  <p className="text-[13px] text-neutral-600 dark:text-neutral-400 mt-0.5">
                     Unlock achievements by actively creating workspaces and maintaining reliable version streaks.
                   </p>
                 </div>
@@ -314,7 +314,7 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between gap-2">
                             <h4
-                              className={`text-xs flex items-center gap-1.5 ${
+                              className={`text-sm flex items-center gap-1.5 flex-wrap ${
                                 item.unlocked
                                   ? 'font-bold text-neutral-900 dark:text-neutral-50'
                                   : 'font-semibold text-neutral-600 dark:text-neutral-400'
@@ -322,7 +322,7 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
                             >
                               <span>{item.name}</span>
                               <span
-                                className={`text-[10px] px-1.5 py-0.2 rounded font-medium border ${
+                                className={`text-xs px-1.5 py-0.5 rounded font-medium border ${
                                   item.unlocked
                                     ? item.tier === 'bronze'
                                       ? 'bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-200 border-amber-300 dark:border-amber-700'
@@ -340,34 +340,34 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
 
                             {item.unlocked ? (
                               /* Ticked Checkmark Badge */
-                              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 dark:bg-emerald-950/90 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 shadow-2xs shrink-0">
+                              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-950/90 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 shadow-2xs shrink-0">
                                 <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 stroke-[3]" />
                                 <span>Unlocked</span>
                               </span>
                             ) : (
                               /* Inactive / Pending Badge with Icon */
-                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 border border-neutral-300 dark:border-neutral-700/80 shrink-0 font-mono">
-                                <Clock className="w-3 h-3 text-neutral-400 dark:text-neutral-500" />
+                              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-300 dark:border-neutral-700/80 shrink-0 font-mono tabular-nums">
+                                <Clock className="w-3 h-3 text-neutral-500 dark:text-neutral-400" />
                                 <span>Pending ({item.progress} / {item.target})</span>
                               </span>
                             )}
                           </div>
 
                           <p
-                            className={`text-xs mt-1 leading-relaxed ${
+                            className={`text-[13px] mt-1 leading-relaxed ${
                               item.unlocked
                                 ? 'font-semibold text-neutral-800 dark:text-neutral-200'
-                                : 'font-medium text-neutral-500 dark:text-neutral-400'
+                                : 'font-medium text-neutral-600 dark:text-neutral-400'
                             }`}
                           >
                             &quot;{item.description}&quot;
                           </p>
 
                           <p
-                            className={`text-[11px] mt-0.5 ${
+                            className={`text-xs mt-0.5 ${
                               item.unlocked
                                 ? 'text-neutral-600 dark:text-neutral-400'
-                                : 'text-neutral-400 dark:text-neutral-500'
+                                : 'text-neutral-500 dark:text-neutral-400'
                             }`}
                           >
                             {item.requirement}
@@ -407,16 +407,16 @@ export const DemoAccountModal: React.FC<DemoAccountModalProps> = ({
                 onResetWorkspace();
               }
             }}
-            className="h-[35px] px-3 flex items-center gap-1.5 rounded-md text-xs font-medium text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer"
+            className="h-[35px] px-3 flex items-center gap-1.5 rounded-md text-sm font-medium text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
+            <RotateCcw className="w-4 h-4" />
             <span>Reset Demo DB</span>
           </button>
 
           <button
             type="button"
             onClick={onClose}
-            className="h-[35px] px-4 flex items-center justify-center rounded-md text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] transition-colors cursor-pointer shadow-2xs"
+            className="h-[35px] px-4 flex items-center justify-center rounded-md text-sm font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] transition-colors cursor-pointer shadow-2xs"
           >
             Done
           </button>

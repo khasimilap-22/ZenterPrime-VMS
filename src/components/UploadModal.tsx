@@ -234,10 +234,10 @@ export const UploadModal: React.FC<UploadModalProps> = ({
               )}
             </div>
             <div>
-              <h3 id="upload-modal-title" className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+              <h3 id="upload-modal-title" className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
                 {zipArchiveName ? `Import Archive: ${zipArchiveName}` : 'Import Code Files & ZIP Archives'}
               </h3>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400">
+              <p className="text-[13px] text-neutral-600 dark:text-neutral-400">
                 Extract full folder trees, insider files, or individual source assets
               </p>
             </div>
@@ -249,7 +249,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
               <button
                 type="button"
                 onClick={onExportZip}
-                className="h-[30px] px-2.5 hidden sm:flex items-center gap-1.5 text-xs font-medium text-neutral-600 dark:text-neutral-300 hover:text-sky-600 dark:hover:text-sky-400 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer"
+                className="h-[30px] px-2.5 hidden sm:flex items-center gap-1.5 text-[13px] font-medium text-neutral-700 dark:text-neutral-200 hover:text-sky-600 dark:hover:text-sky-400 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer whitespace-nowrap"
                 title="Download current workspace as ZIP"
               >
                 <Download className="w-3.5 h-3.5 text-sky-500" />
@@ -260,7 +260,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 rounded-md text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+              className="p-1.5 rounded-md text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
               aria-label="Close modal"
             >
               <X className="w-4 h-4" />
@@ -271,7 +271,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
         {/* Modal Body */}
         <form onSubmit={handleSubmit} className="p-6 space-y-4 overflow-y-auto flex-1">
           {errorMessage && (
-            <div className="flex items-center gap-2 p-3 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-xs text-rose-700 dark:text-rose-300 rounded-lg">
+            <div className="flex items-center gap-2 p-3 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-sm text-rose-700 dark:text-rose-300 rounded-lg">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{errorMessage}</span>
             </div>
@@ -290,14 +290,14 @@ export const UploadModal: React.FC<UploadModalProps> = ({
               </div>
 
               <div className="space-y-1 max-w-sm">
-                <h4 className="text-sm font-bold text-neutral-900 dark:text-neutral-100">
+                <h4 className="text-base font-bold text-neutral-900 dark:text-neutral-100">
                   Extracting ZIP Archive
                 </h4>
-                <p className="text-xs text-neutral-500 dark:text-neutral-400 font-mono truncate">
+                <p className="text-sm text-neutral-600 dark:text-neutral-400 font-mono truncate">
                   {zipArchiveName}
                 </p>
                 {zipProgress?.currentFileName && (
-                  <p className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 truncate max-w-xs mx-auto">
+                  <p className="text-xs font-mono text-emerald-600 dark:text-emerald-400 truncate max-w-xs mx-auto">
                     &rarr; {zipProgress.currentFileName}
                   </p>
                 )}
@@ -311,7 +311,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                     style={{ width: `${zipProgress?.percent || 15}%` }}
                   />
                 </div>
-                <div className="flex items-center justify-between text-[11px] font-mono text-neutral-400">
+                <div className="flex items-center justify-between text-xs font-mono tabular-nums text-neutral-500 dark:text-neutral-400">
                   <span>
                     {zipProgress?.filesExtracted || 0} files extracted
                   </span>
@@ -319,7 +319,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                 </div>
               </div>
 
-              <p className="text-[11px] text-neutral-400 dark:text-neutral-500">
+              <p className="text-xs text-neutral-500 dark:text-neutral-400">
                 Preserving folder hierarchies, nested paths, and file contents...
               </p>
             </div>
@@ -356,10 +356,10 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                     <FolderArchive className="w-6 h-6 stroke-[2]" />
                   </div>
 
-                  <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                  <h4 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
                     Drop code files or a ZIP archive here
                   </h4>
-                  <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1 max-w-sm mx-auto">
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1 max-w-sm mx-auto leading-relaxed">
                     ZIP archives will be automatically extracted, unpacking all insider folders and code files while preserving paths.
                   </p>
 
@@ -368,18 +368,18 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                     <button
                       type="button"
                       onClick={() => zipInputRef.current?.click()}
-                      className="h-[35px] px-3.5 flex items-center gap-2 rounded-md text-xs font-medium text-white bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
+                      className="h-[35px] px-3.5 flex items-center gap-2 rounded-md text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 transition-colors shadow-2xs cursor-pointer"
                     >
-                      <FolderArchive className="w-3.5 h-3.5" />
+                      <FolderArchive className="w-4 h-4" />
                       <span>Choose ZIP Archive (.zip)</span>
                     </button>
 
                     <button
                       type="button"
                       onClick={() => fileInputRef.current?.click()}
-                      className="h-[35px] px-3.5 flex items-center gap-2 rounded-md text-xs font-medium text-neutral-700 dark:text-neutral-200 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 transition-colors shadow-2xs cursor-pointer"
+                      className="h-[35px] px-3.5 flex items-center gap-2 rounded-md text-sm font-medium text-neutral-700 dark:text-neutral-200 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 transition-colors shadow-2xs cursor-pointer"
                     >
-                      <UploadCloud className="w-3.5 h-3.5" />
+                      <UploadCloud className="w-4 h-4" />
                       <span>Choose Individual Files</span>
                     </button>
                   </div>
@@ -399,14 +399,14 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                       </div>
                       <div className="min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-xs font-bold text-neutral-900 dark:text-neutral-100 truncate">
+                          <span className="text-sm font-bold text-neutral-900 dark:text-neutral-100 truncate">
                             {zipArchiveName ? `Extracted "${zipArchiveName}"` : 'Staged Files for Import'}
                           </span>
-                          <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-emerald-200/60 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-semibold">
+                          <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-emerald-200/60 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-semibold">
                             {stagedFiles.length} {stagedFiles.length === 1 ? 'file' : 'files'}
                           </span>
                         </div>
-                        <p className="text-[11px] text-neutral-500 dark:text-neutral-400 mt-0.5 font-mono">
+                        <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-0.5 font-mono tabular-nums">
                           {formatBytes(totalBytes)} total · {totalLines} lines
                           {discoveredFolders.length > 0 && ` across ${discoveredFolders.length} folders`}
                         </p>
@@ -417,7 +417,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                       <button
                         type="button"
                         onClick={handleClearStaged}
-                        className="h-[30px] px-2.5 flex items-center gap-1 text-xs text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-200 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
+                        className="h-[30px] px-2.5 flex items-center gap-1 text-[13px] text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
                         title="Discard staged files and choose another"
                       >
                         <RotateCcw className="w-3.5 h-3.5" />
@@ -429,16 +429,16 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                   {/* Discovered Folders List */}
                   {discoveredFolders.length > 0 && (
                     <div className="space-y-1.5">
-                      <span className="text-[11px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
+                      <span className="text-xs font-semibold text-neutral-600 dark:text-neutral-400 uppercase tracking-wider">
                         Preserved Folder Structure ({discoveredFolders.length})
                       </span>
-                      <div className="flex items-center gap-1.5 flex-wrap max-h-20 overflow-y-auto p-1.5 bg-neutral-50 dark:bg-neutral-950 rounded-lg border border-neutral-200 dark:border-neutral-800">
+                      <div className="flex items-center gap-1.5 flex-wrap max-h-24 overflow-y-auto p-2 bg-neutral-50 dark:bg-neutral-950 rounded-lg border border-neutral-200 dark:border-neutral-800">
                         {discoveredFolders.map((folder) => (
                           <span
                             key={folder}
-                            className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-mono rounded bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700"
+                            className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-mono rounded bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700"
                           >
-                            <Folder className="w-3 h-3 text-sky-500" />
+                            <Folder className="w-3.5 h-3.5 text-sky-500" />
                             <span>{folder}/</span>
                           </span>
                         ))}
@@ -448,14 +448,14 @@ export const UploadModal: React.FC<UploadModalProps> = ({
 
                   {/* Staged File List */}
                   <div className="space-y-1.5">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="font-semibold text-neutral-700 dark:text-neutral-300">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="font-semibold text-neutral-800 dark:text-neutral-200">
                         Extracted Insider Files ({stagedFiles.length})
                       </span>
                       <button
                         type="button"
                         onClick={() => zipInputRef.current?.click()}
-                        className="text-[11px] text-sky-600 dark:text-sky-400 hover:underline cursor-pointer"
+                        className="text-xs font-medium text-sky-600 dark:text-sky-400 hover:underline cursor-pointer"
                       >
                         + Add another ZIP
                       </button>
@@ -465,7 +465,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                       {stagedFiles.map((file, idx) => (
                         <div
                           key={`${file.path}-${idx}`}
-                          className="flex items-center justify-between p-2.5 hover:bg-neutral-50 dark:hover:bg-neutral-900/60 transition-colors text-xs"
+                          className="flex items-center justify-between p-2.5 hover:bg-neutral-50 dark:hover:bg-neutral-900/60 transition-colors text-[13px]"
                         >
                           <div className="flex items-center gap-2.5 min-w-0 pr-2">
                             <FileCode className="w-4 h-4 text-sky-500 shrink-0" />
@@ -473,7 +473,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                               <span className="font-mono font-medium text-neutral-900 dark:text-neutral-100 truncate block">
                                 {file.path}
                               </span>
-                              <div className="flex items-center gap-2 text-[11px] text-neutral-400 mt-0.5 font-mono">
+                              <div className="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 font-mono tabular-nums">
                                 <span className="capitalize">{file.language}</span>
                                 <span>·</span>
                                 <span>{formatBytes(file.sizeBytes)}</span>
@@ -489,7 +489,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                             className="p-1 text-neutral-400 hover:text-rose-500 rounded transition-colors cursor-pointer shrink-0"
                             title={`Remove ${file.name}`}
                           >
-                            <X className="w-3.5 h-3.5" />
+                            <X className="w-4 h-4" />
                           </button>
                         </div>
                       ))}
@@ -501,7 +501,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
               {/* Commit Note and Target Directory inputs */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-neutral-100 dark:border-neutral-800">
                 <div>
-                  <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1.5">
+                  <label className="block text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-1.5">
                     Target Folder Prefix (Optional)
                   </label>
                   <input
@@ -509,11 +509,11 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                     value={targetDir}
                     onChange={(e) => setTargetDir(e.target.value)}
                     placeholder="e.g. packages/ or imported/ (leave blank for root)"
-                    className="w-full h-[35px] px-3 text-xs font-mono bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                    className="w-full h-[35px] px-3 text-sm font-mono bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-emerald-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1.5">
+                  <label className="block text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-1.5">
                     Import Note / Version Summary
                   </label>
                   <input
@@ -521,7 +521,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="e.g. Imported service module from release zip"
-                    className="w-full h-[35px] px-3 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-emerald-500 font-sans"
+                    className="w-full h-[35px] px-3 text-sm bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-emerald-500 font-sans"
                   />
                 </div>
               </div>
@@ -532,7 +532,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
           <div className="flex items-center justify-between pt-3 border-t border-neutral-200 dark:border-neutral-800">
             <div>
               {stagedFiles.length > 0 && (
-                <span className="text-[11px] font-mono text-neutral-500 dark:text-neutral-400 hidden sm:inline">
+                <span className="text-xs font-mono text-neutral-600 dark:text-neutral-400 hidden sm:inline">
                   {stagedFiles.length} file(s) staged for commit
                 </span>
               )}
@@ -542,7 +542,7 @@ export const UploadModal: React.FC<UploadModalProps> = ({
               <button
                 type="button"
                 onClick={onClose}
-                className="h-[35px] px-3.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
+                className="h-[35px] px-3.5 text-sm font-medium text-neutral-700 dark:text-neutral-200 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
               >
                 Cancel
               </button>
@@ -550,9 +550,9 @@ export const UploadModal: React.FC<UploadModalProps> = ({
               <button
                 type="submit"
                 disabled={stagedFiles.length === 0 || isExtractingZip || isReading}
-                className="h-[35px] px-4 text-xs font-medium text-white bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed rounded-md transition-colors shadow-2xs flex items-center gap-1.5 cursor-pointer"
+                className="h-[35px] px-4 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed rounded-md transition-colors shadow-2xs flex items-center gap-1.5 cursor-pointer"
               >
-                <CheckCircle2 className="w-3.5 h-3.5" />
+                <CheckCircle2 className="w-4 h-4" />
                 <span>
                   {stagedFiles.length > 0
                     ? `Import ${stagedFiles.length} Files & Record Versions`

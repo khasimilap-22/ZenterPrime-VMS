@@ -192,17 +192,17 @@ export const NewFileModal: React.FC<NewFileModalProps> = ({
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 id="new-file-title" className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                <h3 id="new-file-title" className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
                   Create New Code File
                 </h3>
                 {!isOnline && (
-                  <span className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30">
-                    <WifiOff className="w-3 h-3" />
+                  <span className="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/30">
+                    <WifiOff className="w-3.5 h-3.5" />
                     Offline Draft Mode
                   </span>
                 )}
               </div>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400">
+              <p className="text-[13px] text-neutral-600 dark:text-neutral-400">
                 Define path, template, and initial contents. Draft is auto-saved locally.
               </p>
             </div>
@@ -210,7 +210,7 @@ export const NewFileModal: React.FC<NewFileModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-md text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+            className="p-1.5 rounded-md text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
             aria-label="Close modal"
           >
             <X className="w-4 h-4" />
@@ -231,24 +231,24 @@ export const NewFileModal: React.FC<NewFileModalProps> = ({
 
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
           {error && (
-            <div className="p-2.5 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-xs text-rose-700 dark:text-rose-300 rounded-lg">
+            <div className="p-3 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 text-sm text-rose-700 dark:text-rose-300 rounded-lg">
               {error}
             </div>
           )}
 
           <div>
-            <div className="flex items-center justify-between mb-1.5">
-              <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+            <div className="flex items-center justify-between gap-2 mb-1.5 flex-wrap">
+              <label className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
                 File Path &amp; Name <span className="text-red-500">*</span>
               </label>
-              <div className="flex items-center gap-1.5">
-                <span className="text-[11px] text-neutral-400 dark:text-neutral-500">Templates:</span>
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="text-xs text-neutral-500 dark:text-neutral-400">Templates:</span>
                 {TEMPLATES.map((t) => (
                   <button
                     key={t.label}
                     type="button"
                     onClick={() => handleApplyTemplate(t)}
-                    className="text-[11px] px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 border border-neutral-200 dark:border-neutral-700 transition-colors cursor-pointer"
+                    className="text-xs px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-100 border border-neutral-200 dark:border-neutral-700 transition-colors cursor-pointer"
                   >
                     {t.label}
                   </button>
@@ -264,22 +264,22 @@ export const NewFileModal: React.FC<NewFileModalProps> = ({
                   setError(null);
                 }}
                 placeholder="e.g. src/auth/tokenValidator.ts"
-                className="w-full h-[35px] pl-8 pr-3 text-xs font-mono bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-sky-500"
+                className="w-full h-[35px] pl-9 pr-3 text-sm font-mono bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-sky-500"
                 required
               />
-              <FileCode className="w-3.5 h-3.5 text-neutral-400 dark:text-neutral-500 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <FileCode className="w-4 h-4 text-neutral-400 dark:text-neutral-500 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             </div>
-            <p className="mt-1 text-[11px] text-neutral-400 dark:text-neutral-500">
+            <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400">
               Detected language: <span className="font-mono text-neutral-700 dark:text-neutral-300">{detectLanguage(filePath)}</span>
             </p>
           </div>
 
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+              <label className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
                 Initial Code Content
               </label>
-              <span className="text-[11px] text-neutral-400 dark:text-neutral-500">
+              <span className="text-xs text-neutral-500 dark:text-neutral-400">
                 Auto-saved to draft
               </span>
             </div>
@@ -288,13 +288,13 @@ export const NewFileModal: React.FC<NewFileModalProps> = ({
               onChange={(e) => setContent(e.target.value)}
               rows={7}
               spellCheck={false}
-              className="w-full px-3 py-2 text-xs font-mono bg-neutral-50 dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-sky-500 resize-y"
+              className="w-full px-3 py-2 text-[13px] font-mono bg-neutral-50 dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-sky-500 resize-y leading-relaxed"
               placeholder="// Write or paste initial file code..."
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1.5">
+            <label className="block text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-1.5">
               Creation Note / Version Summary
             </label>
             <input
@@ -302,7 +302,7 @@ export const NewFileModal: React.FC<NewFileModalProps> = ({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="e.g. Initialized token validator routine"
-              className="w-full h-[35px] px-3 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
+              className="w-full h-[35px] px-3 text-sm bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
             />
           </div>
 
@@ -312,7 +312,7 @@ export const NewFileModal: React.FC<NewFileModalProps> = ({
                 <button
                   type="button"
                   onClick={handleDiscardDraft}
-                  className="h-[35px] px-3 text-xs font-medium text-amber-700 dark:text-amber-400 hover:text-amber-900 dark:hover:text-amber-200 hover:bg-amber-500/10 rounded-md transition-colors cursor-pointer"
+                  className="h-[35px] px-3 text-sm font-medium text-amber-700 dark:text-amber-400 hover:text-amber-900 dark:hover:text-amber-200 hover:bg-amber-500/10 rounded-md transition-colors cursor-pointer"
                 >
                   Discard Restored Draft
                 </button>
@@ -323,15 +323,15 @@ export const NewFileModal: React.FC<NewFileModalProps> = ({
               <button
                 type="button"
                 onClick={onClose}
-                className="h-[35px] px-3.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
+                className="h-[35px] px-3.5 text-sm font-medium text-neutral-700 dark:text-neutral-200 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
               >
                 Close (Keep Draft)
               </button>
               <button
                 type="submit"
-                className="h-[35px] px-4 flex items-center gap-1.5 text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] rounded-md transition-colors shadow-2xs cursor-pointer"
+                className="h-[35px] px-4 flex items-center gap-1.5 text-sm font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] rounded-md transition-colors shadow-2xs cursor-pointer"
               >
-                <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
+                <Plus className="w-4 h-4 stroke-[2.5]" />
                 <span>Create File</span>
               </button>
             </div>

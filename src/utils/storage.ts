@@ -24,7 +24,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   tabSize: 2,
   showLineNumbers: true,
   codeWrap: true,
-  fontSize: '13px',
+  fontSize: '14px',
   defaultBranch: 'main',
 };
 

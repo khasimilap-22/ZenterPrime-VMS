@@ -76,10 +76,10 @@ export const MergeCodeSpacesModal: React.FC<MergeCodeSpacesModalProps> = ({
               <GitMerge className="w-4 h-4" />
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+              <h3 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
                 Merge CodeSpaces into Group
               </h3>
-              <p className="text-xs text-neutral-500 dark:text-neutral-400">
+              <p className="text-[13px] text-neutral-600 dark:text-neutral-400">
                 Group and manage related workspaces together
               </p>
             </div>
@@ -87,7 +87,7 @@ export const MergeCodeSpacesModal: React.FC<MergeCodeSpacesModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-md text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+            className="p-1.5 rounded-md text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
             aria-label="Close"
           >
             <X className="w-4 h-4" />
@@ -97,7 +97,7 @@ export const MergeCodeSpacesModal: React.FC<MergeCodeSpacesModalProps> = ({
         {/* Body */}
         <form onSubmit={handleSubmit} className="p-5 space-y-4">
           {error && (
-            <div className="p-2.5 text-xs text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 rounded-lg flex items-center gap-2">
+            <div className="p-3 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/60 rounded-lg flex items-center gap-2">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
@@ -106,7 +106,7 @@ export const MergeCodeSpacesModal: React.FC<MergeCodeSpacesModalProps> = ({
           {/* Group Metadata */}
           <div className="grid grid-cols-1 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1.5">
+              <label className="block text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-1.5">
                 Group Title <span className="text-red-500">*</span>
               </label>
               <input
@@ -117,20 +117,20 @@ export const MergeCodeSpacesModal: React.FC<MergeCodeSpacesModalProps> = ({
                   if (error) setError('');
                 }}
                 placeholder="e.g. Core Services, Micro-frontends, Release A"
-                className="w-full h-[35px] px-3 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
+                className="w-full h-[35px] px-3 text-sm bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1.5">
-                Group Description <span className="text-neutral-400 dark:text-neutral-500 font-normal">(Optional)</span>
+              <label className="block text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-1.5">
+                Group Description <span className="text-neutral-500 dark:text-neutral-400 font-normal">(Optional)</span>
               </label>
               <input
                 type="text"
                 value={groupDescription}
                 onChange={(e) => setGroupDescription(e.target.value)}
                 placeholder="Short description of this group..."
-                className="w-full h-[35px] px-3 text-xs bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
+                className="w-full h-[35px] px-3 text-sm bg-white dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-md text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
               />
             </div>
           </div>
@@ -138,13 +138,13 @@ export const MergeCodeSpacesModal: React.FC<MergeCodeSpacesModalProps> = ({
           {/* Selection List */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-xs font-semibold text-neutral-700 dark:text-neutral-300">
+              <label className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
                 Select CodeSpaces to Group ({selectedIds.length} of {codeSpaces.length})
               </label>
               <button
                 type="button"
                 onClick={handleSelectAll}
-                className="text-[11px] text-sky-600 dark:text-sky-400 hover:underline cursor-pointer"
+                className="text-xs font-medium text-sky-600 dark:text-sky-400 hover:underline cursor-pointer"
               >
                 {selectedIds.length === codeSpaces.length ? 'Deselect All' : 'Select All'}
               </button>
@@ -175,18 +175,18 @@ export const MergeCodeSpacesModal: React.FC<MergeCodeSpacesModalProps> = ({
                       </div>
 
                       <div className="flex items-center gap-2">
-                        <Box className="w-4 h-4 text-neutral-400 dark:text-neutral-500" />
+                        <Box className="w-4 h-4 text-neutral-500 dark:text-neutral-400" />
                         <div>
-                          <div className="text-xs font-medium text-neutral-900 dark:text-neutral-100 flex items-center gap-1.5">
+                          <div className="text-sm font-medium text-neutral-900 dark:text-neutral-100 flex items-center gap-1.5">
                             <span>{cs.name}</span>
                             {cs.isDefault && (
-                              <span className="text-[10px] px-1.5 py-0.2 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700 font-mono">
+                              <span className="text-xs px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 font-mono">
                                 Default
                               </span>
                             )}
                           </div>
                           {cs.description && (
-                            <p className="text-[11px] text-neutral-500 dark:text-neutral-400 truncate max-w-xs">
+                            <p className="text-xs text-neutral-600 dark:text-neutral-400 truncate max-w-xs">
                               {cs.description}
                             </p>
                           )}
@@ -194,7 +194,7 @@ export const MergeCodeSpacesModal: React.FC<MergeCodeSpacesModalProps> = ({
                       </div>
                     </div>
 
-                    <div className="text-[11px] font-mono text-neutral-400 dark:text-neutral-500">
+                    <div className="text-xs font-mono tabular-nums text-neutral-500 dark:text-neutral-400">
                       {cs.files ? cs.files.length : 0} files
                     </div>
                   </div>
@@ -208,16 +208,16 @@ export const MergeCodeSpacesModal: React.FC<MergeCodeSpacesModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="h-[35px] px-3.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
+              className="h-[35px] px-3.5 text-sm font-medium text-neutral-700 dark:text-neutral-200 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={selectedIds.length === 0}
-              className="h-[35px] px-4 flex items-center gap-1.5 text-xs font-medium text-white bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed rounded-md transition-colors shadow-2xs cursor-pointer"
+              className="h-[35px] px-4 flex items-center gap-1.5 text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed rounded-md transition-colors shadow-2xs cursor-pointer"
             >
-              <GitMerge className="w-3.5 h-3.5" />
+              <GitMerge className="w-4 h-4" />
               <span>Create Merged Group</span>
             </button>
           </div>

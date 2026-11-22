@@ -170,14 +170,14 @@ export const CodebaseExplorer: React.FC<CodebaseExplorerProps> = ({
           />
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="text-[11px] font-mono text-neutral-400">
+        <div className="flex items-center gap-3">
+          <span className="text-[13px] font-mono text-neutral-500 dark:text-neutral-400 tabular-nums">
             {files.length} file{files.length === 1 ? '' : 's'}
           </span>
           <button
             type="button"
             onClick={handleExportZip}
-            className="flex items-center gap-1 h-[25px] px-2 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 h-[25px] px-2.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer whitespace-nowrap"
             title="Download this CodeSpace as a ZIP archive"
           >
             <Download className="w-3.5 h-3.5 text-sky-500" />
@@ -186,7 +186,7 @@ export const CodebaseExplorer: React.FC<CodebaseExplorerProps> = ({
           <button
             type="button"
             onClick={onNavigateToVersions}
-            className="text-[11px] font-medium text-sky-600 dark:text-sky-400 hover:underline px-1 py-0.5"
+            className="text-[13px] font-medium text-sky-600 dark:text-sky-400 hover:underline px-1 py-0.5 cursor-pointer whitespace-nowrap"
           >
             History &rarr;
           </button>
@@ -195,7 +195,7 @@ export const CodebaseExplorer: React.FC<CodebaseExplorerProps> = ({
 
       {/* Golden Session Restored Banner if an uncommitted new file draft exists */}
       {restoredDraft && !isNewModalOpen && (
-        <div className="h-[35px] shrink-0 flex items-center justify-between px-3 bg-amber-500/10 dark:bg-amber-950/40 border-b border-amber-500/25 dark:border-amber-500/30 text-amber-800 dark:text-amber-200 text-xs">
+        <div className="h-[38px] shrink-0 flex items-center justify-between px-3 bg-amber-500/10 dark:bg-amber-950/40 border-b border-amber-500/25 dark:border-amber-500/30 text-amber-800 dark:text-amber-200 text-[13px]">
           <SessionRestoredTag
             size="30px"
             onDismiss={() => setRestoredDraft(null)}
@@ -204,14 +204,14 @@ export const CodebaseExplorer: React.FC<CodebaseExplorerProps> = ({
               setRestoredDraft(null);
             }}
           />
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] text-amber-700/80 dark:text-amber-300/80 font-mono hidden sm:inline truncate max-w-xs">
+          <div className="flex items-center gap-2.5">
+            <span className="text-xs text-amber-700/90 dark:text-amber-300/90 font-mono hidden sm:inline truncate max-w-xs">
               Draft: {restoredDraft.filePath || 'New File'}
             </span>
             <button
               type="button"
               onClick={() => setIsNewModalOpen(true)}
-              className="h-[30px] px-2.5 flex items-center gap-1 text-xs font-medium text-white bg-amber-600 hover:bg-amber-500 rounded-md transition-colors shadow-2xs cursor-pointer"
+              className="h-[30px] px-3 flex items-center gap-1 text-[13px] font-medium text-white bg-amber-600 hover:bg-amber-500 rounded-md transition-colors shadow-2xs cursor-pointer whitespace-nowrap"
             >
               <span>Resume File Creation</span>
             </button>
@@ -223,6 +223,8 @@ export const CodebaseExplorer: React.FC<CodebaseExplorerProps> = ({
       <div className="flex-1 flex overflow-hidden">
         {/* Left Pane: Hierarchical File Tree */}
         <FileTree
+          key={activeCodeSpaceId}
+          codeSpaceId={activeCodeSpaceId}
           files={files}
           selectedFileId={activeFile?.id || null}
           onSelectFile={handleSelectFile}
@@ -255,42 +257,42 @@ export const CodebaseExplorer: React.FC<CodebaseExplorerProps> = ({
               onDirtyChange={handleDirtyChange}
             />
           ) : (
-            <div className="flex-1 flex flex-col items-center justify-center p-8 text-center text-neutral-400 bg-white dark:bg-neutral-900 select-none">
-              <div className="w-12 h-12 rounded-xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-neutral-400 dark:text-neutral-500 mb-4">
+            <div className="flex-1 flex flex-col items-center justify-center p-8 text-center text-neutral-500 dark:text-neutral-400 bg-white dark:bg-neutral-900 select-none">
+              <div className="w-12 h-12 rounded-xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-neutral-500 dark:text-neutral-400 mb-4">
                 <FolderCode className="w-6 h-6" />
               </div>
-              <h3 className="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-1">
+              <h3 className="text-base font-semibold text-neutral-900 dark:text-neutral-100 mb-1.5">
                 No Open Files in Workspace
               </h3>
-              <p className="text-xs text-neutral-500 max-w-sm mb-6 leading-relaxed">
-                Open a file from the explorer on the left, press <kbd className="font-mono px-1 py-0.5 rounded border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 text-[10px]">⌘K</kbd> to quick-search, or upload new code assets.
+              <p className="text-sm text-neutral-600 dark:text-neutral-400 max-w-md mb-6 leading-relaxed">
+                Open a file from the explorer on the left, press <kbd className="font-mono px-1.5 py-0.5 rounded border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 text-xs">⌘K</kbd> to quick-search, or upload new code assets.
               </p>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5 flex-wrap justify-center">
                 <button
                   type="button"
                   onClick={() => setIsNewModalOpen(true)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-sky-600 hover:bg-sky-500 rounded-lg transition-colors shadow-xs"
+                  className="h-[35px] flex items-center gap-1.5 px-3.5 text-sm font-medium text-white bg-sky-600 hover:bg-sky-500 rounded-md transition-colors shadow-xs cursor-pointer"
                 >
-                  <Plus className="w-3.5 h-3.5" />
+                  <Plus className="w-4 h-4" />
                   <span>New File</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setIsUploadModalOpen(true)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-lg transition-colors"
+                  className="h-[35px] flex items-center gap-1.5 px-3.5 text-sm font-medium text-neutral-700 dark:text-neutral-200 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer"
                 >
-                  <UploadCloud className="w-3.5 h-3.5 text-emerald-500" />
+                  <UploadCloud className="w-4 h-4 text-emerald-500" />
                   <span>Upload Code</span>
                 </button>
 
                 <button
                   type="button"
                   onClick={onOpenCommandPalette}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-lg transition-colors"
+                  className="h-[35px] flex items-center gap-1.5 px-3.5 text-sm font-medium text-neutral-700 dark:text-neutral-200 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer"
                 >
-                  <Command className="w-3.5 h-3.5" />
+                  <Command className="w-4 h-4" />
                   <span>Command Menu</span>
                 </button>
               </div>

@@ -38,25 +38,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
     {
       id: 'codespaces',
       label: 'CodeSpaces',
-      icon: <Code2 className="w-4 h-4 shrink-0" strokeWidth={1.75} />,
+      icon: <Code2 className="w-[18px] h-[18px] shrink-0" strokeWidth={1.75} />,
       count: codespaceCount,
     },
     {
       id: 'versions',
       label: 'Versions',
-      icon: <Clock className="w-4 h-4 shrink-0" strokeWidth={1.75} />,
+      icon: <Clock className="w-[18px] h-[18px] shrink-0" strokeWidth={1.75} />,
       count: versionCount,
     },
     {
       id: 'groups',
       label: 'Groups',
-      icon: <Inbox className="w-4 h-4 shrink-0" strokeWidth={1.75} />,
+      icon: <Inbox className="w-[18px] h-[18px] shrink-0" strokeWidth={1.75} />,
       count: groupCount,
     },
     {
       id: 'settings',
       label: 'Settings',
-      icon: <Settings className="w-4 h-4 shrink-0" strokeWidth={1.75} />,
+      icon: <Settings className="w-[18px] h-[18px] shrink-0" strokeWidth={1.75} />,
     },
   ];
 
@@ -94,7 +94,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               key={item.id}
               type="button"
               onClick={() => onSelectTab(item.id)}
-              className={`w-full h-10 flex items-center rounded-md text-xs transition-colors cursor-pointer ${
+              className={`w-full h-10 flex items-center rounded-md text-sm transition-colors cursor-pointer ${
                 isExpanded ? 'px-3 gap-3 justify-start' : 'justify-center px-0'
               } ${
                 isActive
@@ -107,9 +107,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
               {isExpanded && (
                 <div className="flex-1 flex items-center justify-between min-w-0">
-                  <span className="truncate text-xs">{item.label}</span>
+                  <span className="truncate text-sm">{item.label}</span>
                   {item.count !== undefined && item.count > 0 && (
-                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-neutral-200/60 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 ml-1">
+                    <span className="text-xs font-mono tabular-nums px-1.5 py-0.5 rounded bg-neutral-200/70 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 ml-1">
                       {item.count}
                     </span>
                   )}

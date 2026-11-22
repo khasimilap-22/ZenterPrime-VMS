@@ -83,29 +83,29 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
     switch (action) {
       case 'uploaded':
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-            <UploadCloud className="w-3 h-3" />
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-mono font-medium bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
+            <UploadCloud className="w-3.5 h-3.5" />
             Uploaded
           </span>
         );
       case 'created':
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20">
-            <PlusCircle className="w-3 h-3" />
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-mono font-medium bg-sky-500/10 text-sky-700 dark:text-sky-400 border border-sky-500/20">
+            <PlusCircle className="w-3.5 h-3.5" />
             Created
           </span>
         );
       case 'edited':
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
-            <Edit3 className="w-3 h-3" />
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-mono font-medium bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20">
+            <Edit3 className="w-3.5 h-3.5" />
             Edited
           </span>
         );
       case 'deleted':
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20">
-            <Trash2 className="w-3 h-3" />
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-mono font-medium bg-rose-500/10 text-rose-700 dark:text-rose-400 border border-rose-500/20">
+            <Trash2 className="w-3.5 h-3.5" />
             Deleted
           </span>
         );
@@ -119,16 +119,16 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
           <div>
             <div className="flex items-center gap-2">
-              <History className="w-4 h-4 text-sky-500" />
-              <h2 className="text-sm font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+              <History className="w-5 h-5 text-sky-500" />
+              <h2 className="text-lg font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
                 Codebase Version Control &amp; Audit Log
               </h2>
-              <span className="flex items-center gap-1 text-[11px] font-mono text-neutral-500 dark:text-neutral-400 px-2 py-0.5 rounded bg-neutral-200/60 dark:bg-neutral-800">
-                <GitBranch className="w-3 h-3 text-sky-500" />
+              <span className="flex items-center gap-1 text-xs font-mono text-neutral-600 dark:text-neutral-300 px-2 py-0.5 rounded bg-neutral-200/70 dark:bg-neutral-800">
+                <GitBranch className="w-3.5 h-3.5 text-sky-500" />
                 main
               </span>
             </div>
-            <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+            <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1">
               Immutable revision history across all uploaded, created, edited, and permanently purged assets.
             </p>
           </div>
@@ -136,13 +136,13 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
           <div className="flex items-center gap-2 w-full sm:w-auto">
             {/* Quick Search */}
             <div className="relative flex-1 sm:w-64">
-              <Search className="w-3.5 h-3.5 text-neutral-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <Search className="w-4 h-4 text-neutral-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Filter by hash, file, note..."
-                className="w-full h-[30px] pl-8 pr-3 text-xs bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
+                className="w-full h-[35px] pl-9 pr-3 text-sm bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg text-neutral-900 dark:text-neutral-100 focus:outline-none focus:ring-1 focus:ring-sky-500 font-sans"
               />
             </div>
 
@@ -179,7 +179,7 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
         </div>
 
         {/* 5 Requested Sub-Tabs: All, Uploaded, Created, Edited, Deleted */}
-        <div className="flex items-center gap-1 p-1 bg-neutral-200/50 dark:bg-neutral-800/60 rounded-lg w-fit select-none">
+        <div className="flex items-center gap-1 p-1 bg-neutral-200/50 dark:bg-neutral-800/60 rounded-lg w-fit select-none flex-wrap">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.key;
             return (
@@ -187,7 +187,7 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
                 key={tab.key}
                 type="button"
                 onClick={() => setActiveTab(tab.key)}
-                className={`h-[30px] flex items-center gap-2 px-3 text-xs font-medium rounded-md transition-all whitespace-nowrap cursor-pointer ${
+                className={`h-[30px] flex items-center gap-2 px-3 text-[13px] font-medium rounded-md transition-all whitespace-nowrap cursor-pointer ${
                   isActive
                     ? 'bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 shadow-xs'
                     : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200'
@@ -195,10 +195,10 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
               >
                 <span>{tab.label}</span>
                 <span
-                  className={`font-mono text-[11px] tabular-nums px-1.5 py-0.2 rounded-full ${
+                  className={`font-mono text-xs tabular-nums px-1.5 py-0.5 rounded-full ${
                     isActive
                       ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200'
-                      : 'text-neutral-400'
+                      : 'text-neutral-500 dark:text-neutral-400'
                   }`}
                 >
                   {tab.count}
@@ -212,12 +212,12 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
       {/* Main Content Area */}
       <div className="flex-1 overflow-y-auto p-6">
         {filteredVersions.length === 0 ? (
-          <div className="flex flex-col items-center justify-center p-12 text-center text-neutral-400 border border-dashed border-neutral-200 dark:border-neutral-800 rounded-xl">
-            <History className="w-8 h-8 mb-2 text-neutral-400 dark:text-neutral-600" />
-            <p className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+          <div className="flex flex-col items-center justify-center p-12 text-center text-neutral-500 border border-dashed border-neutral-200 dark:border-neutral-800 rounded-xl">
+            <History className="w-9 h-9 mb-2.5 text-neutral-400 dark:text-neutral-600" />
+            <p className="text-base font-semibold text-neutral-800 dark:text-neutral-200">
               No version records found
             </p>
-            <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1 max-w-sm">
+            <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1 max-w-sm">
               {searchQuery
                 ? 'No revisions matched your query. Try searching by file name or action.'
                 : `There are currently no recorded events in the "${activeTab}" category.`}
@@ -227,8 +227,8 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
           /* Structured Table View */
           <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl overflow-hidden bg-white dark:bg-neutral-900 shadow-xs">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
-                <thead className="bg-neutral-50 dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 text-neutral-500 dark:text-neutral-400 font-medium select-none">
+              <table className="w-full text-left text-sm">
+                <thead className="bg-neutral-50 dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 text-[13px] text-neutral-600 dark:text-neutral-400 font-medium select-none">
                   <tr>
                     <th className="py-3 px-4">Action</th>
                     <th className="py-3 px-4 font-mono">Commit</th>
@@ -269,13 +269,13 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
                           <button
                             type="button"
                             onClick={(e) => handleCopyHash(displayHash, e)}
-                            className="flex items-center gap-1 font-mono text-[11px] px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 transition-colors"
+                            className="flex items-center gap-1 font-mono text-xs px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-300 transition-colors"
                             title="Click to copy commit hash"
                           >
-                            <GitCommit className="w-3 h-3 text-neutral-400" />
+                            <GitCommit className="w-3.5 h-3.5 text-neutral-400" />
                             <span>{displayHash}</span>
                             {copiedHash === displayHash && (
-                              <Check className="w-3 h-3 text-emerald-500" />
+                              <Check className="w-3.5 h-3.5 text-emerald-500" />
                             )}
                           </button>
                         </td>
@@ -286,12 +286,12 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
                             <span className="font-mono font-semibold text-neutral-900 dark:text-neutral-100">
                               {record.fileName}
                             </span>
-                            <span className="text-[11px] font-mono text-neutral-400 truncate">
+                            <span className="text-xs font-mono text-neutral-500 dark:text-neutral-400 truncate">
                               ({record.filePath})
                             </span>
                           </div>
                           {record.author && (
-                            <div className="text-[10px] text-neutral-400 mt-0.5">
+                            <div className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
                               by <span className="font-mono">{record.author}</span>
                             </div>
                           )}
@@ -314,8 +314,8 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
                               </span>
                             </span>
                           ) : isDeleted ? (
-                            <span className="inline-flex items-center gap-0.5 text-[10px] font-mono text-rose-600 dark:text-rose-400 font-medium">
-                              <ShieldCheck className="w-3 h-3" />
+                            <span className="inline-flex items-center gap-1 text-xs font-mono text-rose-600 dark:text-rose-400 font-medium">
+                              <ShieldCheck className="w-3.5 h-3.5" />
                               Purged
                             </span>
                           ) : (
@@ -324,7 +324,7 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
                         </td>
 
                         {/* Timestamp */}
-                        <td className="py-3 px-4 whitespace-nowrap text-neutral-500 dark:text-neutral-400 font-mono text-[11px]">
+                        <td className="py-3 px-4 whitespace-nowrap text-neutral-600 dark:text-neutral-400 font-mono text-xs">
                           {dateStr}
                         </td>
 
@@ -336,10 +336,10 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
                               e.stopPropagation();
                               setSelectedVersion(record);
                             }}
-                            className="inline-flex items-center gap-1.5 h-[30px] px-3 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer"
+                            className="inline-flex items-center gap-1.5 h-[30px] px-3 text-[13px] font-medium text-neutral-700 dark:text-neutral-200 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer"
                           >
                             <span>{isDeleted ? 'View Record' : 'Inspect'}</span>
-                            <ChevronRight className="w-3.5 h-3.5 text-neutral-400" />
+                            <ChevronRight className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400" />
                           </button>
                         </td>
                       </tr>
@@ -381,13 +381,13 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
                       <button
                         type="button"
                         onClick={(e) => handleCopyHash(displayHash, e)}
-                        className="flex items-center gap-1 font-mono text-[11px] px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-600 dark:text-neutral-300 transition-colors"
+                        className="flex items-center gap-1 font-mono text-xs px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-600 dark:text-neutral-300 transition-colors"
                         title="Copy commit hash"
                       >
-                        <GitCommit className="w-3 h-3 text-neutral-400" />
+                        <GitCommit className="w-3.5 h-3.5 text-neutral-400" />
                         <span>{displayHash}</span>
                         {copiedHash === displayHash && (
-                          <Check className="w-3 h-3 text-emerald-500" />
+                          <Check className="w-3.5 h-3.5 text-emerald-500" />
                         )}
                       </button>
                     </div>
@@ -395,27 +395,27 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
                     {/* File Name & Path */}
                     <div className="mb-2">
                       <div className="flex items-center gap-1.5">
-                        <FileCode className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
-                        <h3 className="font-mono text-xs font-bold text-neutral-900 dark:text-neutral-100 truncate">
+                        <FileCode className="w-4 h-4 text-neutral-500 dark:text-neutral-400 shrink-0" />
+                        <h3 className="font-mono text-sm font-bold text-neutral-900 dark:text-neutral-100 truncate">
                           {record.fileName}
                         </h3>
                       </div>
-                      <p className="text-[11px] font-mono text-neutral-400 dark:text-neutral-500 truncate mt-0.5 pl-5">
+                      <p className="text-xs font-mono text-neutral-500 dark:text-neutral-400 truncate mt-0.5 pl-5.5">
                         {record.filePath}
                       </p>
                     </div>
 
                     {/* Commit Description */}
-                    <p className="text-xs text-neutral-600 dark:text-neutral-400 line-clamp-2 min-h-[32px] leading-relaxed mb-3">
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2 min-h-[40px] leading-relaxed mb-3">
                       {record.description}
                     </p>
                   </div>
 
                   {/* Card Bottom: Metadata and Inspect button */}
-                  <div className="pt-3 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between text-[11px]">
-                    <div className="flex items-center gap-2">
+                  <div className="pt-3 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between gap-2 text-xs">
+                    <div className="flex items-center gap-2 min-w-0">
                       {!isDeleted && record.additions !== undefined ? (
-                        <span className="font-mono tabular-nums">
+                        <span className="font-mono tabular-nums shrink-0">
                           <span className="text-emerald-600 dark:text-emerald-400 font-medium">
                             +{record.additions}
                           </span>{' '}
@@ -424,14 +424,14 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
                           </span>
                         </span>
                       ) : isDeleted ? (
-                        <span className="inline-flex items-center gap-0.5 font-mono text-[11px] text-rose-600 dark:text-rose-400 font-medium">
+                        <span className="inline-flex items-center gap-1 font-mono text-xs text-rose-600 dark:text-rose-400 font-medium shrink-0">
                           <ShieldCheck className="w-3.5 h-3.5" /> Purged
                         </span>
                       ) : (
                         <span className="text-neutral-400 font-mono">—</span>
                       )}
                       <span className="text-neutral-400">·</span>
-                      <span className="text-neutral-400 font-mono text-[11px]">{dateStr}</span>
+                      <span className="text-neutral-500 dark:text-neutral-400 font-mono text-xs truncate">{dateStr}</span>
                     </div>
 
                     <button
@@ -440,7 +440,7 @@ export const VersionsView: React.FC<VersionsViewProps> = ({ versions, onRestoreV
                         e.stopPropagation();
                         setSelectedVersion(record);
                       }}
-                      className="h-[30px] px-3 inline-flex items-center text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer"
+                      className="h-[30px] px-3 inline-flex items-center text-[13px] font-medium text-neutral-700 dark:text-neutral-200 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-md transition-colors cursor-pointer shrink-0"
                     >
                       {isDeleted ? 'View' : 'Inspect'}
                     </button>
@@ -521,14 +521,14 @@ const VersionDetailModal: React.FC<VersionDetailModalProps> = ({
 
             <div>
               <div className="flex items-center gap-2">
-                <h3 id="version-detail-title" className="text-sm font-bold text-neutral-900 dark:text-neutral-100">
+                <h3 id="version-detail-title" className="text-base font-bold text-neutral-900 dark:text-neutral-100">
                   {isDeleted ? 'Deletion Record' : `Revision: ${record.fileName}`}
                 </h3>
-                <span className="font-mono text-xs px-2 py-0.5 rounded bg-neutral-200/60 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300">
+                <span className="font-mono text-xs px-2 py-0.5 rounded bg-neutral-200/70 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300">
                   commit {displayHash}
                 </span>
               </div>
-              <p className="text-xs text-neutral-400 font-mono mt-0.5">
+              <p className="text-[13px] text-neutral-500 dark:text-neutral-400 font-mono mt-0.5">
                 {record.filePath} · {new Date(record.timestamp).toLocaleString()}
               </p>
             </div>
@@ -536,7 +536,7 @@ const VersionDetailModal: React.FC<VersionDetailModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-1 text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 rounded transition-colors"
+            className="p-1 text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 rounded transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -545,7 +545,7 @@ const VersionDetailModal: React.FC<VersionDetailModalProps> = ({
         {/* Modal Body */}
         <div className="flex-1 overflow-y-auto p-6 space-y-4">
           {/* Audit Note Box */}
-          <div className="p-3 bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-200 dark:border-neutral-700 rounded-lg text-xs text-neutral-700 dark:text-neutral-300">
+          <div className="p-3.5 bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-200 dark:border-neutral-700 rounded-lg text-sm text-neutral-700 dark:text-neutral-300">
             <span className="font-semibold text-neutral-900 dark:text-neutral-100">Commit Note: </span>
             {record.description}
           </div>
@@ -559,18 +559,18 @@ const VersionDetailModal: React.FC<VersionDetailModalProps> = ({
               </div>
 
               <div>
-                <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                <h4 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">
                   Deleted File Tombstone Record
                 </h4>
                 <div className="mt-2 inline-block px-3 py-1 font-mono text-sm font-bold bg-white dark:bg-neutral-900 border border-rose-300 dark:border-rose-800 text-rose-700 dark:text-rose-400 rounded-lg shadow-2xs">
                   {record.fileName}
                 </div>
-                <p className="font-mono text-xs text-neutral-500 dark:text-neutral-400 mt-2">
+                <p className="font-mono text-[13px] text-neutral-600 dark:text-neutral-400 mt-2">
                   Repository Location: {record.filePath}
                 </p>
               </div>
 
-              <div className="max-w-md mx-auto p-3.5 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg text-left text-xs leading-relaxed text-neutral-600 dark:text-neutral-400">
+              <div className="max-w-md mx-auto p-4 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg text-left text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
                 <p className="font-semibold text-neutral-900 dark:text-neutral-100 mb-1">
                   Compliance &amp; Data Purge Certificate
                 </p>
@@ -582,24 +582,24 @@ const VersionDetailModal: React.FC<VersionDetailModalProps> = ({
           ) : isEdited && record.previousContent !== undefined ? (
             /* EDITED ACTION: Professional diff comparison */
             <div>
-              <div className="flex items-center justify-between mb-2 text-xs">
+              <div className="flex items-center justify-between mb-2 text-sm">
                 <span className="font-semibold text-neutral-800 dark:text-neutral-200">
                   Revision Diff
                 </span>
-                <div className="flex items-center gap-3 text-[11px] font-mono text-neutral-400">
-                  <span className="text-emerald-500">+ additions</span>
-                  <span className="text-rose-500">- deletions</span>
+                <div className="flex items-center gap-3 text-xs font-mono text-neutral-500 dark:text-neutral-400">
+                  <span className="text-emerald-600 dark:text-emerald-400">+ additions</span>
+                  <span className="text-rose-600 dark:text-rose-400">- deletions</span>
                 </div>
               </div>
 
-              <div className="border border-neutral-200 dark:border-neutral-800 rounded-lg overflow-hidden font-mono text-xs bg-neutral-50 dark:bg-neutral-950 max-h-96 overflow-y-auto">
-                <div className="px-3 py-1 bg-neutral-200/50 dark:bg-neutral-800/80 text-neutral-500 text-[11px] border-b border-neutral-200 dark:border-neutral-800">
+              <div className="border border-neutral-200 dark:border-neutral-800 rounded-lg overflow-hidden font-mono text-[13px] bg-neutral-50 dark:bg-neutral-950 max-h-96 overflow-y-auto">
+                <div className="px-3 py-1.5 bg-neutral-200/50 dark:bg-neutral-800/80 text-neutral-600 dark:text-neutral-400 text-xs border-b border-neutral-200 dark:border-neutral-800">
                   @@ -1,{record.previousContent.split('\n').length} +1,{record.content?.split('\n').length} @@
                 </div>
                 {computeLineDiff(record.previousContent, record.content || '').map((line, idx) => (
                   <div
                     key={idx}
-                    className={`flex items-start px-3 py-0.5 leading-5 select-text ${
+                    className={`flex items-start px-3 py-0.5 leading-6 select-text ${
                       line.type === 'added'
                         ? 'bg-emerald-500/15 text-emerald-800 dark:text-emerald-300'
                         : line.type === 'removed'
@@ -620,16 +620,16 @@ const VersionDetailModal: React.FC<VersionDetailModalProps> = ({
           ) : (
             /* CREATED / UPLOADED: Snapshot viewer */
             <div>
-              <div className="flex items-center justify-between mb-2 text-xs">
+              <div className="flex items-center justify-between mb-2 text-sm">
                 <span className="font-semibold text-neutral-800 dark:text-neutral-200">
                   Revision Content Snapshot
                 </span>
-                <span className="font-mono text-neutral-400 text-[11px]">
+                <span className="font-mono text-neutral-500 dark:text-neutral-400 text-xs tabular-nums">
                   {record.lineCount || (record.content?.split('\n').length ?? 0)} lines
                 </span>
               </div>
 
-              <pre className="p-4 bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-lg text-xs font-mono text-neutral-800 dark:text-neutral-200 overflow-x-auto max-h-96 whitespace-pre leading-5">
+              <pre className="p-4 bg-neutral-50 dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-800 rounded-lg text-[13px] font-mono text-neutral-800 dark:text-neutral-200 overflow-x-auto max-h-96 whitespace-pre leading-6">
                 {record.content || '// Empty content'}
               </pre>
             </div>
@@ -643,9 +643,9 @@ const VersionDetailModal: React.FC<VersionDetailModalProps> = ({
               <button
                 type="button"
                 onClick={() => handleCopyCode(record.content)}
-                className="h-[35px] px-3 flex items-center gap-1.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
+                className="h-[35px] px-3 flex items-center gap-1.5 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-200/60 dark:hover:bg-neutral-800 rounded-md transition-colors cursor-pointer"
               >
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+                {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
                 <span>{copied ? 'Copied' : 'Copy Code'}</span>
               </button>
             )}
@@ -655,7 +655,7 @@ const VersionDetailModal: React.FC<VersionDetailModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="h-[35px] px-3.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
+              className="h-[35px] px-3.5 text-sm font-medium text-neutral-700 dark:text-neutral-200 bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-700/60 rounded-md transition-colors cursor-pointer"
             >
               Close
             </button>
@@ -663,9 +663,9 @@ const VersionDetailModal: React.FC<VersionDetailModalProps> = ({
               <button
                 type="button"
                 onClick={onRestore}
-                className="h-[35px] px-4 flex items-center gap-1.5 text-xs font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] rounded-md transition-colors shadow-2xs cursor-pointer"
+                className="h-[35px] px-4 flex items-center gap-1.5 text-sm font-medium text-white bg-[#0284c7] hover:bg-[#0369a1] active:bg-[#075985] rounded-md transition-colors shadow-2xs cursor-pointer"
               >
-                <RotateCcw className="w-3.5 h-3.5" />
+                <RotateCcw className="w-4 h-4" />
                 <span>Restore Revision</span>
               </button>
             )}
